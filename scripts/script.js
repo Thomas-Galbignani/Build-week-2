@@ -2,6 +2,8 @@
 const endpoint = `https://striveschool-api.herokuapp.com/api/deezer/search?q=`;
 // canzone corrente
 let currentSong = new Audio();
+
+let currentSongArray = [];
 // serch form
 const searchInput = document.getElementById(`searchInput`);
 let attribute = ``;
@@ -20,6 +22,12 @@ let songName3 = `nightmare`;
 
 //variabile dei btnPlay
 let playBtn1 = ``;
+
+let playerImgContainer = document.getElementById('player-img-container')
+let playerImg = document.getElementById('player-img')
+let playerTitle = document.getElementById('player-title')
+let playerArtist = document.getElementById('player-artist')
+let playerButton = document.getElementById('play')
 
 // funzioni  per popolare il carosello della home con 3 canzoni
 const songsOnCarousel = function () {
@@ -156,10 +164,13 @@ const createCarousel = function () {
   playBtn1.addEventListener(`click`, () => {
     currentSong.currentTime = 0;
     currentSong.pause();
+    currentSongArray = []
+    console.log(songs[0])
+    currentSongArray.push(songs[0])
     currentSong = new Audio(fileAudio1);
-    currentSong
-      .play()
+    currentSong.play()
       .then(() => {
+        footerSong();
         console.log(`stai ascoltando la canzone`);
       })
       .catch(() => {
@@ -172,10 +183,12 @@ const createCarousel = function () {
   playBtn2.addEventListener(`click`, () => {
     currentSong.currentTime = 0;
     currentSong.pause();
+    currentSongArray = []
+    currentSongArray.push(songs[1])
     currentSong = new Audio(fileAudio2);
-    currentSong
-      .play()
+    currentSong.play()
       .then(() => {
+        footerSong();
         console.log(`stai ascoltando la canzone`);
       })
       .catch(() => {
@@ -188,11 +201,12 @@ const createCarousel = function () {
   playBtn3.addEventListener(`click`, () => {
     currentSong.currentTime = 0;
     currentSong.pause();
+    currentSongArray = []
+    currentSongArray.push(songs[2])
     currentSong = new Audio(fileAudio3);
-
-    currentSong
-      .play()
+    currentSong.play()
       .then(() => {
+        footerSong();
         console.log(`stai ascoltando la canzone`);
       })
       .catch(() => {
@@ -269,9 +283,39 @@ const backSong = function (id) {
   }
 };
 
+const footerSong = function () {
+  if (currentSongArray.length === 0) {
+    console.log('sono nell if', currentSongArray)
+  } else {
+    console.log(currentSongArray)
+    playerImgContainer.classList.remove('opacity-0')
+    playerImg.setAttribute('src', currentSongArray[0].album.cover_small)
+    playerArtist.innerText = currentSongArray[0].artist.name
+    playerTitle.innerText = currentSongArray[0].title
+    playerButton.innerHTML = `
+    <i class="bi bi-pause-circle-fill text-light h3"></i>
+    `
+  }
+}
+
+playerButton.addEventListener('click', () => {
+  currentSong.pause();
+  if (currentSong.paused) {
+    playerButton.innerHTML = `
+    <i class="bi bi-play-circle-fill text-light h3"></i>
+    `
+  } else {
+    playerButton.innerHTML = `
+    <i class="bi bi-pause-circle-fill text-light h3"></i>
+    `
+  }
+})
+
 songsOnCarousel();
+footerSong();
 
 // funzione per auto-scroll del carousel richiamando la funzione
 document.addEventListener("DOMContentLoaded", (event) => {
   setInterval(nextSong, 5000);
 });
+
