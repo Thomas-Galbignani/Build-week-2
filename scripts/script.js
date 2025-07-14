@@ -60,9 +60,17 @@ const songsOnCarousel = function () {
 const createCarousel = function () {
   console.log(songs)
   carouselContainer.innerHTML = `
-    <div class="my-5">
-         <button class="btn btn-success me-2" onclick="backSong()" id="btn-back">Indietro</button>
-         <button class="btn btn-outline-light" onclick="nextSong()" id="btn-next">Avanti</button>
+    <div class="mt-5 mb-4 d-flex">
+         <button class="btn btn-success me-2 rounded-circle d-flex justify-content-center align-items-center p-1" onclick="backSong()" id="btn-back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+          </svg>
+         </button>
+         <button class="btn btn-outline-light rounded-circle d-flex justify-content-center align-items-center p-1" onclick="nextSong()" id="btn-next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+         </button>
          </div>
     <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100" id="${songs[0].id}">
       <img src="${songs[0].album.cover_medium}" class="album-cover me-4"
@@ -71,10 +79,16 @@ const createCarousel = function () {
                 <p class="text-white">${songs[0].album.title}</p>
                   <h1 class="text-white">${songs[0].title}</h1>
                   <p class="text-white">${songs[0].artist.name}</p>
-                  <p class="text-white">Ascolta il nuovo singolo di ${songs[0].artist.name}</p>
-                  <button class="btn btn-success me-2"></button>
-                  <button class="btn btn-outline-light"></button>
-                  <button class="btn btn-success me-2"></button>
+                  <p class="text-white">Ascolta il nuovo singolo di ${songs[0].artist.name}!</p>
+                  <div class="d-flex">
+                    <div class="d-flex">
+                      <button class="btn btn-success me-2 rounded-5 py-2 px-4">Play</button>
+                      <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
+                    </div>
+                    <button class="btn text-white">.</button>
+                    <button class="btn text-white">.</button>
+                    <button class="btn text-white">.</button>
+                  </div>
                 </div>
           </div>
               <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 d-none" id="${songs[1].id}">
@@ -84,10 +98,16 @@ const createCarousel = function () {
                 <p class="text-white">${songs[1].album.title}</p>
                   <h1 class="text-white">${songs[1].title}</h1>
                   <p class="text-white">${songs[1].artist.name}</p>
-                  <p class="text-white">Ascolta il nuovo singolo di ${songs[1].artist.name}</p>
-                  <button class="btn btn-success me-2"></button>
-                  <button class="btn btn-outline-light"></button>
-                  <button class="btn btn-success me-2"></button>
+                  <p class="text-white">Ascolta il nuovo singolo di ${songs[1].artist.name}!</p>
+                   <div class="d-flex">
+                    <div class="d-flex">
+                      <button class="btn btn-success me-2 rounded-5 py-2 px-4">Play</button>
+                      <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
+                    </div>
+                    <button class="btn text-white">.</button>
+                    <button class="btn text-white">.</button>
+                    <button class="btn text-white">.</button>
+                  </div>
                 </div>
           </div>
         <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 d-none" id="${songs[2].id}">
@@ -97,10 +117,16 @@ const createCarousel = function () {
                       <p class="text-white">${songs[2].album.title}</p>
                         <h1 class="text-white">${songs[2].title}</h1>
                         <p class="text-white">${songs[2].artist.name}</p>
-                        <p class="text-white">Ascolta il nuovo singolo di ${songs[2].artist.name}</p>
-                        <button class="btn btn-success me-2"></button>
-                        <button class="btn btn-outline-light"></button>
-                        <button class="btn btn-success me-2"></button>
+                        <p class="text-white">Ascolta il nuovo singolo di ${songs[2].artist.name}!</p>
+                         <div class="d-flex">
+                          <div class="d-flex">
+                            <button class="btn btn-success me-2 rounded-5 py-2 px-4">Play</button>
+                            <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
+                          </div>
+                          <button class="btn text-white">.</button>
+                          <button class="btn text-white">.</button>
+                          <button class="btn text-white">.</button>
+                        </div>
                       </div>
           </div>
   `
