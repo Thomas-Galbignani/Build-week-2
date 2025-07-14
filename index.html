@@ -96,7 +96,11 @@
           <h5 class="fs-6">
             <a
               class="bi bi-search text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
-              href="#"
+              href="#searchCollapse"
+              data-bs-toggle="collapse"
+              role="button"
+              aria-expanded="false"
+              aria-controls="searchCollapse"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -111,6 +115,10 @@
               >Cerca</a
             >
           </h5>
+          <!-- Contenitore che si apre e chiude -->
+          <div class="collapse mb-3" id="searchCollapse">
+            <input type="text" class="form-control" placeholder="Cerca..." />
+          </div>
           <h5 class="fs-6 mb-4">
             <a
               class="bi bi-collection-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
