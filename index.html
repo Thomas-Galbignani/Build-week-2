@@ -16,225 +16,300 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/artist.css" />
   </head>
 
   <body class="bg-black">
     <div class="container-fluid">
       <div class="row">
         <!-- Sidebar Sinistra -->
-        <div class="col-2 sidebar ps-3">
-          <!-- Toggle -->
-          <div>
-            <a
-              class="d-block text-decoration-none"
-              data-bs-toggle="collapse"
-              href="#submenu1"
-              role="button"
-              aria-expanded="false"
-              aria-controls="submenu1"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                fill="currentColor"
-                class="bi bi-three-dots text-white my-2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"
-                />
-              </svg>
-            </a>
-            <!-- Submenu -->
-            <div class="collapse ps-1 bg-dark rounded-2 mb-3" id="submenu1">
-              <a
-                href="#"
-                class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light"
-                >File</a
-              >
-              <a
-                href="#"
-                class="d-block py-1 text-decoration-none text-secondary link-light"
-                >Modifica</a
-              >
-              <a
-                href="#"
-                class="d-block py-1 text-decoration-none text-secondary link-light"
-                >Visualizza</a
-              >
-              <a
-                href="#"
-                class="d-block py-1 text-decoration-none text-secondary link-light"
-                >Riproduzione</a
-              >
-              <a
-                href="#"
-                class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light"
-                >Assistenza</a
-              >
-            </div>
-          </div>
-          <h5 class="fs-6">
-            <a
-              class="bi bi-house-door text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2 mb-2"
-              href="#"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="bi bi-house-door-fill me-2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"
-                /></svg
-              >Home</a
-            >
-          </h5>
-          <h5 class="fs-6">
-            <a
-              class="bi bi-search text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
-              href="#searchCollapse"
-              data-bs-toggle="collapse"
-              role="button"
-              aria-expanded="false"
-              aria-controls="searchCollapse"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="bi bi-search me-2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-                /></svg
-              >Cerca</a
-            >
-          </h5>
-          <!-- Contenitore che si apre e chiude -->
-          <div class="collapse mb-3" id="searchCollapse">
-            <input type="text" class="form-control" placeholder="Cerca..." />
-          </div>
-          <h5 class="fs-6 mb-4">
-            <a
-              class="bi bi-collection-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
-              href="#"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="bi bi-collection-fill me-2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1"
-                /></svg
-              >La tua libreria</a
-            >
-          </h5>
-
-          <h5 class="fs-6">
-            <a
-              class="bi bi-plus-lg text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
-              href="#"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="bi bi-plus-lg text-black bg-secondary border border-secondary me-2 rounded-1"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
-                /></svg
-              >Crea playlist</a
-            >
-          </h5>
-          <h5 class="fs-6">
-            <a
-              class="bi bi-heart-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
-              href="#"
-              ><img
-                class="me-2 rounded-1"
-                width="20"
-                height="20"
-                src="./lmiylow6r5z81.jpg"
-              />Brani che ti piacciono</a
-            >
-          </h5>
-          <h5 class="fs-6">
-            <a
-              class="bi bi-bookmark-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
-              href="#"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                class="bi bi-bookmark-fill rounded-1 bg-success bg-opacity-75 me-2 text-success"
-                viewBox="0 0 30 30"
-              >
-                <g transform="translate(7,7)">
-                  <path
-                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"
+        <nav
+          id="sidebarMenu"
+          class="col-md-3 col-lg-2 d-md-block bg-light sidebar bg-black"
+        >
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column align-items">
+              <li class="nav-item px-3">
+                <div>
+                  <a
+                    class="d-block text-decoration-none"
+                    data-bs-toggle="collapse"
+                    href="#submenu1"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="submenu1"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="currentColor"
+                      class="bi bi-three-dots text-white my-2"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"
+                      />
+                    </svg>
+                  </a>
+                  <!-- Submenu -->
+                  <div
+                    class="collapse ps-1 bg-dark rounded-2 mb-3"
+                    id="submenu1"
+                  >
+                    <a
+                      href="#"
+                      class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light"
+                      >File</a
+                    >
+                    <a
+                      href="#"
+                      class="d-block py-1 text-decoration-none text-secondary link-light"
+                      >Modifica</a
+                    >
+                    <a
+                      href="#"
+                      class="d-block py-1 text-decoration-none text-secondary link-light"
+                      >Visualizza</a
+                    >
+                    <a
+                      href="#"
+                      class="d-block py-1 text-decoration-none text-secondary link-light"
+                      >Riproduzione</a
+                    >
+                    <a
+                      href="#"
+                      class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light"
+                      >Assistenza</a
+                    >
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link text-secondary active d-flex align-items-center link-light"
+                  aria-current="page"
+                  href="#"
+                  ><i class="bi bi-house-door m-0 me-3 h4"></i>
+                  <span data-feather="home "></span>
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="text-secondary text-decoration-none d-inline-flex align-items-center link-light py-2 px-3"
+                  href="#searchCollapse"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="searchCollapse"
+                  ><i class="bi bi-search m-0 me-3 h4"></i> Cerca</a
+                >
+                <div class="collapse mb-3" id="searchCollapse">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Cerca..."
                   />
-                </g></svg
-              >I tuoi episodi</a
-            >
-          </h5>
-          <hr class="text-white" />
-          <div class="top-0 start-0 overflow-y-scroll">
-            <div class="playlist-item">
-              <a
-                class="bi bi-house-door text-secondary text-decoration-none link-light"
-                href="#"
-                >early stage emily syndrome</a
-              >
-            </div>
-            <div class="playlist-item">
-              <a
-                class="bi bi-house-door text-secondary text-decoration-none link-light"
-                href="#"
-                >Be The Young</a
-              >
-            </div>
-            <div class="playlist-item">
-              <a
-                class="bi bi-house-door text-secondary text-decoration-none link-light"
-                href="#"
-                >saggio vibes</a
-              >
-            </div>
-            <div class="playlist-item">
-              <a
-                class="bi bi-house-door text-secondary text-decoration-none link-light"
-                href="#"
-                >main character energy</a
-              >
-            </div>
-            <div class="playlist-item">
-              <a
-                class="bi bi-house-door text-secondary text-decoration-none link-light"
-                href="#"
-                >that fucking mood</a
-              >
-            </div>
-            <div class="playlist-item">
-              <a
-                class="bi bi-house-door text-secondary text-decoration-none link-light"
-                href="#"
-                >2021 lol</a
-              >
-            </div>
+                </div>
+              </li>
+              <li class="nav-item mb-4">
+                <a
+                  class="nav-link text-secondary d-flex align-items-center link-light"
+                  href="#"
+                >
+                  <span data-feather="Library"></span
+                  ><i class="bi bi-music-note-list m-0 me-3 h4"></i>
+                  La tua libreria
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary link-light" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  <img
+                    src="https://cdn3.vectorstock.com/i/1000x1000/80/67/plus-sign-icon-add-or-increase-vector-26538067.jpg"
+                    alt="ADDS"
+                    width="10%"
+                    class="me-3"
+                  />
+                  Crea playlist
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link text-secondary d-flex align-items-center link-light"
+                  href="#"
+                >
+                  <span data-feather="shopping-cart"></span>
+                  <img
+                    src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844e0f3caa1f9239c90fcd44fc"
+                    alt="Brani Preferiti"
+                    width="10%"
+                    class="me-3"
+                  />
+                  Brani che ti piacciono
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-secondary link-light" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/10015/10015330.png"
+                    alt="Bookmark"
+                    width="10%"
+                    class="me-3"
+                  />
+                  I tuoi episodi
+                </a>
+              </li>
+            </ul>
           </div>
-        </div>
+          <hr class="border-secondary my-3" />
+
+          <div class="small-playlists mb-4 overflow-auto">
+            <ul class="list-unstyled over small">
+              <li class="mb-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >early stages anxiety syndrome (sett '2022)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >Be The Young</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  ><i class="fas fa-podcast me-1"></i>cit. Kimiko (lug ago
+                  2022)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >saggio + ben <i class="fas fa-lock text-danger ms-1"></i
+                ></a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >main character energy (mag giu 2022)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >that f***ing mood <i class="fas fa-lock text-danger ms-1"></i
+                ></a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >VEE, CARLOTTA E GIACOMO VANNO A BOSSO</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >An Emily Winchester kind of mood
+                  <i class="fas fa-lock text-danger ms-1"></i
+                ></a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >landing page (mar apr 2020)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >2021 ka</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >cosa cazzo vuoi dire questa affermazione (gen fe...</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >honey and glass (nov dic 2021)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >(Rewenge) Training An...</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >Lida + Emily</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >minecraft & nintendo switch (sep oct 2021)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >shuno d'italia? i hardly know her (lug - ago 2021)</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >culo 2021</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >Frah Quintale Mix</a
+                >
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a
+                  href="#"
+                  class="playlist-item text-secondary text-decoration-none"
+                  >Francesco Guccini Mix</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
 
         <!-- Contenuto Centrale -->
         <div class="col-8 main-content">
@@ -251,26 +326,219 @@
               <button class="btn btn-outline-light"></button>
             </div>
           </div>
+          <div>
+            <h4 class="text-white my-3">Buonasera</h4>
+            <div class="row row-cols-2 row-cols-md-3 g-3">
+              <div class="col">
+                <div
+                  class="bg-dark pe-3 rounded text-white d-inline-flex align-items-center"
+                  style="min-height: 80px; width: 100%"
+                >
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-1.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-2.jpg"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-3.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-4.jpg"
+                    />
+                  </div>
 
-          <h4>Buonasera</h4>
-          <div class="row row-cols-2 row-cols-md-3 g-3">
-            <div class="col">
-              <div class="bg-dark p-3 rounded"></div>
-            </div>
-            <div class="col">
-              <div class="bg-dark p-3 rounded"></div>
-            </div>
-            <div class="col">
-              <div class="bg-dark p-3 rounded"></div>
-            </div>
-            <div class="col">
-              <div class="bg-dark p-3 rounded"></div>
-            </div>
-            <div class="col">
-              <div class="bg-dark p-3 rounded"></div>
-            </div>
-            <div class="col">
-              <div class="bg-dark p-3 rounded"></div>
+                  <h6 class="ms-2 mb-0 text-truncate" style="max-width: 180px">
+                    early stage emily syndrome (sett-ott 2022)
+                  </h6>
+                </div>
+              </div>
+              <div class="col">
+                <div
+                  class="bg-dark pe-3 rounded text-white d-inline-flex align-items-center"
+                  style="min-height: 80px; width: 100%"
+                >
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-5.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-6.jpg"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-7.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-8.jpg"
+                    />
+                  </div>
+
+                  <h6 class="ms-2 mb-0 text-truncate" style="max-width: 180px">
+                    Be The Young
+                  </h6>
+                </div>
+              </div>
+              <div class="col">
+                <div
+                  class="bg-dark pe-3 rounded text-white d-inline-flex align-items-center"
+                  style="min-height: 80px; width: 100%"
+                >
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-9.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-10.jpg"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-11.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-12.jpg"
+                    />
+                  </div>
+
+                  <h6 class="ms-2 mb-0 text-truncate" style="max-width: 180px">
+                    saggio vibes
+                  </h6>
+                </div>
+              </div>
+              <div class="col">
+                <div
+                  class="bg-dark pe-3 rounded text-white d-inline-flex align-items-center"
+                  style="min-height: 80px; width: 100%"
+                >
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-13.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-14.jpg"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-15.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-16.jpg"
+                    />
+                  </div>
+
+                  <h6 class="ms-2 mb-0 text-truncate" style="max-width: 180px">
+                    main character energy
+                  </h6>
+                </div>
+              </div>
+              <div class="col">
+                <div
+                  class="bg-dark pe-3 rounded text-white d-inline-flex align-items-center"
+                  style="min-height: 80px; width: 100%"
+                >
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-17.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-18.jpg"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-19.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-14.jpg"
+                    />
+                  </div>
+
+                  <h6 class="ms-2 mb-0 text-truncate" style="max-width: 180px">
+                    that fucking mood
+                  </h6>
+                </div>
+              </div>
+              <div class="col">
+                <div
+                  class="bg-dark pe-3 rounded text-white d-inline-flex align-items-center"
+                  style="min-height: 80px; width: 100%"
+                >
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-15.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-10.jpg"
+                    />
+                  </div>
+                  <div class="d-flex flex-column">
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-1.jpg"
+                    />
+                    <img
+                      width="40"
+                      height="40"
+                      src="./assets/imgs/main/image-8.jpg"
+                    />
+                  </div>
+
+                  <h6 class="ms-2 mb-0 text-truncate" style="max-width: 180px">
+                    2021 lol
+                  </h6>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -293,12 +561,11 @@
             </div>
           </div>
         </div>
-
         <!-- Attività Amici -->
         <div class="col-2 right-sidebar d-none d-lg-block">
-          <div class="d-flex">
+          <div>
             <h6 class="text-white my-2 float-start">Attività amici</h6>
-            <a href="#"
+            <a class="float-end my-1" href="#"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -333,20 +600,67 @@
         </div>
       </div>
     </div>
+
     <!-- Footer Player -->
-    <div
-      class="footer-player d-flex align-items-center justify-content-between"
-    >
-      <div><strong></strong></div>
-      <div>
-        <button class="btn btn-outline-light btn-sm">⏮</button>
-        <button class="btn btn-light btn-sm">▶</button>
-        <button class="btn btn-outline-light btn-sm">⏭</button>
+    <footer class="py-3 px-1" id="footer">
+      <div class="container-fluid">
+        <div class="row d-flex align-items-center">
+          <!-- parte img titolo e cuore -->
+          <div class="col d-flex align-items-center">
+            <img src="" alt="immagine" class="me-2" width="" />
+            <div>
+              <a href="" class="text-decoration-none text-light"
+                ><p class="m-0">TITOLO</p></a
+              >
+              <a href="" class="text-decoration-none text-secondary"
+                ><p class="m-0">artista</p></a
+              >
+            </div>
+            <a href="" class="text-light ms-2"><i class="bi bi-heart"></i></a>
+          </div>
+          <!-- audio player -->
+
+          <div class="col-5 d-flex flex-column align-items-center">
+            <div>
+              <button class="control-btn border-0 colorbg">
+                <i class="bi bi-shuffle h4 text-secondary"></i>
+              </button>
+              <button class="control-btn border-0 colorbg">
+                <i class="bi bi-skip-backward-fill text-secondary h4"></i>
+              </button>
+              <button
+                class="control-btn play-pause-btn border-0 colorbg"
+                id="play"
+              >
+                <i class="bi bi-play-circle-fill text-light h3"></i>
+              </button>
+              <button class="control-btn border-0 colorbg">
+                <i class="bi bi-skip-forward-fill text-secondary h4"></i>
+              </button>
+              <button class="control-btn border-0 colorbg">
+                <i class="bi bi-repeat text-secondary h4"></i>
+              </button>
+            </div>
+            <div class="progress-bar-container w-100">
+              <span class="current-time">0:00</span>
+              <div class="progress-bar-wrapper">
+                <div class="progress-bar"></div>
+              </div>
+              <span class="duration">3:30</span>
+            </div>
+          </div>
+          <!--colonna Volume  -->
+          <div class="col d-flex justify-content-end">
+            <i class="bi bi-mic text-secondary me-2"></i>
+            <i class="bi bi-collection text-secondary me-2"></i>
+            <i class="bi bi-speaker text-secondary me-2"></i>
+            <i class="bi bi-volume-up text-secondary me-1"></i>
+            <input type="range" id="volume" class="me-2" />
+            <i class="bi bi-arrows-angle-expand text-secondary"></i>
+          </div>
+        </div>
       </div>
-      <div>
-        <small></small>
-      </div>
-    </div>
+    </footer>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script
