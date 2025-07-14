@@ -1,0 +1,41 @@
+.small-playlists {
+  max-height: calc(80vh - 300px); /* regola l'altezza in base alla tua UI */
+  overflow-y: auto;
+}
+#footer {
+  background-color: #181818;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.colorbg {
+  background-color: #181818;
+}
+
+/* Barra di progresso */
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 2; /* Occupano più spazio */
+  min-width: 250px;
+}
+
+.progress-bar-wrapper {
+  flex-grow: 1; /* Si espande per riempire lo spazio */
+  height: 4px;
+  background-color: #535353;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  /* la width parte da 0 e si man mano che aumenta si riempie la barra */
+  width: 0%;
+  background-color: white;
+  border-radius: 2px;
+}
+#volume {
+
