@@ -1,6 +1,11 @@
-const endpoin = `https://striveschool-api.herokuapp.com/api/deezer/search?q=`;
 // Endpoint api
 const endpoint = `https://striveschool-api.herokuapp.com/api/deezer/search?q=`;
+// canzone corrente
+let currentSong = new Audio();
+// serch form
+const searchInput = document.getElementById(`searchInput`);
+let attribute = ``;
+
 // array da popolare con canzoni
 const songs = [];
 // funzioni  per popolare il carosello della home con 3 canzoni
@@ -18,7 +23,7 @@ let playBtn1 = ``;
 
 // funzioni  per popolare il carosello della home con 3 canzoni
 const songsOnCarousel = function () {
-  fetch(endpoin + songName1)
+  fetch(endpoint + songName1)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -28,7 +33,7 @@ const songsOnCarousel = function () {
     })
     .then((song) => {
       songs.push(song.data[0]);
-      return fetch(endpoin + songName2); // per richiamare una fetch
+      return fetch(endpoint + songName2); // per richiamare una fetch
     })
     .then((response) => {
       if (response.ok) {
@@ -39,7 +44,7 @@ const songsOnCarousel = function () {
     })
     .then((song2) => {
       songs.push(song2.data[0]);
-      return fetch(endpoin + songName3);
+      return fetch(endpoint + songName3);
     })
     .then((response) => {
       if (response.ok) {
@@ -57,6 +62,14 @@ const songsOnCarousel = function () {
     .catch((err) => {
       console.log(err, "tutto rotto");
     });
+};
+
+const searchSong = function (e) {
+  e.preventDefault();
+  const formInput = searchInput.value;
+  if (searchInput) {
+    attribute = formInput;
+  }
 };
 
 const createCarousel = function () {
@@ -135,17 +148,16 @@ const createCarousel = function () {
   playBtn1 = document.getElementById(`play-` + songs[0].id);
   console.log(playBtn1); // solo per vedere se funziona
   const fileAudio1 = songs[0].preview;
-  const audio1 = new Audio(fileAudio1);
+
   const fileAudio2 = songs[1].preview;
-  const audio2 = new Audio(fileAudio2);
+
   const fileAudio3 = songs[2].preview;
-  const audio3 = new Audio(fileAudio3);
 
   playBtn1.addEventListener(`click`, () => {
-    audio1.currentTime = 0;
-    audio2.pause();
-    audio3.pause();
-    audio1
+    currentSong.currentTime = 0;
+    currentSong.pause();
+    currentSong = new Audio(fileAudio1);
+    currentSong
       .play()
       .then(() => {
         console.log(`stai ascoltando la canzone`);
@@ -158,10 +170,10 @@ const createCarousel = function () {
   console.log(playBtn2); // solo per vedere se funziona
 
   playBtn2.addEventListener(`click`, () => {
-    audio2.currentTime = 0;
-    audio1.pause();
-    audio3.pause();
-    audio2
+    currentSong.currentTime = 0;
+    currentSong.pause();
+    currentSong = new Audio(fileAudio2);
+    currentSong
       .play()
       .then(() => {
         console.log(`stai ascoltando la canzone`);
@@ -174,10 +186,11 @@ const createCarousel = function () {
   console.log(playBtn3); // solo per vedere se funziona
 
   playBtn3.addEventListener(`click`, () => {
-    audio3.currentTime = 0;
-    audio1.pause();
-    audio2.pause();
-    audio3
+    currentSong.currentTime = 0;
+    currentSong.pause();
+    currentSong = new Audio(fileAudio3);
+
+    currentSong
       .play()
       .then(() => {
         console.log(`stai ascoltando la canzone`);
