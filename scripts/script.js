@@ -13,7 +13,6 @@ let songName1 = `under a glass moon`;
 let songName2 = `the passage of the time`;
 let songName3 = `nightmare`;
 
-let songName = `under a glass moon`;
 // funzioni  per popolare il carosello della home con 3 canzoni
 const songsOnCarousel = function () {
   fetch(endpoin + songName1)
@@ -91,7 +90,7 @@ const createCarousel = function () {
                   </div>
                 </div>
           </div>
-              <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 d-none" id="${songs[1].id}">
+              <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100 d-none" id="${songs[1].id}">
       <img src="${songs[1].album.cover_medium}" class="album-cover me-4"
                   alt="Album cover" />
                 <div>
@@ -110,7 +109,7 @@ const createCarousel = function () {
                   </div>
                 </div>
           </div>
-        <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 d-none" id="${songs[2].id}">
+        <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100 d-none" id="${songs[2].id}">
             <img src="${songs[2].album.cover_medium}" class="album-cover me-4"
                         alt="Album cover" />
                       <div>
@@ -164,7 +163,6 @@ const nextSong = function (id) {
 }
 
 const backSong = function (id) {
-  console.log('prova')
 
   id = songs[0].id
 
