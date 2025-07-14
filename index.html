@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Spotify</title>
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -16,25 +16,45 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar Sinistra -->
-      <div class="col-2 sidebar">
+      <div class="col-2 sidebar ps-3">
+        <!-- Toggle -->
+        <div>
+          <a class="d-block text-decoration-none" data-bs-toggle="collapse" href="#submenu1" role="button"
+            aria-expanded="false" aria-controls="submenu1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+              class="bi bi-three-dots text-white my-2" viewBox="0 0 16 16">
+              <path
+                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+            </svg>
+          </a>
+          <!-- Submenu -->
+          <div class="collapse ps-1 bg-dark rounded-2 mb-3" id="submenu1">
+            <a href="#" class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light">File</a>
+            <a href="#" class="d-block py-1 text-decoration-none text-secondary link-light">Modifica</a>
+            <a href="#" class="d-block py-1 text-decoration-none text-secondary link-light">Visualizza</a>
+            <a href="#" class="d-block py-1 text-decoration-none text-secondary link-light">Riproduzione</a>
+            <a href="#" class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light">Assistenza</a>
+          </div>
+        </div>
         <h5 class="fs-6">
-          <a class="bi bi-house-door text-secondary text-decoration-none" href="#"><svg
-              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+          <a class="bi bi-house-door text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2 mb-2"
+            href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
               class="bi bi-house-door-fill me-2" viewBox="0 0 16 16">
               <path
                 d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
             </svg>Home</a>
         </h5>
         <h5 class="fs-6">
-          <a class="bi bi-search text-secondary text-decoration-none" href="#"><svg xmlns="http://www.w3.org/2000/svg"
-              width="20" height="20" fill="currentColor" class="bi bi-search me-2" viewBox="0 0 16 16">
+          <a class="bi bi-search text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
+            href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-search me-2" viewBox="0 0 16 16">
               <path
                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
             </svg>Cerca</a>
         </h5>
         <h5 class="fs-6 mb-4">
-          <a class="bi bi-collection-fill text-secondary text-decoration-none" href="#"><svg
-              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+          <a class="bi bi-collection-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
+            href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
               class="bi bi-collection-fill me-2" viewBox="0 0 16 16">
               <path
                 d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3m2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1" />
@@ -42,49 +62,56 @@
         </h5>
 
         <h5 class="fs-6">
-          <a class="bi bi-plus-lg text-secondary text-decoration-none" href="#"><svg xmlns="http://www.w3.org/2000/svg"
-              width="20" height="20" fill="currentColor"
-              class="bi bi-plus-lg text-black bg-secondary border border-secondary me-2" viewBox="0 0 16 16">
+          <a class="bi bi-plus-lg text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
+            href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-plus-lg text-black bg-secondary border border-secondary me-2 rounded-1" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
             </svg>Crea playlist</a>
         </h5>
         <h5 class="fs-6">
-          <a class="bi bi-heart-fill text-secondary text-decoration-none d-inline-flex align-items-center" href="#"><svg
-              xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-heart-fill bg-gradientc border border-secondary me-2" viewBox="0 0 30 30">
-              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
-            </svg>Brani che ti piacciono</a>
+          <a class="bi bi-heart-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
+            href="#"><img class="me-2 rounded-1" width="20" height="20" src="./lmiylow6r5z81.jpg" />Brani che ti
+            piacciono</a>
         </h5>
         <h5 class="fs-6">
-          <a class="bi bi-house-door text-secondary text-decoration-none" href="#">I tuoi episodi</a>
+          <a class="bi bi-bookmark-fill text-secondary text-decoration-none d-inline-flex align-items-center link-light mb-2"
+            href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-bookmark-fill rounded-1 bg-success bg-opacity-75 me-2 text-success" viewBox="0 0 30 30">
+              <g transform="translate(7,7)">
+                <path
+                  d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+              </g>
+            </svg>I tuoi episodi</a>
         </h5>
         <hr class="text-white" />
-        <div>
+        <div class="top-0 start-0 overflow-y-scroll">
           <div class="playlist-item">
-            <a class="bi bi-house-door text-secondary text-decoration-none" href="#">early stage emily syndrome</a>
+            <a class="bi bi-house-door text-secondary text-decoration-none link-light" href="#">early stage emily
+              syndrome</a>
           </div>
           <div class="playlist-item">
-            <a class="bi bi-house-door text-secondary text-decoration-none" href="#">Be The Young</a>
+            <a class="bi bi-house-door text-secondary text-decoration-none link-light" href="#">Be The Young</a>
           </div>
           <div class="playlist-item">
-            <a class="bi bi-house-door text-secondary text-decoration-none" href="#">saggio vibes</a>
+            <a class="bi bi-house-door text-secondary text-decoration-none link-light" href="#">saggio vibes</a>
           </div>
           <div class="playlist-item">
-            <a class="bi bi-house-door text-secondary text-decoration-none" href="#">main character energy</a>
+            <a class="bi bi-house-door text-secondary text-decoration-none link-light" href="#">main character
+              energy</a>
           </div>
           <div class="playlist-item">
-            <a class="bi bi-house-door text-secondary text-decoration-none" href="#">that fucking mood</a>
+            <a class="bi bi-house-door text-secondary text-decoration-none link-light" href="#">that fucking mood</a>
           </div>
           <div class="playlist-item">
-            <a class="bi bi-house-door text-secondary text-decoration-none" href="#">2021 lol</a>
+            <a class="bi bi-house-door text-secondary text-decoration-none link-light" href="#">2021 lol</a>
           </div>
         </div>
       </div>
 
       <!-- Contenuto Centrale -->
       <div class="col-8 main-content">
-        <div class="d-flex align-items-center mb-4" id="carousel">
+        <div class="align-items-center mb-4" id="carousel">
           <img src="https://i.scdn.co/image/ab67616d0000b2730f56380b6ed7b17d4f62206a" class="album-cover me-4"
             alt="Album cover" />
           <div>
@@ -139,7 +166,16 @@
 
       <!-- Attività Amici -->
       <div class="col-2 right-sidebar d-none d-lg-block">
-        <h6>Attività amici</h6>
+        <div class="d-flex">
+          <h6 class="text-white my-2 float-start">Attività amici</h6>
+          <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-person-add text-secondary link-light" viewBox="0 0 16 16">
+              <path
+                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+              <path
+                d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
+            </svg></a>
+        </div>
         <div class="mb-3">
           <strong></strong><br />
           <br />
