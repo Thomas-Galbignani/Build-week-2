@@ -138,7 +138,7 @@ const createCarousel = function () {
   const audio1 = new Audio(fileAudio1);
   const fileAudio2 = songs[1].preview;
   const audio2 = new Audio(fileAudio2);
-  const fileAudio3 = songs[3].preview;
+  const fileAudio3 = songs[2].preview;
   const audio3 = new Audio(fileAudio3);
 
   playBtn1.addEventListener(`click`, () => {
