@@ -28,6 +28,7 @@ let playerImg = document.getElementById('player-img')
 let playerTitle = document.getElementById('player-title')
 let playerArtist = document.getElementById('player-artist')
 let playerButton = document.getElementById('play')
+const playerVolume = document.getElementById('volume-mute')
 
 // Funzione per recuperare le canzoni da inserire nel carosello
 const songsOnCarousel = function () {
@@ -194,6 +195,22 @@ const playSong = function (songToPlay) { // songToPlay sarebbe l'intera canzone 
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
     });
 };
+
+// Diamo lo stile del cursore pointer al pulsante del volume muto
+playerVolume.style.cursor = "pointer";
+
+// Funzione per mutare o smutare la canzone
+playerVolume.addEventListener('click', () => {
+  if (currentSong.volume === 0) { // Se il volume è 0
+    currentSong.volume = 1
+    playerVolume.classList.remove('bi', 'bi-volume-mute')
+    playerVolume.classList.add('bi', 'bi-volume-up')
+  } else {
+    playerVolume.classList.remove('bi', 'bi-volume-up')
+    playerVolume.classList.add('bi', 'bi-volume-mute')
+    currentSong.volume = 0
+  }
+})
 
 songsOnCarousel();
 footerSong();
