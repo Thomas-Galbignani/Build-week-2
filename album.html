@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>ALBUM</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -21,24 +21,23 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/circular-font.css" />
+    <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
   </head>
   <style>
     .small-playlists::-webkit-scrollbar {
       width: 15px;
     }
 
-   
     .small-playlists::-webkit-scrollbar-thumb {
       background-color: #888;
     }
 
-   
     .small-playlists::-webkit-scrollbar-thumb:hover {
       background-color: #555;
     }
     /* for main content scrollbar */
     #main-content::-webkit-scrollbar {
-      width: 15px; 
+      width: 15px;
     }
 
     #main-content::-webkit-scrollbar-thumb {
@@ -55,6 +54,10 @@
     .btn-dark.rounded-circle:hover {
       background-color: rgba(0, 0, 0, 0.34) !important;
       border: none;
+    }
+    .track-row.highlight {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffd700;
     }
   </style>
   <body class="bg-black">
@@ -388,17 +391,15 @@
           </div>
 
           <div
-            class="tracklist-header d-flex py-2 px-4 border-bottom text-white"
+            class="tracklist-header d-flex py-3 px-4 border-bottom text-white"
           >
-            <div style="width: 40px">#</div>
-            <div class="flex-grow-1">TITOLO</div>
-            <div style="width: 120px; text-align: center">Riproduzioni</div>
-            <div style="width: 60px" class="text-end">
+            <div style="width: 50%"># TITOLO</div>
+            <div style="width: 30%; text-align: center;">Riproduzioni</div>
+            <div style="width: 20%; text-align: right">
               <i class="bi bi-clock"></i>
             </div>
           </div>
 
-          <!-- Empty Tracklist to be filled by JS -->
           <div id="tracklist-container" class="tracklist"></div>
         </main>
 
@@ -417,48 +418,87 @@
         </div>
       </div>
     </div>
-   <!-- Footer Player -->
-<footer class="py-3 px-1 bg-dark text-white fixed-bottom border-top border-secondary" id="footer">
-  <div class="container-fluid">
-    <div class="row d-flex align-items-center">
-      <div class="col d-flex align-items-center opacity-0" id="player-img-container">
-        <img src="" alt="immagine" class="me-2" width="50" id="player-img" />
-        <div>
-          <a href="#" class="text-decoration-none text-light"><p class="m-0" id="player-title">Title</p></a>
-          <a href="#" class="text-decoration-none text-secondary"><p class="m-0" id="player-artist">Artist</p></a>
-        </div>
-        <a href="#" class="text-light ms-2"><i class="bi bi-heart"></i></a>
-      </div>
-
-      <div class="col-5 d-flex flex-column align-items-center">
-        <div>
-          <button class="control-btn border-0 bg-transparent"><i class="bi bi-shuffle h4 text-secondary"></i></button>
-          <button class="control-btn border-0 bg-transparent"><i class="bi bi-skip-backward-fill text-secondary h4"></i></button>
-          <button class="control-btn play-pause-btn border-0 bg-transparent" id="play"><i class="bi bi-play-circle-fill text-light h3"></i></button>
-          <button class="control-btn border-0 bg-transparent"><i class="bi bi-skip-forward-fill text-secondary h4"></i></button>
-          <button class="control-btn border-0 bg-transparent"><i class="bi bi-repeat text-secondary h4"></i></button>
-        </div>
-        <div class="progress-bar-container w-100 d-flex align-items-center">
-          <span class="current-time me-2">0:00</span>
-          <div class="flex-grow-1 bg-secondary" style="height: 4px; position: relative;">
-            <div class="progress-bar bg-light" style="width: 0%; height: 100%;"></div>
+    <!-- Footer Player -->
+    <footer
+      class="py-3 px-1 bg-dark text-white fixed-bottom border-top border-secondary"
+      id="footer"
+    >
+      <div class="container-fluid">
+        <div class="row d-flex align-items-center">
+          <div
+            class="col d-flex align-items-center opacity-0"
+            id="player-img-container"
+          >
+            <img
+              src=""
+              alt="immagine"
+              class="me-2"
+              width="50"
+              id="player-img"
+            />
+            <div>
+              <a href="#" class="text-decoration-none text-light"
+                ><p class="m-0" id="player-title">Title</p></a
+              >
+              <a href="#" class="text-decoration-none text-secondary"
+                ><p class="m-0" id="player-artist">Artist</p></a
+              >
+            </div>
+            <a href="#" class="text-light ms-2"><i class="bi bi-heart"></i></a>
           </div>
-          <span class="duration ms-2">0:30</span>
+
+          <div class="col-5 d-flex flex-column align-items-center">
+            <div>
+              <button class="control-btn border-0 bg-transparent">
+                <i class="bi bi-shuffle h4 text-secondary"></i>
+              </button>
+              <button class="control-btn border-0 bg-transparent">
+                <i class="bi bi-skip-backward-fill text-secondary h4"></i>
+              </button>
+              <button
+                class="control-btn play-pause-btn border-0 bg-transparent"
+                id="play"
+              >
+                <i class="bi bi-play-circle-fill text-light h3"></i>
+              </button>
+              <button class="control-btn border-0 bg-transparent">
+                <i class="bi bi-skip-forward-fill text-secondary h4"></i>
+              </button>
+              <button class="control-btn border-0 bg-transparent">
+                <i class="bi bi-repeat text-secondary h4"></i>
+              </button>
+            </div>
+            <div class="progress-bar-container w-100 d-flex align-items-center">
+              <span class="current-time me-2">0:00</span>
+              <div
+                class="flex-grow-1 bg-secondary"
+                style="height: 4px; position: relative"
+              >
+                <div
+                  class="progress-bar bg-light"
+                  style="width: 0%; height: 100%"
+                ></div>
+              </div>
+              <span class="duration ms-2">0:30</span>
+            </div>
+          </div>
+
+          <div class="col d-flex justify-content-end">
+            <i class="bi bi-mic text-secondary me-2"></i>
+            <i class="bi bi-collection text-secondary me-2"></i>
+            <i class="bi bi-speaker text-secondary me-2"></i>
+            <i class="bi bi-volume-up text-secondary me-1"></i>
+            <input type="range" id="volume" class="me-2" />
+            <i class="bi bi-arrows-angle-expand text-secondary"></i>
+            <i
+              class="bi bi-x-circle text-light ms-2"
+              id="close-footer"
+              style="cursor: pointer"
+            ></i>
+          </div>
         </div>
       </div>
-
-      <div class="col d-flex justify-content-end">
-        <i class="bi bi-mic text-secondary me-2"></i>
-        <i class="bi bi-collection text-secondary me-2"></i>
-        <i class="bi bi-speaker text-secondary me-2"></i>
-        <i class="bi bi-volume-up text-secondary me-1"></i>
-        <input type="range" id="volume" class="me-2" />
-        <i class="bi bi-arrows-angle-expand text-secondary"></i>
-        <i class="bi bi-x-circle text-light ms-2" id="close-footer" style="cursor: pointer;"></i>
-      </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 
     <!-- Bootstrap JS (Popper + Bootstrap JS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
