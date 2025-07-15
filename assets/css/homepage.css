@@ -1,0 +1,21 @@
+body{
+background: #000000;
+background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(36, 35, 35, 1) 70%, rgba(56, 56, 56, 1) 100%);
+}
+/* aumenta la zona di scorrimento della scrollbar */
+.main-content{
+    height: 100vh;
+    padding-bottom: 100px;
+}
+/* colore sfondo carosello */
+#carousel{
+background: #000000;
+background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(38, 37, 37, 1) 70%, rgba(44, 44, 44, 1) 100%);
+}
+/* colore sfondo sidebar amici */
+#Amici{
+    background-color: black;
+}
+.fs-6{
+    font-size: smaller;
+}
