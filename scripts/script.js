@@ -131,6 +131,7 @@ const searchSong = function (e) {
 // Funzione per creare il carosello
 const createCarousel = function () {
   carouselContainer.innerHTML = ""; // Pulisce il div prima di aggiungere i nuovi elementi
+  localStorage.clear();
   songs.forEach((song, index) => {
     const carouselItem = document.createElement("div"); // Crea un nuovo div
     carouselItem.id = `carousel-item-${index}`; // Assegna un ID unico a ogni elemento del carosello

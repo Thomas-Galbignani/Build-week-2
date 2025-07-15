@@ -90,7 +90,6 @@ const playSong = function () {
     .play() // Avvia la canzone
     .then(() => {
       console.log(`sono io `, currentSongArray[0]);
-      footerSong(); // Lanciamo la funzione footerSong
       console.log(`stai ascoltando la canzone: ${currentSongArray[0].title}`);
     })
     .catch((error) => {
