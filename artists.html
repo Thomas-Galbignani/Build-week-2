@@ -317,19 +317,24 @@
         <div class="row"></div>
       </div>
     </main>
+
+    <!-- Footer Player -->
     <footer class="py-3 px-1" id="footer">
       <div class="container-fluid">
         <div class="row d-flex align-items-center">
           <!-- parte img titolo e cuore -->
-          <div class="col d-flex align-items-center">
-            <img src="" alt="immagine" class="me-2" width="" />
+          <div
+            class="col d-flex align-items-center opacity-0"
+            id="player-img-container"
+          >
+            <img src="" alt="immagine" class="me-2" width="" id="player-img" />
             <div>
-              <a href="" class="text-decoration-none text-light"
-                ><p class="m-0">TITOLO</p></a
-              >
-              <a href="" class="text-decoration-none text-secondary"
-                ><p class="m-0">artista</p></a
-              >
+              <a href="" class="text-decoration-none text-light">
+                <p class="m-0" id="player-title"></p>
+              </a>
+              <a href="" class="text-decoration-none text-secondary">
+                <p class="m-0" id="player-artist"></p>
+              </a>
             </div>
             <a href="" class="text-light ms-2"><i class="bi bi-heart"></i></a>
           </div>
@@ -338,22 +343,26 @@
           <div class="col-5 d-flex flex-column align-items-center">
             <div>
               <button class="control-btn border-0 colorbg">
-                <i class="bi bi-shuffle h4 text-secondary"></i>
+                <i class="bi bi-shuffle h4 text-secondary link-light"></i>
               </button>
               <button class="control-btn border-0 colorbg">
-                <i class="bi bi-skip-backward-fill text-secondary h4"></i>
+                <i
+                  class="bi bi-skip-backward-fill text-secondary h4 link-light"
+                ></i>
               </button>
               <button
                 class="control-btn play-pause-btn border-0 colorbg"
                 id="play"
               >
-                <i class="bi bi-play-circle-fill text-light h3"></i>
+                <i class="bi bi-play-circle-fill text-light h3 link-light"></i>
               </button>
               <button class="control-btn border-0 colorbg">
-                <i class="bi bi-skip-forward-fill text-secondary h4"></i>
+                <i
+                  class="bi bi-skip-forward-fill text-secondary h4 link-light"
+                ></i>
               </button>
               <button class="control-btn border-0 colorbg">
-                <i class="bi bi-repeat text-secondary h4"></i>
+                <i class="bi bi-repeat text-secondary h4 link-light"></i>
               </button>
             </div>
             <div class="progress-bar-container w-100">
@@ -361,17 +370,30 @@
               <div class="progress-bar-wrapper">
                 <div class="progress-bar"></div>
               </div>
-              <span class="duration">3:30</span>
+              <span class="duration">0:30</span>
             </div>
           </div>
           <!--colonna Volume  -->
           <div class="col d-flex justify-content-end">
-            <i class="bi bi-mic text-secondary me-2"></i>
-            <i class="bi bi-collection text-secondary me-2"></i>
-            <i class="bi bi-speaker text-secondary me-2"></i>
-            <i class="bi bi-volume-up text-secondary me-1"></i>
+            <i class="bi bi-mic text-secondary me-2 link-light" id="mouse"></i>
+            <i
+              class="bi bi-collection text-secondary me-2 link-light"
+              id="mouse"
+            ></i>
+            <i
+              class="bi bi-speaker text-secondary me-2 link-light"
+              id="mouse"
+            ></i>
+            <!--Pulsante volume-->
+            <i
+              class="bi bi-volume-up text-secondary me-1 link-light"
+              id="volume-mute"
+            ></i>
             <input type="range" id="volume" class="me-2" />
-            <i class="bi bi-arrows-angle-expand text-secondary"></i>
+            <i
+              class="bi bi-arrows-angle-expand text-secondary link-light"
+              id="mouse"
+            ></i>
           </div>
         </div>
       </div>

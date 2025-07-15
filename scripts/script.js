@@ -22,11 +22,20 @@ let songName1 = `under a glass moon`;
 let songName2 = `the passage of the time`;
 let songName3 = `nightmare`;
 
-let songNames = [`nightmare`, `the passage of the time`, `under a glass moon`, `numb`, `money`, `pneuma` , `he reigns `, `duality`];
+let songNames = [
+  `nightmare`,
+  `the passage of the time`,
+  `under a glass moon`,
+  `numb`,
+  `money`,
+  `pneuma`,
+  `he reigns `,
+  `duality`,
+];
 
 let songCard = [];
 
-const cardContainer = document.getElementById('card-container');
+const cardContainer = document.getElementById("card-container");
 
 // Elementi del Footer
 let playerImgContainer = document.getElementById("player-img-container");
@@ -45,10 +54,10 @@ const songsOnCard = function () {
         }
       })
       .then((song) => {
-        console.log(song)
-        songCard.push(song)
+        console.log(song);
+        songCard.push(song);
         const cardItem = document.createElement("div");
-        cardItem.classList.add('col')
+        cardItem.classList.add("col");
         cardItem.innerHTML = `
         <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
               <div class="card bg-black p-3 rounded-4 text-white h-100">
@@ -60,15 +69,14 @@ const songsOnCard = function () {
                 <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
                 <p class="text-secondary mt-2 mb-0">${song.data[0].artist.name}</p>
               </div></a>
-  `
-        cardContainer.appendChild(cardItem)
-
+  `;
+        cardContainer.appendChild(cardItem);
       })
       .catch((err) => {
         console.log(err, "tutto rotto");
       });
-  })
-}
+  });
+};
 
 // Funzione per recuperare le canzoni da inserire nel carosello
 const songsOnCarousel = function () {
@@ -253,8 +261,10 @@ const playSong = function (songToPlay) {
   currentSong
     .play() // Avvia la canzone
     .then(() => {
+      console.log(`sono io `, songToPlay);
       footerSong(); // Lanciamo la funzione footerSong
       console.log(`stai ascoltando la canzone: ${songToPlay.title}`);
+      localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
     })
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
