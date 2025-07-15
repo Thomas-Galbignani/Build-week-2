@@ -22,6 +22,12 @@ let songName1 = `under a glass moon`;
 let songName2 = `the passage of the time`;
 let songName3 = `nightmare`;
 
+let songNames = [`nightmare`, `the passage of the time`, `under a glass moon`, `numb`, `money`, `pneuma` , `he reigns `, `duality`];
+
+let songCard = [];
+
+const cardContainer = document.getElementById('card-container');
+
 // Elementi del Footer
 let playerImgContainer = document.getElementById("player-img-container");
 let playerImg = document.getElementById("player-img");
@@ -29,6 +35,40 @@ let playerTitle = document.getElementById("player-title");
 let playerArtist = document.getElementById("player-artist");
 let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
+
+const songsOnCard = function () {
+  songNames.forEach((song) => {
+    fetch(endpoint + song)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((song) => {
+        console.log(song)
+        songCard.push(song)
+        const cardItem = document.createElement("div");
+        cardItem.classList.add('col')
+        cardItem.innerHTML = `
+        <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
+              <div class="card bg-black p-3 rounded-4 text-white h-100">
+                <img
+                  class="rounded-2"
+                  src="${song.data[0].album.cover}"
+                  alt="..."
+                />
+                <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
+                <p class="text-secondary mt-2 mb-0">${song.data[0].artist.name}</p>
+              </div></a>
+  `
+        cardContainer.appendChild(cardItem)
+
+      })
+      .catch((err) => {
+        console.log(err, "tutto rotto");
+      });
+  })
+}
 
 // Funzione per recuperare le canzoni da inserire nel carosello
 const songsOnCarousel = function () {
@@ -240,6 +280,7 @@ playerVolume.addEventListener("click", () => {
 
 songsOnCarousel();
 footerSong();
+songsOnCard();
 
 // funzione per auto-scorrimento del carosello ogni 5 secondi
 document.addEventListener("DOMContentLoaded", (event) => {
