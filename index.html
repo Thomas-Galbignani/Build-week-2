@@ -12,6 +12,8 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="./assets/css/artist.css" />
+  <link rel="icon" type="image/png" href="./assets/imgs/favicon.png">
+
 </head>
 
 <body class="bg-black">
@@ -167,15 +169,30 @@
 
       <!-- Contenuto Centrale -->
       <div class="col-8 main-content">
-        <div class="align-items-center mb-4" id="carousel">
-          <img src="https://i.scdn.co/image/ab67616d0000b2730f56380b6ed7b17d4f62206a" class="album-cover me-4"
-            alt="Album cover" />
-          <div>
-            <h1></h1>
-            <p></p>
-            <button class="btn btn-success me-2"></button>
-            <button class="btn btn-outline-light"></button>
+        <!--Pulsanti avanti-indietro carosello -->
+        <div>
+          <div class="mt-5 mb-4 d-flex">
+            <button class="btn btn-success me-2 rounded-circle d-flex justify-content-center align-items-center p-1"
+              onclick="backSong()" id="btn-back">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+              </svg>
+            </button>
+            <button class="btn btn-outline-light rounded-circle d-flex justify-content-center align-items-center p-1"
+              onclick="nextSong()" id="btn-next">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+              </svg>
+            </button>
           </div>
+        </div>
+        <!-- Carosello -->
+        <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100" id="carousel">
+         <!-- Carosello generato da JS -->
         </div>
         <div>
           <h4 class="text-white my-3">Buonasera</h4>
@@ -341,7 +358,7 @@
       <div class="row d-flex align-items-center">
         <!-- parte img titolo e cuore -->
         <div class="col d-flex align-items-center opacity-0" id="player-img-container">
-          <img src="" alt="immagine" class="me-2" width="" id="player-img"/>
+          <img src="" alt="immagine" class="me-2" width="" id="player-img" />
           <div>
             <a href="" class="text-decoration-none text-light">
               <p class="m-0" id="player-title"></p>

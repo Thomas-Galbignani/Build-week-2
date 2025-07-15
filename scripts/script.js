@@ -1,77 +1,76 @@
 // Endpoint api
 const endpoint = `https://striveschool-api.herokuapp.com/api/deezer/search?q=`;
-// canzone corrente
-let currentSong = new Audio();
 
-let currentSongArray = [];
+let currentSong = new Audio(); // Canzone corrente
+
+let currentSongArray = []; // Array della canzone corrente
 // serch form
 const searchInput = document.getElementById(`searchInput`);
 let attribute = ``;
 
-// array da popolare con canzoni
+// Array da popolare con canzoni del carosello
 const songs = [];
-// funzioni  per popolare il carosello della home con 3 canzoni
+
+// Elementi del carosello
 const carouselContainer = document.getElementById("carousel");
 const btnBack = document.getElementById("btn-back");
 const btnNext = document.getElementById("btn-next");
+let currentCarouselIndex = 0; // Indice per tenere traccia della canzone attualmente visualizzata nel carosello
 
 // Canzoni del carosello
 let songName1 = `under a glass moon`;
 let songName2 = `the passage of the time`;
 let songName3 = `nightmare`;
 
-//variabile dei btnPlay
-let playBtn1 = ``;
-
+// Elementi del Footer
 let playerImgContainer = document.getElementById('player-img-container')
 let playerImg = document.getElementById('player-img')
 let playerTitle = document.getElementById('player-title')
 let playerArtist = document.getElementById('player-artist')
 let playerButton = document.getElementById('play')
 
-// funzioni  per popolare il carosello della home con 3 canzoni
+// Funzione per recuperare le canzoni da inserire nel carosello
 const songsOnCarousel = function () {
-  fetch(endpoint + songName1)
+  fetch(endpoint + songName1) // Recuperiamo la prima canzone
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error(errorre);
+        throw new Error("Errore nel recupero della prima canzone!");
       }
     })
     .then((song) => {
-      songs.push(song.data[0]);
-      return fetch(endpoint + songName2); // per richiamare una fetch
+      songs.push(song.data[0]); // Aggiungiamo la prima canzone all'array songs
+      return fetch(endpoint + songName2); // Recuperiamo la seconda canzone
     })
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error(errorre);
+        throw new Error("Errore nel recupero della seconda canzone!");
       }
     })
     .then((song2) => {
-      songs.push(song2.data[0]);
-      return fetch(endpoint + songName3);
+      songs.push(song2.data[0]); // Aggiungiamo la seconda canzone all'array songs
+      return fetch(endpoint + songName3); // Recuperiamo la terza canzone
     })
     .then((response) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error(errorre);
+        throw new Error("Errore nel recupero della terza canzone!");
       }
     })
     .then((song3) => {
-      songs.push(song3.data[0]);
-      createCarousel();
-      console.log("array con canzoni del carosello", songs);
+      songs.push(song3.data[0]); // Aggiungiamo la terza canzone all'array songs
+      createCarousel(); // Lanciamo la funzione per avviare il carosello
     })
-
     .catch((err) => {
       console.log(err, "tutto rotto");
     });
 };
 
+// Funzione per il form di ricerca
 const searchSong = function (e) {
   e.preventDefault();
   const formInput = searchInput.value;
@@ -80,32 +79,30 @@ const searchSong = function (e) {
   }
 };
 
+// Funzione per creare il carosello
 const createCarousel = function () {
-  console.log(songs);
-  carouselContainer.innerHTML = `
-    <div class="mt-5 mb-4 d-flex">
-         <button class="btn btn-success me-2 rounded-circle d-flex justify-content-center align-items-center p-1" onclick="backSong()" id="btn-back">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-          </svg>
-         </button>
-         <button class="btn btn-outline-light rounded-circle d-flex justify-content-center align-items-center p-1" onclick="nextSong()" id="btn-next">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-            </svg>
-         </button>
-         </div>
-    <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100" id="${songs[0].id}">
-      <img src="${songs[0].album.cover_medium}" class="album-cover me-4"
-                  alt="Album cover" />
-                <div>
-                <p class="text-white">${songs[0].album.title}</p>
-                  <h1 class="text-white">${songs[0].title}</h1>
-                  <p class="text-white">${songs[0].artist.name}</p>
-                  <p class="text-white">Ascolta il nuovo singolo di ${songs[0].artist.name}!</p>
+  carouselContainer.innerHTML = ''; // Pulisce il div prima di aggiungere i nuovi elementi
+  songs.forEach((song, index) => {
+    const carouselItem = document.createElement('div'); // Crea un nuovo div
+    carouselItem.id = `carousel-item-${index}`; // Assegna un ID unico a ogni elemento del carosello
+    carouselItem.classList.add('carousel-song-card', 'd-flex', 'align-items-center', 'w-100'); // Aggiunge le classi necessarie per allineare
+
+    // Nascondi tutti gli elementi tranne il primo all'inizio
+    if (index !== 0) {
+      carouselItem.classList.add('d-none');
+    }
+
+    // Creiamo il carosello
+    carouselItem.innerHTML = `
+      <img src="${song.album.cover_medium}" class="album-cover me-4" alt="Album cover" />
+            <div>
+                <p class="text-white">${song.album.title}</p>
+                  <h1 class="text-white">${song.title}</h1>
+                  <p class="text-white">${song.artist.name}</p>
+                  <p class="text-white">Ascolta il nuovo singolo di ${song.artist.name}!</p>
                   <div class="d-flex">
                     <div class="d-flex">
-                      <button class="btn btn-success me-2 rounded-5 py-2 px-4" id='play-${songs[0].id}'>Play</button>
+                      <button class="btn btn-success me-2 rounded-5 py-2 px-4 play-btn" data-song-index="${index}">Play</button>
                       <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
                     </div>
                     <button class="btn text-white">.</button>
@@ -113,176 +110,45 @@ const createCarousel = function () {
                     <button class="btn text-white">.</button>
                   </div>
                 </div>
-          </div>
-              <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100 d-none" id="${songs[1].id}">
-      <img src="${songs[1].album.cover_medium}" class="album-cover me-4"
-                  alt="Album cover" />
-                <div>
-                <p class="text-white">${songs[1].album.title}</p>
-                  <h1 class="text-white">${songs[1].title}</h1>
-                  <p class="text-white">${songs[1].artist.name}</p>
-                  <p class="text-white">Ascolta il nuovo singolo di ${songs[1].artist.name}!</p>
-                   <div class="d-flex">
-                    <div class="d-flex">
-                      <button class="btn btn-success me-2 rounded-5 py-2 px-4" id='play-${songs[1].id}' >Play</button>
-                      <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
-                    </div>
-                    <button class="btn text-white">.</button>
-                    <button class="btn text-white">.</button>
-                    <button class="btn text-white">.</button>
-                  </div>
-                </div>
-          </div>
-        <div class="d-flex align-items-center mb-4 bg-dark px-3 py-5 w-100 d-none" id="${songs[2].id}">
-            <img src="${songs[2].album.cover_medium}" class="album-cover me-4"
-                        alt="Album cover" />
-                      <div>
-                      <p class="text-white">${songs[2].album.title}</p>
-                        <h1 class="text-white">${songs[2].title}</h1>
-                        <p class="text-white">${songs[2].artist.name}</p>
-                        <p class="text-white">Ascolta il nuovo singolo di ${songs[2].artist.name}!</p>
-                         <div class="d-flex">
-                          <div class="d-flex">
-                            <button class="btn btn-success me-2 rounded-5 py-2 px-4" id='play-${songs[2].id}' >Play</button>
-                            <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
-                          </div>
-                          <button class="btn text-white">.</button>
-                          <button class="btn text-white">.</button>
-                          <button class="btn text-white">.</button>
-                        </div>
-                      </div>
           </div>
   `;
-  playBtn1 = document.getElementById(`play-` + songs[0].id);
-  console.log(playBtn1); // solo per vedere se funziona
-  const fileAudio1 = songs[0].preview;
 
-  const fileAudio2 = songs[1].preview;
+    carouselContainer.appendChild(carouselItem); // Aggiunge l'elemento al div principale
 
-  const fileAudio3 = songs[2].preview;
-
-  playBtn1.addEventListener(`click`, () => {
-    currentSong.currentTime = 0;
-    currentSong.pause();
-    currentSongArray = []
-    console.log(songs[0])
-    currentSongArray.push(songs[0])
-    currentSong = new Audio(fileAudio1);
-    currentSong.play()
-      .then(() => {
-        footerSong();
-        console.log(`stai ascoltando la canzone`);
-      })
-      .catch(() => {
-        console.log(`Non funziona`);
-      });
+    // Collega l'event listener al pulsante Play
+    const playButton = carouselItem.querySelector('.play-btn'); // Recuperiamo il pulsante con la classe play-btn
+    playButton.addEventListener('click', () => {
+      // Passa l'intero oggetto della canzone alla funzione playSong per la riproduzione
+      playSong(song);
+    });
   });
-  playBtn2 = document.getElementById(`play-` + songs[1].id);
-  console.log(playBtn2); // solo per vedere se funziona
 
-  playBtn2.addEventListener(`click`, () => {
-    currentSong.currentTime = 0;
-    currentSong.pause();
-    currentSongArray = []
-    currentSongArray.push(songs[1])
-    currentSong = new Audio(fileAudio2);
-    currentSong.play()
-      .then(() => {
-        footerSong();
-        console.log(`stai ascoltando la canzone`);
-      })
-      .catch(() => {
-        console.log(`Non funziona`);
-      });
-  });
-  playBtn3 = document.getElementById(`play-` + songs[2].id);
-  console.log(playBtn3); // solo per vedere se funziona
-
-  playBtn3.addEventListener(`click`, () => {
-    currentSong.currentTime = 0;
-    currentSong.pause();
-    currentSongArray = []
-    currentSongArray.push(songs[2])
-    currentSong = new Audio(fileAudio3);
-    currentSong.play()
-      .then(() => {
-        footerSong();
-        console.log(`stai ascoltando la canzone`);
-      })
-      .catch(() => {
-        console.log(`Non funziona`);
-      });
-  });
+  // Aggiunge le funzioni backSong e nextSong ai pulsanti in alto
+  btnBack.addEventListener('click', backSong);
+  btnNext.addEventListener('click', nextSong);
 };
 
-const nextSong = function (id) {
-  id = songs[0].id;
-
-  const carousel1 = document.getElementById(songs[0].id);
-  const carousel2 = document.getElementById(songs[1].id);
-  const carousel3 = document.getElementById(songs[2].id);
-
-  if (
-    carousel1.classList.contains("d-none") &&
-    carousel3.classList.contains("d-none")
-  ) {
-    id = songs[1].id;
-  } else if (
-    carousel2.classList.contains("d-none") &&
-    carousel1.classList.contains("d-none")
-  ) {
-    id = songs[2].id;
-  }
-
-  if (id === songs[0].id) {
-    carousel1.classList.add("d-none");
-    carousel2.classList.remove("d-none");
-    carousel3.classList.add("d-none");
-  } else if (id === songs[1].id) {
-    carousel1.classList.add("d-none");
-    carousel2.classList.add("d-none");
-    carousel3.classList.remove("d-none");
-  } else {
-    carousel1.classList.remove("d-none");
-    carousel2.classList.add("d-none");
-    carousel3.classList.add("d-none");
-  }
+// Funzione per scorrere il carosello in avanti
+const nextSong = function () {
+  // Nasconde la canzone corrente
+  document.getElementById(`carousel-item-${currentCarouselIndex}`).classList.add('d-none');
+  // Incrementa l'index, se si supera l'ultima canzone torna a 0
+  currentCarouselIndex = (currentCarouselIndex + 1) % songs.length;
+  // Mostra la prossima canzone
+  document.getElementById(`carousel-item-${currentCarouselIndex}`).classList.remove('d-none');
 };
 
-const backSong = function (id) {
-  id = songs[0].id;
-
-  const carousel1 = document.getElementById(songs[0].id);
-  const carousel2 = document.getElementById(songs[1].id);
-  const carousel3 = document.getElementById(songs[2].id);
-
-  if (
-    carousel1.classList.contains("d-none") &&
-    carousel3.classList.contains("d-none")
-  ) {
-    id = songs[1].id;
-  } else if (
-    carousel2.classList.contains("d-none") &&
-    carousel1.classList.contains("d-none")
-  ) {
-    id = songs[2].id;
-  }
-
-  if (id === songs[0].id) {
-    carousel1.classList.add("d-none");
-    carousel2.classList.add("d-none");
-    carousel3.classList.remove("d-none");
-  } else if (id === songs[2].id) {
-    carousel1.classList.add("d-none");
-    carousel2.classList.remove("d-none");
-    carousel3.classList.add("d-none");
-  } else {
-    carousel1.classList.remove("d-none");
-    carousel2.classList.add("d-none");
-    carousel3.classList.add("d-none");
-  }
+// Funzione per scorrere il carosello indietro
+const backSong = function () {
+  // Nasconde la canzone corrente
+  document.getElementById(`carousel-item-${currentCarouselIndex}`).classList.add('d-none');
+  // Diminuisce l'indice, tornando all'ultima canzone se si va sotto 0
+  currentCarouselIndex = (currentCarouselIndex - 1 + songs.length) % songs.length; // + songs.length per gestire i numeri negativi
+  // Mostra la canzone precedente
+  document.getElementById(`carousel-item-${currentCarouselIndex}`).classList.remove('d-none');
 };
 
+// Funzione per il la barra di riproduzione del footer
 const footerSong = function () {
   if (currentSongArray.length === 0) {
     console.log('sono nell if', currentSongArray)
@@ -298,23 +164,41 @@ const footerSong = function () {
   }
 }
 
+// Funzione per il pulsante play del footer
 playerButton.addEventListener('click', () => {
-  currentSong.pause();
-  if (currentSong.paused) {
+  if (!currentSong.paused) { // Se la canzone non è in pausa
+    currentSong.pause(); // Mette in pausa la canzone
     playerButton.innerHTML = `
     <i class="bi bi-play-circle-fill text-light h3"></i>
     `
-  } else {
+  } else if (currentSong.paused) { // Se la canzone è in pausa
+    currentSong.play(); // Avvia la canzone
     playerButton.innerHTML = `
     <i class="bi bi-pause-circle-fill text-light h3"></i>
     `
   }
 })
 
+// Funzione per far partire la musica
+const playSong = function (songToPlay) { // songToPlay sarebbe l'intera canzone che abbiamo passato come parametro
+  currentSong.currentTime = 0; // Portiamo il tempo della canzone a 0
+  currentSong.pause(); // Mettiamo in pausa la canzone corrente
+  currentSongArray = [songToPlay]; // Aggiorna currentSongArray con la canzone selezionata
+  currentSong = new Audio(songToPlay.preview); // Aggiunge e currentSong il link della canzone
+  currentSong.play() // Avvia la canzone
+    .then(() => {
+      footerSong(); // Lanciamo la funzione footerSong
+      console.log(`stai ascoltando la canzone: ${songToPlay.title}`);
+    })
+    .catch((error) => {
+      console.error(`Non funziona: Errore durante la riproduzione.`, error);
+    });
+};
+
 songsOnCarousel();
 footerSong();
 
-// funzione per auto-scroll del carousel richiamando la funzione
+// funzione per auto-scorrimento del carosello ogni 5 secondi
 document.addEventListener("DOMContentLoaded", (event) => {
   setInterval(nextSong, 5000);
 });
