@@ -124,11 +124,10 @@ const durationElem = document.querySelector(".duration");
 const volumeSlider = document.getElementById("volume");
 
 let isPlaying = false;
-
-// Başlanğıcda player gizlidir
+// dipslay none at start
 footer.style.display = "none";
 
-// Track seçəndə çağırılacaq funksiya
+
 function selectTrack(previewUrl, title, artist, cover) {
   audio.src = previewUrl;
   playerTitle.textContent = title;
@@ -142,7 +141,7 @@ function selectTrack(previewUrl, title, artist, cover) {
   durationElem.textContent = formatDuration(audio.duration || 30);
 }
 
-// Play/pause düyməsi
+// Play/pause
 playBtn.addEventListener("click", () => {
   if (!audio.src) {
     alert("Please select a track first!");
@@ -158,7 +157,7 @@ playBtn.addEventListener("click", () => {
   updatePlayButton();
 });
 
-// Audio eventləri
+// Audio events
 audio.addEventListener("timeupdate", () => {
   const progressPercent = (audio.currentTime / audio.duration) * 100;
   progressBar.style.width = progressPercent + "%";
@@ -171,7 +170,7 @@ audio.addEventListener("ended", () => {
   footer.style.display = "none";
 });
 
-// Play düyməsinin ikonunu yenilə
+// Play button
 function updatePlayButton() {
   if (isPlaying) {
     playIcon.classList.remove("bi-play-circle-fill");
@@ -182,12 +181,12 @@ function updatePlayButton() {
   }
 }
 
-// Volume kontrolu
+// Volume
 volumeSlider.addEventListener("input", (e) => {
   audio.volume = e.target.value / 100;
 });
 
-// 0-100 saniyə formatında vaxtı "m:ss" formatına çevirir
+
 function formatDuration(seconds) {
   if (isNaN(seconds)) return "0:00";
   const min = Math.floor(seconds / 60);
@@ -195,14 +194,14 @@ function formatDuration(seconds) {
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
 document.getElementById("close-footer").addEventListener("click", () => {
-  audio.pause();  // Mahnını da dayandırır
-  footer.style.display = "none";  // Footer gizlənir
+  audio.pause(); 
+  footer.style.display = "none";  // Footer is none
 });
 
 let currentTracks = [];
 let currentTrackIndex = 0;
 
-// Track listi render edəndə yadda saxlayırıq
+// Track lists
 function renderTracklist(tracks) {
   currentTracks = tracks;
   const container = document.getElementById("tracklist-container");
@@ -232,10 +231,10 @@ function selectTrack(previewUrl, title, artist, cover, index) {
   audio.play();
   isPlaying = true;
   updatePlayButton();
-  durationElem.textContent = "0:30"; // çünki preview link 30 saniyəlik olur
+  durationElem.textContent = "0:30";
 }
 
-// Shuffle düyməsi
+// Shuffle button
 document.querySelector(".bi-shuffle").addEventListener("click", () => {
   if (currentTracks.length === 0) return;
   const randomIndex = Math.floor(Math.random() * currentTracks.length);
