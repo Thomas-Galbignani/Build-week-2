@@ -2,6 +2,7 @@
 const endpoint = `https://striveschool-api.herokuapp.com/api/deezer/artist`;
 
 const parameters = new URLSearchParams(location.search);
+const pageTitle = document.getElementById('page-title');
 
 const eventId = parameters.get("eventId");
 
@@ -18,7 +19,8 @@ fetch(endpoint + `/` + eventId)
     }
   })
   .then((artist) => {
-    console.log(artist);
+    console.log('artista', artist);
+    pageTitle.innerText = artist.name;
   })
   .catch(() => {
     console.log(`tuttto sbagliato`);
@@ -52,7 +54,11 @@ const footerSong = function () {
     playerImgContainer.classList.remove("opacity-0");
     playerImg.setAttribute("src", currentSongArray[0].album.cover_small);
     playerArtist.innerText = currentSongArray[0].artist.name;
+    const playerArtistLink = playerArtist.parentElement;
+    playerArtistLink.href = `./artists.html?eventId=${currentSongArray[0].artist.id}`
     playerTitle.innerText = currentSongArray[0].title;
+    const playerTitleLink = playerTitle.parentElement;
+    playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`
     playerButton.innerHTML = `
       <i class="bi bi-pause-circle-fill text-light h3"></i>
       `;

@@ -228,7 +228,11 @@ const footerSong = function () {
     playerImgContainer.classList.remove("opacity-0");
     playerImg.setAttribute("src", currentSongArray[0].album.cover_small);
     playerArtist.innerText = currentSongArray[0].artist.name;
+    const playerArtistLink = playerArtist.parentElement;
+    playerArtistLink.href = `./artists.html?eventId=${currentSongArray[0].artist.id}`
     playerTitle.innerText = currentSongArray[0].title;
+    const playerTitleLink = playerTitle.parentElement;
+    playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`
     playerButton.innerHTML = `
     <i class="bi bi-pause-circle-fill text-light h3"></i>
     `;
