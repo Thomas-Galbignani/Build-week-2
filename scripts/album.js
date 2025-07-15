@@ -88,9 +88,7 @@ function renderTracklist(tracks) {
     <div
       class="d-flex align-items-center py-2 px-4 text-white track-row"
       style="cursor: pointer;"
-      onclick="selectTrack('${track.preview}', \`${track.title.replace(
-      /`/g,
-      ""
+      onclick="selectTrack('${track.preview}', \`${track.title.replace(/`/g, "")}\`, \`${track.artist.name}\`, '${track.album.cover_small}')"
     )}\`, this)"
     >
       <div style="width: 40px;" class="text-center">${index + 1}</div>
@@ -112,25 +110,168 @@ function selectTrack(previewUrl, title) {
   audio.play();
   console.log("Selected track:", title);
 }
-const audio = document.getElementById("audio-player");
+const audio = new Audio();
+const footer = document.getElementById("footer");
+const playBtn = document.getElementById("play");
+const playIcon = playBtn.querySelector("i");
+const playerImgContainer = document.getElementById("player-img-container");
+const playerImg = document.getElementById("player-img");
+const playerTitle = document.getElementById("player-title");
+const playerArtist = document.getElementById("player-artist");
+const progressBar = document.querySelector(".progress-bar");
+const currentTimeElem = document.querySelector(".current-time");
+const durationElem = document.querySelector(".duration");
+const volumeSlider = document.getElementById("volume");
 
-audio.addEventListener("play", () => {
-  audio.style.display = "block";
+let isPlaying = false;
+
+// Başlanğıcda player gizlidir
+footer.style.display = "none";
+
+// Track seçəndə çağırılacaq funksiya
+function selectTrack(previewUrl, title, artist, cover) {
+  audio.src = previewUrl;
+  playerTitle.textContent = title;
+  playerArtist.textContent = artist;
+  playerImg.src = cover;
+  footer.style.display = "block";
+  playerImgContainer.classList.remove("opacity-0");
+  audio.play();
+  isPlaying = true;
+  updatePlayButton();
+  durationElem.textContent = formatDuration(audio.duration || 30);
+}
+
+// Play/pause düyməsi
+playBtn.addEventListener("click", () => {
+  if (!audio.src) {
+    alert("Please select a track first!");
+    return;
+  }
+
+  if (isPlaying) {
+    audio.pause();
+  } else {
+    audio.play();
+  }
+  isPlaying = !isPlaying;
+  updatePlayButton();
 });
 
-audio.addEventListener("pause", () => {
-  audio.style.display = "none";
+// Audio eventləri
+audio.addEventListener("timeupdate", () => {
+  const progressPercent = (audio.currentTime / audio.duration) * 100;
+  progressBar.style.width = progressPercent + "%";
+  currentTimeElem.textContent = formatDuration(audio.currentTime);
 });
 
 audio.addEventListener("ended", () => {
-  audio.style.display = "none";
+  isPlaying = false;
+  updatePlayButton();
+  footer.style.display = "none";
 });
-// Format time
+
+// Play düyməsinin ikonunu yenilə
+function updatePlayButton() {
+  if (isPlaying) {
+    playIcon.classList.remove("bi-play-circle-fill");
+    playIcon.classList.add("bi-pause-circle-fill");
+  } else {
+    playIcon.classList.add("bi-play-circle-fill");
+    playIcon.classList.remove("bi-pause-circle-fill");
+  }
+}
+
+// Volume kontrolu
+volumeSlider.addEventListener("input", (e) => {
+  audio.volume = e.target.value / 100;
+});
+
+// 0-100 saniyə formatında vaxtı "m:ss" formatına çevirir
 function formatDuration(seconds) {
+  if (isNaN(seconds)) return "0:00";
   const min = Math.floor(seconds / 60);
-  const sec = seconds % 60;
+  const sec = Math.floor(seconds % 60);
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
+document.getElementById("close-footer").addEventListener("click", () => {
+  audio.pause();  // Mahnını da dayandırır
+  footer.style.display = "none";  // Footer gizlənir
+});
+
+let currentTracks = [];
+let currentTrackIndex = 0;
+
+// Track listi render edəndə yadda saxlayırıq
+function renderTracklist(tracks) {
+  currentTracks = tracks;
+  const container = document.getElementById("tracklist-container");
+  container.innerHTML = "";
+
+  tracks.forEach((track, index) => {
+    container.innerHTML += `
+      <div class="d-flex align-items-center py-2 px-4 text-white track-row" style="cursor: pointer;"
+        onclick="selectTrack('${track.preview}', \`${track.title.replace(/`/g, "")}\`, '${track.artist.name}', '${track.album.cover_medium}', ${index})">
+        <div style="width: 40px;" class="text-center">${index + 1}</div>
+        <div class="flex-grow-1">${track.title}</div>
+        <div style="width: 120px;" class="text-center">${track.rank.toLocaleString()}</div>
+        <div style="width: 60px;" class="text-end">${formatDuration(track.duration)}</div>
+      </div>
+    `;
+  });
+}
+
+function selectTrack(previewUrl, title, artist, cover, index) {
+  currentTrackIndex = index !== undefined ? index : 0;
+  audio.src = previewUrl;
+  playerTitle.textContent = title;
+  playerArtist.textContent = artist;
+  playerImg.src = cover;
+  footer.style.display = "block";
+  playerImgContainer.classList.remove("opacity-0");
+  audio.play();
+  isPlaying = true;
+  updatePlayButton();
+  durationElem.textContent = "0:30"; // çünki preview link 30 saniyəlik olur
+}
+
+// Shuffle düyməsi
+document.querySelector(".bi-shuffle").addEventListener("click", () => {
+  if (currentTracks.length === 0) return;
+  const randomIndex = Math.floor(Math.random() * currentTracks.length);
+  const track = currentTracks[randomIndex];
+  selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, randomIndex);
+});
+
+// Skip backward
+document.querySelector(".bi-skip-backward-fill").addEventListener("click", () => {
+  if (currentTrackIndex > 0) {
+    currentTrackIndex--;
+  } else {
+    currentTrackIndex = currentTracks.length - 1; // Əgər əvvəldirsə sonuncuya getsin
+  }
+  const track = currentTracks[currentTrackIndex];
+  selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, currentTrackIndex);
+});
+
+// Skip forward
+document.querySelector(".bi-skip-forward-fill").addEventListener("click", () => {
+  if (currentTrackIndex < currentTracks.length - 1) {
+    currentTrackIndex++;
+  } else {
+    currentTrackIndex = 0;
+  }
+  const track = currentTracks[currentTrackIndex];
+  selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, currentTrackIndex);
+});
+
+// Repeat
+let isRepeat = false;
+document.querySelector(".bi-repeat").addEventListener("click", () => {
+  isRepeat = !isRepeat;
+  audio.loop = isRepeat;
+  alert(isRepeat ? "Repeat ON" : "Repeat OFF");
+});
 
 // Right and left arrows
 document.querySelector(".bi-chevron-left").addEventListener("click", () => {
@@ -188,3 +329,31 @@ document.querySelector(".new-class").addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
   fetchAlbums("rock");
 });
+
+const footerSong = function () {
+  if (currentSongArray.length === 0) {
+    console.log('sono nell if', currentSongArray)
+  } else {
+    console.log(currentSongArray)
+    playerImgContainer.classList.remove('opacity-0')
+    playerImg.setAttribute('src', currentSongArray[0].album.cover_small)
+    playerArtist.innerText = currentSongArray[0].artist.name
+    playerTitle.innerText = currentSongArray[0].title
+    playerButton.innerHTML = `
+    <i class="bi bi-pause-circle-fill text-light h3"></i>
+    `
+  }
+}
+
+playerButton.addEventListener('click', () => {
+  currentSong.pause();
+  if (currentSong.paused) {
+    playerButton.innerHTML = `
+    <i class="bi bi-play-circle-fill text-light h3"></i>
+    `
+  } else {
+    playerButton.innerHTML = `
+    <i class="bi bi-pause-circle-fill text-light h3"></i>
+    `
+  }
+})
