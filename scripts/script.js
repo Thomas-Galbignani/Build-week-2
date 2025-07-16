@@ -327,6 +327,19 @@ if (volumeSlider) {
   });
 }
 
+playerVolume.addEventListener("click", () => {
+  if (currentSong.volume === 0) {
+    // Se il volume è 0
+    currentSong.volume = 1;
+    playerVolume.classList.remove("bi", "bi-volume-mute");
+    playerVolume.classList.add("bi", "bi-volume-up");
+  } else {
+    playerVolume.classList.remove("bi", "bi-volume-up");
+    playerVolume.classList.add("bi", "bi-volume-mute");
+    currentSong.volume = 0;
+  }
+});
+
 songsOnCarousel();
 footerSong();
 songsOnCard();

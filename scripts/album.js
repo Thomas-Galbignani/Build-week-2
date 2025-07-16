@@ -17,6 +17,7 @@ const progressBar = document.querySelector(".progress-bar");
 const currentTimeElem = document.querySelector(".current-time");
 const durationElem = document.querySelector(".duration");
 const volumeSlider = document.getElementById("volume");
+const progressContainer = document.querySelector(".progress-bar-container .flex-grow-1");
 
 footer.style.display = "none";
 
@@ -104,7 +105,7 @@ function selectTrack(previewUrl, title, artist, cover, index = 0) {
   playerTitle.textContent = title;
   playerArtist.textContent = artist;
   playerImg.src = cover;
-  footer.style.display = "block";
+  showFooter();
   playerImgContainer.classList.remove("opacity-0");
   audio.play();
   isPlaying = true;
@@ -113,6 +114,7 @@ function selectTrack(previewUrl, title, artist, cover, index = 0) {
 
   document.querySelectorAll(".track-row").forEach(el => el.classList.remove("highlight"));
   document.querySelectorAll(".track-row")[index]?.classList.add("highlight");
+
 }
 
 function updatePlayButton() {
@@ -166,10 +168,16 @@ audio.addEventListener("timeupdate", () => {
 audio.addEventListener("ended", () => {
   if (isRepeat) {
     audio.play();
+  } else if (isShuffle) {
+    const randomIndex = Math.floor(Math.random() * currentTracks.length);
+    currentTrackIndex = randomIndex;
+    const track = currentTracks[randomIndex];
+    selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, randomIndex);
   } else {
-    isPlaying = false;
-    updatePlayButton();
-    footer.style.display = "none";
+    currentTrackIndex = (currentTrackIndex + 1) % currentTracks.length;
+    const track = currentTracks[currentTrackIndex];
+    selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, currentTrackIndex);
+    audio.play();
   }
 });
 
@@ -177,11 +185,10 @@ volumeSlider.addEventListener("input", (e) => {
   audio.volume = e.target.value / 100;
 });
 
+let isShuffle = false;
+
 document.querySelector(".bi-shuffle").addEventListener("click", () => {
-  if (currentTracks.length === 0) return;
-  const randomIndex = Math.floor(Math.random() * currentTracks.length);
-  const track = currentTracks[randomIndex];
-  selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, randomIndex);
+  isShuffle = !isShuffle;
 });
 
 document.querySelector(".bi-skip-backward-fill").addEventListener("click", () => {
@@ -195,6 +202,39 @@ document.querySelector(".bi-skip-forward-fill").addEventListener("click", () => 
   const track = currentTracks[currentTrackIndex];
   selectTrack(track.preview, track.title, track.artist.name, track.album.cover_medium, currentTrackIndex);
 });
+
+let isDragging = false;
+
+progressContainer.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  seekAudio(e);
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    seekAudio(e);
+  }
+});
+
+window.addEventListener("mouseup", (e) => {
+  if (isDragging) {
+    seekAudio(e);
+    isDragging = false;
+  }
+});
+
+function seekAudio(e) {
+  if (!audio.duration) return;
+
+  const rect = progressContainer.getBoundingClientRect();
+  const offsetX = e.clientX - rect.left;
+  const percent = Math.min(Math.max(offsetX / rect.width, 0), 1);
+
+  progressBar.style.width = `${percent * 100}%`;
+
+   audio.currentTime = percent * audio.duration;
+  currentTimeElem.textContent = formatDuration(audio.currentTime);
+}
 
 document.querySelector(".bi-repeat").addEventListener("click", () => {
   isRepeat = !isRepeat;
@@ -220,12 +260,42 @@ document.querySelector(".bi-chevron-right").addEventListener("click", () => {
   showAlbum(albumList[currentAlbumIndex]);
 });
 document.getElementById("close-footer").addEventListener("click", () => {
-  audio.pause();
+   audio.pause();
   isPlaying = false;
   updatePlayButton();
-  footer.style.display = "none";
+  hideFooter();
 });
 
+function showFooter() {
+  footer.style.display = "block";
+  const mainContent = document.getElementById("main-content");
+  mainContent.style.height = "calc(100vh - 100px)";
+  document.documentElement.classList.add("shrink");
+}
+
+function hideFooter() {
+  footer.style.display = "none";
+  const mainContent = document.getElementById("main-content");
+  mainContent.style.height = "100vh";
+  document.documentElement.classList.remove("shrink");
+}
+
+const playerVolume = document.getElementById("player-volume");
+const currentSong = audio;  // audio elementin varsa bunu istifadə et
+
+playerVolume.addEventListener("click", () => {
+  if (currentSong.volume === 0) {
+    currentSong.volume = 1;
+    playerVolume.classList.replace("bi-volume-mute", "bi-volume-up");
+  } else {
+    currentSong.volume = 0;
+    playerVolume.classList.replace("bi-volume-up", "bi-volume-mute");
+  }
+});
+
+
+
+// play/ three dots
 document.querySelector(".bi-play-circle-fill").addEventListener("click", () => {
   if (currentTracks.length === 0) return alert("No tracks available!");
   const firstTrack = currentTracks[0];

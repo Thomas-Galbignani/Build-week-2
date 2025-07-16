@@ -6,7 +6,7 @@ const eventId = parameters.get("eventId");
 
 // array delle canzoni
 let currentSong = new Audio();
-const currentSongArray = [];
+let currentSongArray = [];
 
 const topTracks = document.getElementById("top-50");
 const imgWrapper = document.getElementById("image-wrapper");
@@ -106,7 +106,7 @@ fetch(endpoint + `/` + eventId)
           const trackDiv = document.createElement("div");
           trackDiv.style.cursor = "pointer";
           trackDiv.innerHTML = `
-          <div class="d-flex align-items-center py-2 mx-2" id="${index}" onclick="playSong('${track.preview}')">
+          <div class="d-flex align-items-center py-2 mx-2" id="${index}">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0 me-3">${index + 1}</p>
                       <img src="${track.album.cover}" alt="img-${track.title}" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
@@ -116,6 +116,9 @@ fetch(endpoint + `/` + eventId)
                     <p class="text-secondary mb-0">${formatDuration(track.duration)}</p>
             </div>
             `;
+          trackDiv.addEventListener("click", () => {
+            playSong(track); // Passa l'intero oggetto 'track'
+          });
           topTracks.appendChild(trackDiv);
         });
       })
@@ -177,20 +180,22 @@ playerButton.addEventListener("click", () => {
 
 // Funzione per far partire la musica
 const playSong = function (songToPlay) {
-  console.log(currentSongArray[0].preview);
+
   if (songToPlay) {
     currentSong.pause();
-    currentSong = new Audio(songToPlay)
-  } else {
+    currentSongArray = [songToPlay];
+    console.log('canzone passata dal click', currentSongArray)
     currentSong = new Audio(currentSongArray[0].preview);
+    footerSong();
+    console.log('canzone corrente', currentSong)
+  } else {
+    currentSong = new Audio(currentSongArray[0].preview)
   }
   currentSong.addEventListener("timeupdate", updateProgressBar); // Per la progressBar
   currentSong.currentTime = 0; // Portiamo il tempo della canzone a 0
   currentSong.pause(); // Mettiamo in pausa la canzone corrente
-
   // Aggiunge e currentSong il link della canzone
-  currentSong
-    .play() // Avvia la canzone
+  currentSong.play() // Avvia la canzone
     .then(() => {
       console.log(`sono io `, currentSongArray[0]);
       console.log(`stai ascoltando la canzone: ${currentSongArray[0].title}`);
