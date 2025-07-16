@@ -4,7 +4,7 @@ const imgWrapper = document.getElementById("image-wrapper");
 
 const parameters = new URLSearchParams(location.search);
 const pageTitle = document.getElementById("page-title");
-
+const topTracks = document.getElementById("top-50");
 const eventId = parameters.get("eventId");
 
 // array delle canzoni
@@ -26,13 +26,13 @@ fetch(endpoint + `/` + eventId)
       (imgWrapper.style.backgroundSize = "cover");
     imgWrapper.style.backgroundRepeat = "no-repeat";
     imgWrapper.style.backgroundPosition = "center";
+    imgWrapper.style.height = "15%";
     const artistTracklistEndpoint = artist.tracklist; // Recuperiamo l'endpoint della top 50
     imgWrapper.innerHTML = `
           <div>
-              <div class="mb-4 d-flex">
+              <div class="mb-4 d-flex mt-2">
                 <button
                   class="btn btn-outline-light me-2 rounded-circle d-flex justify-content-center align-items-center p-1"
-                  onclick="backSong()"
                   id="btn-back"
                 >
                   <svg
@@ -51,7 +51,6 @@ fetch(endpoint + `/` + eventId)
                 </button>
                 <button
                   class="btn btn-outline-light rounded-circle d-flex justify-content-center align-items-center p-1"
-                  onclick="nextSong()"
                   id="btn-next"
                 >
                   <svg
@@ -90,9 +89,29 @@ fetch(endpoint + `/` + eventId)
         }
       })
       .then((tracklist) => {
-        console.log(tracklist)
-        tracklist.forEach((track, index) => {
-        })
+        console.log(tracklist);
+        tracklist.data.forEach((track, index) => {
+          const trackDiv = document.createElement("div");
+          trackDiv.innerHTML = `
+          <div class="d-flex align-items-center py-2 mx-2">
+                    <div class="d-flex align-items-center me-auto">
+                      <p class="text-secondary mb-0 me-3">${index + 1}</p>
+                      <img
+                        src="${track.album.cover}"
+                        alt=""
+                        class="mx-3 img-fluid"
+                        style="width: 50px; height: 50px; object-fit: cover"
+                      />
+                      <p class="mb-0">${track.title}</p>
+                    </div>
+
+                    <p class="text-secondary mb-0 me-3">${track.rank}</p>
+                    <p class="text-secondary mb-0">${formatDuration(
+                      track.duration
+                    )}</p>
+                  </div>`;
+          topTracks.appendChild(trackDiv);
+        });
       })
       .catch(() => {
         console.log(`getTracklist tuttto sbagliato`);
@@ -101,9 +120,6 @@ fetch(endpoint + `/` + eventId)
   .catch(() => {
     console.log(`tuttto sbagliato`);
   });
-
-
-
 
 const songInPlay = localStorage.getItem(`currentSong`);
 if (songInPlay) {
@@ -197,3 +213,11 @@ playerVolume.addEventListener("click", () => {
   }
 });
 footerSong();
+
+// Funzione per formattare il tempo della canzone
+function formatDuration(seconds) {
+  if (isNaN(seconds)) return "0:00";
+  const min = Math.floor(seconds / 60);
+  const sec = Math.floor(seconds % 60);
+  return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+}
