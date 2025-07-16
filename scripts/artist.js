@@ -90,10 +90,11 @@ fetch(endpoint + `/` + eventId)
       })
       .then((tracklist) => {
         console.log(tracklist);
+        tracklist.data.sort((a, b) => b.rank - a.rank);
         tracklist.data.forEach((track, index) => {
           const trackDiv = document.createElement("div");
           trackDiv.innerHTML = `
-          <div class="d-flex align-items-center py-2 mx-2">
+          <div class="d-flex align-items-center py-2 mx-2" id="${index}">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0 me-3">${index + 1}</p>
                       <img
