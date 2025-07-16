@@ -12,7 +12,7 @@ const topTracks = document.getElementById("top-50");
 const imgWrapper = document.getElementById("image-wrapper");
 const artistImg = document.getElementById("imgArtist");
 const artistLike = document.getElementById("artistLike");
-const btnViewMore = document.getElementById('viewMore');
+const btnViewMore = document.getElementById("viewMore");
 
 // Elementi del Footer
 let playerImgContainer = document.getElementById("player-img-container");
@@ -110,54 +110,61 @@ fetch(endpoint + `/` + eventId)
         tracklist.data.sort((a, b) => b.rank - a.rank);
         tracklist.data.forEach((track, index) => {
           const trackDiv = document.createElement("div");
-          trackDiv.id = `${index}`
+          trackDiv.id = `${index}`;
           trackDiv.style.cursor = "pointer";
           trackDiv.classList.add("d-none");
           trackDiv.innerHTML = `
           <div class="d-flex align-items-center py-2 mx-4">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0">${index + 1}</p>
-                      <img src="${track.album.cover}" alt="img-${track.title
-            }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
+                      <img src="${track.album.cover}" alt="img-${
+            track.title
+          }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
                       <p class="mb-0">${track.title}</p>
                     </div>
                     <p class="text-secondary mb-0 me-3">${track.rank}</p>
                     <p class="text-secondary mb-0">${formatDuration(
-              track.duration
-            )}</p>
+                      track.duration
+                    )}</p>
             </div>
             `;
           trackDiv.addEventListener("click", () => {
             playSong(track); // Passa l'intero oggetto 'track'
           });
 
-          if (btnViewMore.innerText === 'VISUALIZZA MENO') {
-            btnViewMore.addEventListener('click', () => {
-              console.log('ciao')
-              if (trackDiv.id >= 9) {
-                trackDiv.classList.add('d-none');
-                btnViewMore.innerText = 'VISUALIZZA ALTRO'
-              }
-            })
-          }
+          // funzioni per mostrare meno e più con il pulsante visualizza altro
 
-          if (btnViewMore.innerText = 'VISUALIZZA ALTRO') {
-            btnViewMore.addEventListener('click', () => {
-              if (trackDiv.id < 10) {
-                trackDiv.classList.remove('d-none');
-                btnViewMore.innerText = 'VISUALIZZA MENO'
-                
-              }
-            })
-          }
+          const vediAltro = function () {
+            if ((btnViewMore.innerText = "VISUALIZZA ALTRO")) {
+              btnViewMore.addEventListener("click", () => {
+                if (trackDiv.id < 10) {
+                  trackDiv.classList.remove("d-none");
+                  btnViewMore.innerText = "VISUALIZZA MENO";
+                  vediMeno();
+                }
+              });
+            }
+          };
+          vediAltro();
+
+          const vediMeno = function () {
+            if (btnViewMore.innerText === "VISUALIZZA MENO") {
+              btnViewMore.addEventListener("click", () => {
+                console.log("ciao voglio chiudere la visuale");
+                if (trackDiv.id >= 5) {
+                  trackDiv.classList.add("d-none");
+                  btnViewMore.innerText = "VISUALIZZA ALTRO";
+                  vediAltro();
+                }
+              });
+            }
+          };
 
           if (trackDiv.id < 5) {
-            trackDiv.classList.remove('d-none');
+            trackDiv.classList.remove("d-none");
           }
           topTracks.appendChild(trackDiv);
         });
-
-
       })
       .catch(() => {
         console.log(`Tracklist tuttto sbagliato`);
