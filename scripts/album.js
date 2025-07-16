@@ -35,6 +35,7 @@ async function fetchAlbums(query = "album") {
 
 async function showAlbum(albumData) {
   const albumId = albumData.album.id;
+  window.location.hash = albumId;
   try {
     const res = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`);
     const album = await res.json();
@@ -223,4 +224,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
+window.addEventListener('hashchange', () => {
+  const newAlbumId = window.location.hash.substring(1);
+  fetchAlbumById(newAlbumId);
+});

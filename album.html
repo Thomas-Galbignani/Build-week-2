@@ -1,508 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>ALBUM</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/circular-font.css" />
-    <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
-  </head>
-  <style>
-    .small-playlists::-webkit-scrollbar {
-      width: 15px;
-    }
+<head>
+  <title>ALBUM</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    .small-playlists::-webkit-scrollbar-thumb {
-      background-color: #888;
-    }
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/circular-font.css" />
+  <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
+</head>
+<style>
+  .small-playlists::-webkit-scrollbar {
+    width: 15px;
+  }
 
-    .small-playlists::-webkit-scrollbar-thumb:hover {
-      background-color: #555;
-    }
-    /* for main content scrollbar */
-    #main-content::-webkit-scrollbar {
-      width: 15px;
-    }
+  .small-playlists::-webkit-scrollbar-thumb {
+    background-color: #888;
+  }
 
-    #main-content::-webkit-scrollbar-thumb {
-      background-color: #888;
-    }
+  .small-playlists::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
 
-    #main-content::-webkit-scrollbar-thumb:hover {
-      background-color: #555;
-    }
-    .btn-dark.rounded-circle {
-      transition: background-color 0.3s ease;
-    }
+  /* for main content scrollbar */
+  #main-content::-webkit-scrollbar {
+    width: 15px;
+  }
 
-    .btn-dark.rounded-circle:hover {
-      background-color: rgba(0, 0, 0, 0.34) !important;
-      border: none;
-    }
-    .track-row.highlight {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #ffd700;
-    }
-  </style>
-  <body class="bg-black">
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Sidebar -->
-        <nav
-          id="sidebarMenu"
-          class="col-md-3 col-lg-2 d-md-block sidebar collapse"
-        >
-          <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item px-3">
-                <div>
-                  <a
-                    class="d-block text-decoration-none"
-                    data-bs-toggle="collapse"
-                    href="#submenu1"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="submenu1"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="25"
-                      height="25"
-                      fill="currentColor"
-                      class="bi bi-three-dots text-white my-2"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"
-                      />
-                    </svg>
-                  </a>
-                  <div
-                    class="collapse ps-3 bg-dark rounded-2 mb-3"
-                    id="submenu1"
-                  >
-                    <a
-                      href="#"
-                      class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light"
-                      >File</a
-                    >
-                    <a
-                      href="#"
-                      class="d-block py-1 text-decoration-none text-secondary link-light"
-                      >Modifica</a
-                    >
-                    <a
-                      href="#"
-                      class="d-block py-1 text-decoration-none text-secondary link-light"
-                      >Visualizza</a
-                    >
-                    <a
-                      href="#"
-                      class="d-block py-1 text-decoration-none text-secondary link-light"
-                      >Riproduzione</a
-                    >
-                    <a
-                      href="#"
-                      class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light"
-                      >Assistenza</a
-                    >
-                  </div>
+  #main-content::-webkit-scrollbar-thumb {
+    background-color: #888;
+  }
+
+  #main-content::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  .btn-dark.rounded-circle {
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-dark.rounded-circle:hover {
+    background-color: rgba(0, 0, 0, 0.34) !important;
+    border: none;
+  }
+
+  .track-row.highlight {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffd700;
+  }
+</style>
+
+<body class="bg-black">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item px-3">
+              <div>
+                <a class="d-block text-decoration-none" data-bs-toggle="collapse" href="#submenu1" role="button"
+                  aria-expanded="false" aria-controls="submenu1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                    class="bi bi-three-dots text-white my-2" viewBox="0 0 16 16">
+                    <path
+                      d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                  </svg>
+                </a>
+                <div class="collapse ps-3 bg-dark rounded-2 mb-3" id="submenu1">
+                  <a href="#" class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light">File</a>
+                  <a href="#" class="d-block py-1 text-decoration-none text-secondary link-light">Modifica</a>
+                  <a href="#" class="d-block py-1 text-decoration-none text-secondary link-light">Visualizza</a>
+                  <a href="#" class="d-block py-1 text-decoration-none text-secondary link-light">Riproduzione</a>
+                  <a href="#" class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light">Assistenza</a>
                 </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active d-flex align-items-center link-light" href="#" aria-current="page">
+                <i class="bi bi-house-door m-0 me-3 h4"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="text-secondary text-decoration-none d-inline-flex align-items-center link-light py-2 px-3"
+                href="#searchCollapse" data-bs-toggle="collapse" role="button" aria-expanded="false"
+                aria-controls="searchCollapse">
+                <i class="bi bi-search m-0 me-3 h4"></i> Cerca
+              </a>
+              <div class="collapse mb-3" id="searchCollapse">
+                <input type="text" class="form-control" placeholder="Cerca..." />
+              </div>
+            </li>
+            <li class="nav-item mb-4">
+              <a class="nav-link d-flex align-items-center link-light" href="#">
+                <i class="bi bi-music-note-list m-0 me-3 h4"></i> La tua
+                libreria
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center link-light" href="#">
+                <img
+                  src="https://cdn3.vectorstock.com/i/1000x1000/80/67/plus-sign-icon-add-or-increase-vector-26538067.jpg"
+                  alt="ADDS" width="20" class="me-3" />
+                Crea playlist
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center link-light" href="#">
+                <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844e0f3caa1f9239c90fcd44fc"
+                  alt="Brani Preferiti" width="20" class="me-3" />
+                Brani che ti piacciono
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center link-light" href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/10015/10015330.png" alt="Bookmark" width="20"
+                  class="me-3" />
+                I tuoi episodi
+              </a>
+            </li>
+          </ul>
+
+          <hr class="border-secondary my-3" />
+
+          <div class="small-playlists mb-4 overflow-auto" style="max-height: 345px">
+            <ul class="list-unstyled small">
+              <li class="mb-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">early stages anxiety syndrome
+                  (sett '2022)</a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link active d-flex align-items-center link-light"
-                  href="#"
-                  aria-current="page"
-                >
-                  <i class="bi bi-house-door m-0 me-3 h4"></i> Home
-                </a>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">Be The Young</a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="text-secondary text-decoration-none d-inline-flex align-items-center link-light py-2 px-3"
-                  href="#searchCollapse"
-                  data-bs-toggle="collapse"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="searchCollapse"
-                >
-                  <i class="bi bi-search m-0 me-3 h4"></i> Cerca
-                </a>
-                <div class="collapse mb-3" id="searchCollapse">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Cerca..."
-                  />
-                </div>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none"><i
+                    class="fas fa-podcast me-1"></i>cit. Kimiko (lug ago
+                  2022)</a>
               </li>
-              <li class="nav-item mb-4">
-                <a
-                  class="nav-link d-flex align-items-center link-light"
-                  href="#"
-                >
-                  <i class="bi bi-music-note-list m-0 me-3 h4"></i> La tua
-                  libreria
-                </a>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">saggio + ben <i
+                    class="fas fa-lock text-danger ms-1"></i></a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link d-flex align-items-center link-light"
-                  href="#"
-                >
-                  <img
-                    src="https://cdn3.vectorstock.com/i/1000x1000/80/67/plus-sign-icon-add-or-increase-vector-26538067.jpg"
-                    alt="ADDS"
-                    width="20"
-                    class="me-3"
-                  />
-                  Crea playlist
-                </a>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">main character energy (mag giu
+                  2022)</a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link d-flex align-items-center link-light"
-                  href="#"
-                >
-                  <img
-                    src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844e0f3caa1f9239c90fcd44fc"
-                    alt="Brani Preferiti"
-                    width="20"
-                    class="me-3"
-                  />
-                  Brani che ti piacciono
-                </a>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">that f***ing mood
+                  <i class="fas fa-lock text-danger ms-1"></i></a>
               </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link d-flex align-items-center link-light"
-                  href="#"
-                >
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/10015/10015330.png"
-                    alt="Bookmark"
-                    width="20"
-                    class="me-3"
-                  />
-                  I tuoi episodi
-                </a>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">VEE, CARLOTTA E GIACOMO VANNO A
+                  BOSSO</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">An Emily Winchester kind of mood
+                  <i class="fas fa-lock text-danger ms-1"></i></a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">landing page (mar apr 2020)</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">2021 ka</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">cosa cazzo vuoi dire questa
+                  affermazione (gen fe...</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">honey and glass (nov dic 2021)</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">(Rewenge) Training An...</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">Lida + Emily</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">minecraft & nintendo switch (sep
+                  oct 2021)</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">shuno d'italia? i hardly know her
+                  (lug - ago 2021)</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">culo 2021</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">Frah Quintale Mix</a>
+              </li>
+              <li class="mb-1 py-1 px-3">
+                <a href="#" class="playlist-item text-secondary text-decoration-none">Francesco Guccini Mix</a>
               </li>
             </ul>
-
-            <hr class="border-secondary my-3" />
-
-            <div
-              class="small-playlists mb-4 overflow-auto"
-              style="max-height: 345px"
-            >
-              <ul class="list-unstyled small">
-                <li class="mb-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >early stages anxiety syndrome (sett '2022)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >Be The Young</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    ><i class="fas fa-podcast me-1"></i>cit. Kimiko (lug ago
-                    2022)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >saggio + ben <i class="fas fa-lock text-danger ms-1"></i
-                  ></a>
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >main character energy (mag giu 2022)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >that f***ing mood
-                    <i class="fas fa-lock text-danger ms-1"></i
-                  ></a>
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >VEE, CARLOTTA E GIACOMO VANNO A BOSSO</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >An Emily Winchester kind of mood
-                    <i class="fas fa-lock text-danger ms-1"></i
-                  ></a>
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >landing page (mar apr 2020)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >2021 ka</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >cosa cazzo vuoi dire questa affermazione (gen fe...</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >honey and glass (nov dic 2021)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >(Rewenge) Training An...</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >Lida + Emily</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >minecraft & nintendo switch (sep oct 2021)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >shuno d'italia? i hardly know her (lug - ago 2021)</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >culo 2021</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >Frah Quintale Mix</a
-                  >
-                </li>
-                <li class="mb-1 py-1 px-3">
-                  <a
-                    href="#"
-                    class="playlist-item text-secondary text-decoration-none"
-                    >Francesco Guccini Mix</a
-                  >
-                </li>
-              </ul>
-            </div>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        <main
-          id="main-content"
-          class="col-md-7 col-lg-8 p-0 position-relative"
-          style="overflow-y: auto; height: 100vh"
-        >
-          <div class="d-flex align-items-center mb-3 p-4">
-            <button
-              class="btn btn-dark rounded-circle me-3"
-              style="width: 40px"
-            >
-              <i class="bi bi-chevron-left"></i>
-            </button>
-            <button class="btn btn-dark rounded-circle" style="width: 40px">
-              <i class="bi bi-chevron-right"></i>
-            </button>
-          </div>
-          <div id="album-info" class="d-flex align-items-end mb-4">
-            <img
-              id="album-cover"
-              src="..."
-              crossorigin="anonymous"
-              class="me-3 rounded"
-              style="width: 250px"
-            />
-          </div>
+      <main id="main-content" class="col-md-7 col-lg-8 p-0 position-relative" style="overflow-y: auto; height: 100vh">
+        <div class="d-flex align-items-center mb-3 p-4">
+          <button class="btn btn-dark rounded-circle me-3" style="width: 40px">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="btn btn-dark rounded-circle" style="width: 40px">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+        <div id="album-info" class="d-flex align-items-end mb-4">
+          <img id="album-cover" src="..." crossorigin="anonymous" class="me-3 rounded" style="width: 250px" />
+        </div>
 
-          <div class="d-flex align-items-center mb-3 px-4">
-            <i
-              class="bi bi-play-circle-fill icon-btn fs-2 me-3"
-              style="color: #1db954"
-            ></i>
-            <i class="bi bi-heart icon-btn fs-4 me-3"></i>
-            <i class="bi bi-download icon-btn fs-4 me-3"></i>
-            <i class="bi bi-three-dots icon-btn new-class fs-4"></i>
-          </div>
+        <div class="d-flex align-items-center mb-3 px-4">
+          <i class="bi bi-play-circle-fill icon-btn fs-2 me-3" style="color: #1db954"></i>
+          <i class="bi bi-heart icon-btn fs-4 me-3"></i>
+          <i class="bi bi-download icon-btn fs-4 me-3"></i>
+          <i class="bi bi-three-dots icon-btn new-class fs-4"></i>
+        </div>
 
-          <div
-            class="tracklist-header d-flex py-3 px-4 border-bottom text-white"
-          >
-            <div style="width: 50%"># TITOLO</div>
-            <div style="width: 30%; text-align: center;">Riproduzioni</div>
-            <div style="width: 20%; text-align: right">
-              <i class="bi bi-clock"></i>
-            </div>
+        <div class="tracklist-header d-flex py-3 px-4 border-bottom text-white">
+          <div style="width: 50%"># TITOLO</div>
+          <div style="width: 30%; text-align: center;">Riproduzioni</div>
+          <div style="width: 20%; text-align: right">
+            <i class="bi bi-clock"></i>
           </div>
+        </div>
 
-          <div id="tracklist-container" class="tracklist"></div>
-        </main>
+        <div id="tracklist-container" class="tracklist">
+          
+        </div>
+      </main>
 
-        <div class="col-md-2 p-4">
-          <div class="about-artist">
-            <h5 style="color: white">Attivita amici</h5>
-            <img
-              id="artist-picture"
-              src=""
-              alt=""
-              class="img-fluid my-2 rounded-circle"
-              width="100"
-            />
-            <p id="about-artist-text"></p>
-          </div>
+      <div class="col-md-2 p-4">
+        <div class="about-artist">
+          <h5 style="color: white">Attivita amici</h5>
+          <img id="artist-picture" src="" alt="" class="img-fluid my-2 rounded-circle" width="100" />
+          <p id="about-artist-text"></p>
         </div>
       </div>
     </div>
-    <!-- Footer Player -->
-    <footer
-      class="py-3 px-1 bg-dark text-white fixed-bottom border-top border-secondary"
-      id="footer"
-    >
-      <div class="container-fluid">
-        <div class="row d-flex align-items-center">
-          <div
-            class="col d-flex align-items-center opacity-0"
-            id="player-img-container"
-          >
-            <img
-              src=""
-              alt="immagine"
-              class="me-2"
-              width="50"
-              id="player-img"
-            />
-            <div>
-              <a href="#" class="text-decoration-none text-light"
-                ><p class="m-0" id="player-title">Title</p></a
-              >
-              <a href="#" class="text-decoration-none text-secondary"
-                ><p class="m-0" id="player-artist">Artist</p></a
-              >
-            </div>
-            <a href="#" class="text-light ms-2"><i class="bi bi-heart"></i></a>
+  </div>
+  <!-- Footer Player -->
+  <footer class="py-3 px-1 bg-dark text-white fixed-bottom border-top border-secondary" id="footer">
+    <div class="container-fluid">
+      <div class="row d-flex align-items-center">
+        <div class="col d-flex align-items-center opacity-0" id="player-img-container">
+          <img src="" alt="immagine" class="me-2" width="50" id="player-img" />
+          <div>
+            <a href="#" class="text-decoration-none text-light">
+              <p class="m-0" id="player-title">Title</p>
+            </a>
+            <a href="#" class="text-decoration-none text-secondary">
+              <p class="m-0" id="player-artist">Artist</p>
+            </a>
           </div>
+          <a href="#" class="text-light ms-2"><i class="bi bi-heart"></i></a>
+        </div>
 
-          <div class="col-5 d-flex flex-column align-items-center">
-            <div>
-              <button class="control-btn border-0 bg-transparent">
-                <i class="bi bi-shuffle h4 text-secondary"></i>
-              </button>
-              <button class="control-btn border-0 bg-transparent">
-                <i class="bi bi-skip-backward-fill text-secondary h4"></i>
-              </button>
-              <button
-                class="control-btn play-pause-btn border-0 bg-transparent"
-                id="play"
-              >
-                <i class="bi bi-play-circle-fill text-light h3"></i>
-              </button>
-              <button class="control-btn border-0 bg-transparent">
-                <i class="bi bi-skip-forward-fill text-secondary h4"></i>
-              </button>
-              <button class="control-btn border-0 bg-transparent">
-                <i class="bi bi-repeat text-secondary h4"></i>
-              </button>
-            </div>
-            <div class="progress-bar-container w-100 d-flex align-items-center">
-              <span class="current-time me-2">0:00</span>
-              <div
-                class="flex-grow-1 bg-secondary"
-                style="height: 4px; position: relative"
-              >
-                <div
-                  class="progress-bar bg-light"
-                  style="width: 0%; height: 100%"
-                ></div>
-              </div>
-              <span class="duration ms-2">0:30</span>
-            </div>
+        <div class="col-5 d-flex flex-column align-items-center">
+          <div>
+            <button class="control-btn border-0 bg-transparent">
+              <i class="bi bi-shuffle h4 text-secondary"></i>
+            </button>
+            <button class="control-btn border-0 bg-transparent">
+              <i class="bi bi-skip-backward-fill text-secondary h4"></i>
+            </button>
+            <button class="control-btn play-pause-btn border-0 bg-transparent" id="play">
+              <i class="bi bi-play-circle-fill text-light h3"></i>
+            </button>
+            <button class="control-btn border-0 bg-transparent">
+              <i class="bi bi-skip-forward-fill text-secondary h4"></i>
+            </button>
+            <button class="control-btn border-0 bg-transparent">
+              <i class="bi bi-repeat text-secondary h4"></i>
+            </button>
           </div>
-
-          <div class="col d-flex justify-content-end">
-            <i class="bi bi-mic text-secondary me-2"></i>
-            <i class="bi bi-collection text-secondary me-2"></i>
-            <i class="bi bi-speaker text-secondary me-2"></i>
-            <i class="bi bi-volume-up text-secondary me-1"></i>
-            <input type="range" id="volume" class="me-2" />
-            <i class="bi bi-arrows-angle-expand text-secondary"></i>
-            <i
-              class="bi bi-x-circle text-light ms-2"
-              id="close-footer"
-              style="cursor: pointer"
-            ></i>
+          <div class="progress-bar-container w-100 d-flex align-items-center">
+            <span class="current-time me-2">0:00</span>
+            <div class="flex-grow-1 bg-secondary" style="height: 4px; position: relative">
+              <div class="progress-bar bg-light" style="width: 0%; height: 100%"></div>
+            </div>
+            <span class="duration ms-2">0:30</span>
           </div>
         </div>
-      </div>
-    </footer>
 
-    <!-- Bootstrap JS (Popper + Bootstrap JS) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./scripts/album.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
-  </body>
+        <div class="col d-flex justify-content-end">
+          <i class="bi bi-mic text-secondary me-2"></i>
+          <i class="bi bi-collection text-secondary me-2"></i>
+          <i class="bi bi-speaker text-secondary me-2"></i>
+          <i class="bi bi-volume-up text-secondary me-1"></i>
+          <input type="range" id="volume" class="me-2" />
+          <i class="bi bi-arrows-angle-expand text-secondary"></i>
+          <i class="bi bi-x-circle text-light ms-2" id="close-footer" style="cursor: pointer"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (Popper + Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./scripts/albums.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+</body>
+
 </html>
