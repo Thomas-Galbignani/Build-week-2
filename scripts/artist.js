@@ -1,16 +1,26 @@
 // Endpoint api
 const endpoint = `https://striveschool-api.herokuapp.com/api/deezer/artist`;
-const imgWrapper = document.getElementById("image-wrapper");
-
 const parameters = new URLSearchParams(location.search);
 const pageTitle = document.getElementById("page-title");
-const topTracks = document.getElementById("top-50");
 const eventId = parameters.get("eventId");
 
 // array delle canzoni
 let currentSong = new Audio();
 const currentSongArray = [];
 
+const topTracks = document.getElementById("top-50");
+const imgWrapper = document.getElementById("image-wrapper");
+
+// Elementi del Footer
+let playerImgContainer = document.getElementById("player-img-container");
+let playerImg = document.getElementById("player-img");
+let playerTitle = document.getElementById("player-title");
+let playerArtist = document.getElementById("player-artist");
+let playerButton = document.getElementById("play");
+const playerVolume = document.getElementById("volume-mute");
+const progressBar = document.getElementById(`progressBar`);
+
+//Funzione per recuperare i dati dell'artista
 fetch(endpoint + `/` + eventId)
   .then((response) => {
     if (response.ok) {
@@ -90,31 +100,27 @@ fetch(endpoint + `/` + eventId)
       })
       .then((tracklist) => {
         console.log(tracklist);
+        // Ordiniamo le canzoni in base al rank
+        tracklist.data.sort((a, b) => b.rank - a.rank);
         tracklist.data.forEach((track, index) => {
           const trackDiv = document.createElement("div");
+          trackDiv.style.cursor = "pointer";
           trackDiv.innerHTML = `
-          <div class="d-flex align-items-center py-2 mx-2">
+          <div class="d-flex align-items-center py-2 mx-2" id="${index}" onclick="playSong('${track.preview}')">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0 me-3">${index + 1}</p>
-                      <img
-                        src="${track.album.cover}"
-                        alt=""
-                        class="mx-3 img-fluid"
-                        style="width: 50px; height: 50px; object-fit: cover"
-                      />
+                      <img src="${track.album.cover}" alt="img-${track.title}" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
                       <p class="mb-0">${track.title}</p>
                     </div>
-
                     <p class="text-secondary mb-0 me-3">${track.rank}</p>
-                    <p class="text-secondary mb-0">${formatDuration(
-                      track.duration
-                    )}</p>
-                  </div>`;
+                    <p class="text-secondary mb-0">${formatDuration(track.duration)}</p>
+            </div>
+            `;
           topTracks.appendChild(trackDiv);
         });
       })
       .catch(() => {
-        console.log(`getTracklist tuttto sbagliato`);
+        console.log(`Tracklist tuttto sbagliato`);
       });
   })
   .catch(() => {
@@ -127,14 +133,6 @@ if (songInPlay) {
   console.log(songInPlayArray);
   currentSongArray.push(songInPlayArray);
 }
-
-// Elementi del Footer
-let playerImgContainer = document.getElementById("player-img-container");
-let playerImg = document.getElementById("player-img");
-let playerTitle = document.getElementById("player-title");
-let playerArtist = document.getElementById("player-artist");
-let playerButton = document.getElementById("play");
-const playerVolume = document.getElementById("volume-mute");
 
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function () {
@@ -176,11 +174,17 @@ playerButton.addEventListener("click", () => {
   }
 });
 
+
 // Funzione per far partire la musica
-const playSong = function () {
+const playSong = function (songToPlay) {
   console.log(currentSongArray[0].preview);
-  currentSong = new Audio(currentSongArray[0].preview);
-  // songInPlayArray  sarebbe l'intera canzone che abbiamo passato come parametro
+  if (songToPlay) {
+    currentSong.pause();
+    currentSong = new Audio(songToPlay)
+  } else {
+    currentSong = new Audio(currentSongArray[0].preview);
+  }
+  currentSong.addEventListener("timeupdate", updateProgressBar); // Per la progressBar
   currentSong.currentTime = 0; // Portiamo il tempo della canzone a 0
   currentSong.pause(); // Mettiamo in pausa la canzone corrente
 
@@ -194,6 +198,17 @@ const playSong = function () {
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
     });
+};
+
+// Funzione per togliere l'audio
+const muteUnmute = function () {
+  if (currentSong.volume === 0) {
+    playerVolume.classList.remove("bi", "bi-volume-up");
+    playerVolume.classList.add("bi", "bi-volume-mute");
+  } else {
+    playerVolume.classList.remove("bi", "bi-volume-mute");
+    playerVolume.classList.add("bi", "bi-volume-up");
+  }
 };
 
 // Diamo lo stile del cursore pointer al pulsante del volume muto
@@ -212,7 +227,29 @@ playerVolume.addEventListener("click", () => {
     currentSong.volume = 0;
   }
 });
-footerSong();
+
+// Funzione per animare la barra bianca del player
+function updateProgressBar() {
+  if (currentSong.duration > 0) {
+    const percentage = (currentSong.currentTime / currentSong.duration) * 100;
+    progressBar.style.width = `${percentage}%`;
+  } else {
+    // Se la durata non è ancora disponibile o è 0
+    progressBar.style.width = `0%`;
+    console.log(progressBar);
+  }
+}
+
+// Funzione per lo slider del volume
+const volumeSlider = document.getElementById("volume");
+if (volumeSlider) {
+  volumeSlider.addEventListener("input", function () {
+    if (currentSong) {
+      currentSong.volume = parseFloat(this.value);
+      muteUnmute();
+    }
+  });
+}
 
 // Funzione per formattare il tempo della canzone
 function formatDuration(seconds) {
@@ -221,3 +258,5 @@ function formatDuration(seconds) {
   const sec = Math.floor(seconds % 60);
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
+
+footerSong();
