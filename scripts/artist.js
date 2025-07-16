@@ -26,7 +26,7 @@ fetch(endpoint + `/` + eventId)
       (imgWrapper.style.backgroundSize = "cover");
     imgWrapper.style.backgroundRepeat = "no-repeat";
     imgWrapper.style.backgroundPosition = "center";
-    console.log(imgWrapper);
+    const artistTracklistEndpoint = artist.tracklist; // Recuperiamo l'endpoint della top 50
     imgWrapper.innerHTML = `
           <div>
               <div class="mb-4 d-flex">
@@ -79,10 +79,31 @@ fetch(endpoint + `/` + eventId)
               <p class="mt-3">${artist.nb_fan} ascoltatori mensili</p>
             </div>
     `;
+
+    // Nuova chiamata all'api per recuperare la top 50
+    fetch(artistTracklistEndpoint)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(` tutto rotto`);
+        }
+      })
+      .then((tracklist) => {
+        console.log(tracklist)
+        tracklist.forEach((track, index) => {
+        })
+      })
+      .catch(() => {
+        console.log(`getTracklist tuttto sbagliato`);
+      });
   })
   .catch(() => {
     console.log(`tuttto sbagliato`);
   });
+
+
+
 
 const songInPlay = localStorage.getItem(`currentSong`);
 if (songInPlay) {
