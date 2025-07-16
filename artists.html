@@ -406,25 +406,33 @@
               <div class="col-7 d-flex flex-column text-light">
                 <h3 class="mx-2 my-4">Popolari</h3>
                 <!-- div della tracklist -->
-                <div id="top-50"></div>
+                <div
+                  id="top-50"
+                  class="pb-4 overflow-auto"
+                  style="max-height: 10%"
+                ></div>
+                <div>
+                  <button class="btn bg-transparent text-light" id="viewMore">
+                    VISUALIZZA ALTRO
+                  </button>
+                </div>
               </div>
               <div class="col-5 text-light">
                 <h3 class="my-4">Brani che ti piacciono</h3>
                 <!-- imagine artisti con like -->
                 <div class="d-flex align-items-center">
                   <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4NFfvQT2ozoooP64_WpM-S39UHVk-a1k7gw&s"
+                    src=""
                     alt=""
                     class="me-4"
-                    width="15%"
-                    height="15%"
+                    width="20%"
+                    height="20%"
                     style="border-radius: 50%"
+                    id="imgArtist"
                   />
                   <div>
-                    <p class="mt-2 mb-0">
-                      <strong>Hai messo mi piace a 11 brani</strong>
-                    </p>
-                    <p class="text-secondary" id="artistLike">DI ...</p>
+                    <p class="m-0">Hai messo mi piace a 11 brani</p>
+                    <p class="text-secondary m-0" id="artistLike"></p>
                   </div>
                 </div>
               </div>
@@ -488,7 +496,7 @@
     </div>
 
     <!-- Footer Player -->
-    <footer class="py-3 px-1" id="footer">
+    <footer class="py-3 px-1 d-none" id="footer">
       <div class="container-fluid">
         <div class="row d-flex align-items-center">
           <!-- parte img titolo e cuore -->
