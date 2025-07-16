@@ -33,27 +33,52 @@ async function fetchAlbums(query = "album") {
   }
 }
 
-async function showAlbum(albumData) {
-  const albumId = albumData.album.id;
-  window.location.hash = albumId;
+async function fetchAlbumById(albumId) {
   try {
     const res = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`);
     const album = await res.json();
-    const albumInfoDiv = document.getElementById("album-info");
-
-    albumInfoDiv.innerHTML = `
-      <img id="album-cover" src="${album.cover_medium}" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
-      <div>
-        <div>ALBUM</div>
-        <h2>${album.title}</h2>
-        <div>${album.artist.name} • ${album.release_date || "?"}</div>
-      </div>
-    `;
-    renderTracklist(album.tracks.data);
-    setDynamicBackground(album.cover_medium);
+    albumList = [album];
+    currentAlbumIndex = 0;
+    showAlbum(album);
   } catch (err) {
-    console.error("Error showing album:", err);
+    console.error("Error fetching album by ID:", err);
   }
+}
+
+async function showAlbum(albumData) {
+  let album = albumData;
+
+  if (albumData.album && albumData.album.id) {
+    const albumId = albumData.album.id;
+    try {
+      const res = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/album/${albumId}`);
+      album = await res.json();
+    } catch (err) {
+      console.error("Error fetching album details:", err);
+      return;
+    }
+  }
+  
+  const albumIdToSet = album.id || (albumData.album && albumData.album.id);
+  if (albumIdToSet) {
+    const url = new URL(window.location);
+    url.searchParams.set("album", albumIdToSet);
+    window.history.pushState({}, "", url);
+  }
+
+  const albumInfoDiv = document.getElementById("album-info");
+
+  albumInfoDiv.innerHTML = `
+    <img id="album-cover" src="${album.cover_medium}" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
+    <div>
+      <div>ALBUM</div>
+      <h2>${album.title}</h2>
+      <div>${album.artist.name} • ${album.release_date || "?"}</div>
+    </div>
+  `;
+
+  renderTracklist(album.tracks.data);
+  setDynamicBackground(album.cover_medium);
 }
 
 function renderTracklist(tracks) {
@@ -90,7 +115,6 @@ function selectTrack(previewUrl, title, artist, cover, index = 0) {
   document.querySelectorAll(".track-row")[index]?.classList.add("highlight");
 }
 
-// Update play button icon
 function updatePlayButton() {
   if (isPlaying) {
     playIcon.classList.remove("bi-play-circle-fill");
@@ -101,7 +125,6 @@ function updatePlayButton() {
   }
 }
 
-// Dynamic Background with ColorThief
 function setDynamicBackground(imgSrc) {
   const img = new Image();
   img.crossOrigin = "Anonymous";
@@ -118,7 +141,6 @@ function setDynamicBackground(imgSrc) {
   };
 }
 
-// Format duration
 function formatDuration(seconds) {
   if (isNaN(seconds)) return "0:00";
   const min = Math.floor(seconds / 60);
@@ -151,12 +173,10 @@ audio.addEventListener("ended", () => {
   }
 });
 
-// Volume control
 volumeSlider.addEventListener("input", (e) => {
   audio.volume = e.target.value / 100;
 });
 
-// Navigation
 document.querySelector(".bi-shuffle").addEventListener("click", () => {
   if (currentTracks.length === 0) return;
   const randomIndex = Math.floor(Math.random() * currentTracks.length);
@@ -183,15 +203,22 @@ document.querySelector(".bi-repeat").addEventListener("click", () => {
 });
 
 document.querySelector(".bi-chevron-left").addEventListener("click", () => {
+  if (albumList.length <= 1) {
+    fetchAlbums("rock");
+    return;
+  }
   currentAlbumIndex = (currentAlbumIndex > 0) ? currentAlbumIndex - 1 : albumList.length - 1;
   showAlbum(albumList[currentAlbumIndex]);
 });
 
 document.querySelector(".bi-chevron-right").addEventListener("click", () => {
+  if (albumList.length <= 1) {
+    fetchAlbums("rock");
+    return;
+  }
   currentAlbumIndex = (currentAlbumIndex < albumList.length - 1) ? currentAlbumIndex + 1 : 0;
   showAlbum(albumList[currentAlbumIndex]);
 });
-
 document.getElementById("close-footer").addEventListener("click", () => {
   audio.pause();
   isPlaying = false;
@@ -199,32 +226,36 @@ document.getElementById("close-footer").addEventListener("click", () => {
   footer.style.display = "none";
 });
 
-// Play all tracks
 document.querySelector(".bi-play-circle-fill").addEventListener("click", () => {
   if (currentTracks.length === 0) return alert("No tracks available!");
   const firstTrack = currentTracks[0];
   selectTrack(firstTrack.preview, firstTrack.title, firstTrack.artist.name, firstTrack.album.cover_medium, 0);
 });
 
-// Example menu button handler
 document.querySelector(".new-class").addEventListener("click", () => {
   if (!playerTitle.textContent) return alert("Please choose a track!");
   alert("Options...");
 });
 
-// Initial load
+// Initial Load
 window.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
-  const albumId = params.get("album");
+  const albumIdFromQuery = params.get("album");
+  const albumIdFromHash = window.location.hash.substring(1);
 
-  if (albumId) {
-    fetchAlbumById(albumId);
+  if (albumIdFromQuery) {
+    fetchAlbumById(albumIdFromQuery);
+  } else if (albumIdFromHash) {
+    fetchAlbumById(albumIdFromHash);
   } else {
     fetchAlbums("rock");
   }
 });
 
+// React on hash change
 window.addEventListener('hashchange', () => {
   const newAlbumId = window.location.hash.substring(1);
-  fetchAlbumById(newAlbumId);
+  if (newAlbumId) {
+    fetchAlbumById(newAlbumId);
+  }
 });
