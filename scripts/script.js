@@ -44,6 +44,7 @@ let playerTitle = document.getElementById("player-title");
 let playerArtist = document.getElementById("player-artist");
 let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
+const progressBar = document.getElementById(`progressBar`);
 
 const songsOnCard = function () {
   songNames.forEach((song) => {
@@ -229,10 +230,10 @@ const footerSong = function () {
     playerImg.setAttribute("src", currentSongArray[0].album.cover_small);
     playerArtist.innerText = currentSongArray[0].artist.name;
     const playerArtistLink = playerArtist.parentElement;
-    playerArtistLink.href = `./artists.html?eventId=${currentSongArray[0].artist.id}`
+    playerArtistLink.href = `./artists.html?eventId=${currentSongArray[0].artist.id}`;
     playerTitle.innerText = currentSongArray[0].title;
     const playerTitleLink = playerTitle.parentElement;
-    playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`
+    playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`;
     playerButton.innerHTML = `
     <i class="bi bi-pause-circle-fill text-light h3"></i>
     `;
@@ -263,17 +264,39 @@ const playSong = function (songToPlay) {
   currentSong.pause(); // Mettiamo in pausa la canzone corrente
   currentSongArray = [songToPlay]; // Aggiorna currentSongArray con la canzone selezionata
   currentSong = new Audio(songToPlay.preview); // Aggiunge e currentSong il link della canzone
+  currentSong.addEventListener("timeupdate", updateProgressBar);
   currentSong
     .play() // Avvia la canzone
     .then(() => {
       console.log(`sono io `, songToPlay);
       footerSong(); // Lanciamo la funzione footerSong
+
       console.log(`stai ascoltando la canzone: ${songToPlay.title}`);
       localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
     })
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
     });
+};
+function updateProgressBar() {
+  if (currentSong.duration > 0) {
+    const percentage = (currentSong.currentTime / currentSong.duration) * 100;
+    progressBar.style.width = `${percentage}%`;
+  } else {
+    // Se la durata non è ancora disponibile o è 0
+    progressBar.style.width = `0%`;
+    console.log(progressBar);
+  }
+}
+
+const muteUnmute = function () {
+  if (currentSong.volume === 0) {
+    playerVolume.classList.remove("bi", "bi-volume-up");
+    playerVolume.classList.add("bi", "bi-volume-mute");
+  } else {
+    playerVolume.classList.remove("bi", "bi-volume-mute");
+    playerVolume.classList.add("bi", "bi-volume-up");
+  }
 };
 
 // Diamo lo stile del cursore pointer al pulsante del volume muto
@@ -292,6 +315,16 @@ playerVolume.addEventListener("click", () => {
     currentSong.volume = 0;
   }
 });
+
+const volumeSlider = document.getElementById("volume");
+if (volumeSlider) {
+  volumeSlider.addEventListener("input", function () {
+    if (currentSong) {
+      currentSong.volume = parseFloat(this.value);
+      muteUnmute();
+    }
+  });
+}
 
 songsOnCarousel();
 footerSong();

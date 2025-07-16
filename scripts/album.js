@@ -224,7 +224,6 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 window.addEventListener('hashchange', () => {
   const newAlbumId = window.location.hash.substring(1);
   fetchAlbumById(newAlbumId);
