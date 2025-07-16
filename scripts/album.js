@@ -58,7 +58,7 @@ async function showAlbum(albumData) {
       return;
     }
   }
-  
+
   const albumIdToSet = album.id || (albumData.album && albumData.album.id);
   if (albumIdToSet) {
     const url = new URL(window.location);
@@ -239,14 +239,11 @@ document.querySelector(".new-class").addEventListener("click", () => {
 
 // Initial Load
 window.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const albumIdFromQuery = params.get("album");
-  const albumIdFromHash = window.location.hash.substring(1);
+  const parameters = new URLSearchParams(window.location.search);
+  const eventId = parameters.get("eventId") || parameters.get("album");
 
-  if (albumIdFromQuery) {
-    fetchAlbumById(albumIdFromQuery);
-  } else if (albumIdFromHash) {
-    fetchAlbumById(albumIdFromHash);
+  if (eventId) {
+    fetchAlbumById(eventId);
   } else {
     fetchAlbums("rock");
   }
