@@ -1143,7 +1143,7 @@
             <div class="progress-bar-container w-100">
               <span class="current-time">0:00</span>
               <div class="progress-bar-wrapper">
-                <div class="progress-bar"></div>
+                <div class="progress-bar" id="progressBar"></div>
               </div>
               <span class="duration">0:30</span>
             </div>
@@ -1166,7 +1166,15 @@
               class="bi bi-volume-up text-secondary me-1 link-light"
               id="volume-mute"
             ></i>
-            <input type="range" id="volume" class="me-2" />
+            <input
+              type="range"
+              id="volume"
+              class="me-2"
+              min="0"
+              max="1"
+              step="0.01"
+              value="1"
+            />
             <i
               class="bi bi-arrows-angle-expand text-secondary link-light"
               id="mouse"
