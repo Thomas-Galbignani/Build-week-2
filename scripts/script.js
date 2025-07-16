@@ -289,6 +289,7 @@ function updateProgressBar() {
   }
 }
 
+// Funzione per togliere l'audio
 const muteUnmute = function () {
   if (currentSong.volume === 0) {
     playerVolume.classList.remove("bi", "bi-volume-up");
