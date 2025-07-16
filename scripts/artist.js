@@ -7,12 +7,14 @@ const eventId = parameters.get("eventId");
 // array delle canzoni
 let currentSong = new Audio();
 let currentSongArray = [];
+let firstTrack = [];
 
 const topTracks = document.getElementById("top-50");
 const imgWrapper = document.getElementById("image-wrapper");
 const artistImg = document.getElementById("imgArtist");
 const artistLike = document.getElementById("artistLike");
 const btnViewMore = document.getElementById("viewMore");
+const btnPlayerList = document.getElementById("btn-player-list");
 
 // Elementi del Footer
 let playerImgContainer = document.getElementById("player-img-container");
@@ -108,6 +110,7 @@ fetch(endpoint + `/` + eventId)
         console.log(tracklist);
         // Ordiniamo le canzoni in base al rank
         tracklist.data.sort((a, b) => b.rank - a.rank);
+        firstTrack = tracklist.data[0];
         tracklist.data.forEach((track, index) => {
           const trackDiv = document.createElement("div");
           trackDiv.id = `${index}`;
@@ -180,6 +183,11 @@ if (songInPlay) {
   console.log(songInPlayArray);
   currentSongArray.push(songInPlayArray);
 }
+
+btnPlayerList.addEventListener("click", () => {
+  playSong(firstTrack);
+  console.log(firstTrack);
+});
 
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function () {
