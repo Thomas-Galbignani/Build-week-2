@@ -60,17 +60,18 @@ const songsOnCard = function () {
         const cardItem = document.createElement("div");
         cardItem.classList.add("col");
         cardItem.innerHTML = `
-        <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
-              <div class="card bg-black p-3 rounded-4 text-white h-100">
-                <img
-                  class="rounded-2"
-                  src="${song.data[0].album.cover}"
-                  alt="..."
-                />
-                <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
-                <p class="text-secondary mt-2 mb-0">${song.data[0].artist.name}</p>
-              </div></a>
-  `;
+            <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
+                <div class="card bg-black p-3 rounded-4 text-white h-100">
+                  <img
+                    class="rounded-2 img-fluid" 
+                    src="${song.data[0].album.cover}"
+                    alt="..."
+                  />
+                  <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
+                  <p class="text-secondary mt-2 mb-0">${song.data[0].artist.name}</p>
+                </div>
+            </a>
+        `;
         cardContainer.appendChild(cardItem);
       })
       .catch((err) => {
@@ -140,7 +141,13 @@ const createCarousel = function () {
       "carousel-song-card",
       "d-flex",
       "align-items-center",
-      "w-100"
+      "w-100",
+      "flex-column",
+      "flex-md-row", 
+      "text-center", 
+      "text-md-start", 
+      "py-3", 
+      "py-md-5"
     ); // Aggiunge le classi necessarie per allineare
 
     // Nascondi tutti gli elementi tranne il primo all'inizio
@@ -150,27 +157,28 @@ const createCarousel = function () {
 
     // Creiamo il carosello
     carouselItem.innerHTML = `
-      <img src="${song.album.cover_medium}" class="album-cover me-4" alt="Album cover" />
+      <img src="${song.album.cover_medium}" class="album-cover me-md-4 mb-3 mb-md-0 img-fluid" alt="Album cover" />
             <div>
                 <a href='./album.html?eventId=${song.album.id}' class='text-decoration-none'> <p class="text-white">${song.album.title}</p></a>
                   <h1 class="text-white">${song.title}</h1>
                   <a href='./artists.html?eventId=${song.artist.id}' class='text-decoration-none'> <p class="text-white">${song.artist.name}</p></a>
                   <p class="text-white">Ascolta il nuovo singolo di ${song.artist.name}!</p>
-                  <div class="d-flex">
-                    <div class="d-flex">
-                      <button class="btn btn-success me-2 rounded-5 py-2 px-4 play-btn" data-song-index="${index}">Play</button>
-                      <button class="btn btn-outline-light me-2 rounded-5 py-2 px-4">Salva</button>
-                      <div>
-                      <a class="d-block text-decoration-none ms-3" data-bs-toggle="collapse"  role="button"
-                        aria-expanded="false" aria-controls="submenu1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                          class="bi bi-three-dots text-white my-2" viewBox="0 0 16 16">
-                          <path
-                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
-                        </svg>
-                      </a>
+                 
+                    <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-md-start w-100 mt-2">
+                      <button class="btn btn-success me-sm-2 rounded-5 py-2 px-4 play-btn mb-2 mb-sm-0" data-song-index="${index}">Play</button>
+                      <button class="btn btn-outline-light rounded-5 py-2 px-4 mb-2 mb-sm-0">Salva</button>
+                      <div class="ms-0 ms-sm-3">
+                      
+                        <a class="d-block text-decoration-none ms-3" data-bs-toggle="collapse"  role="button"
+                          aria-expanded="false" aria-controls="submenu1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-three-dots text-white my-2" viewBox="0 0 16 16">
+                            <path
+                              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
-                </div>
           </div>
   `;
 
