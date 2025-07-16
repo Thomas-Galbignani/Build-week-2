@@ -1,8 +1,9 @@
 // Endpoint api
 const endpoint = `https://striveschool-api.herokuapp.com/api/deezer/artist`;
+const imgWrapper = document.getElementById("image-wrapper");
 
 const parameters = new URLSearchParams(location.search);
-const pageTitle = document.getElementById('page-title');
+const pageTitle = document.getElementById("page-title");
 
 const eventId = parameters.get("eventId");
 
@@ -19,8 +20,65 @@ fetch(endpoint + `/` + eventId)
     }
   })
   .then((artist) => {
-    console.log('artista', artist);
+    console.log("artista", artist);
     pageTitle.innerText = artist.name;
+    (imgWrapper.style.backgroundImage = `url(${artist.picture_xl})`),
+      (imgWrapper.style.backgroundSize = "cover");
+    imgWrapper.style.backgroundRepeat = "no-repeat";
+    imgWrapper.style.backgroundPosition = "center";
+    console.log(imgWrapper);
+    imgWrapper.innerHTML = `
+          <div>
+              <div class="mb-4 d-flex">
+                <button
+                  class="btn btn-outline-light me-2 rounded-circle d-flex justify-content-center align-items-center p-1"
+                  onclick="backSong()"
+                  id="btn-back"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    class="bi bi-chevron-left"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="btn btn-outline-light rounded-circle d-flex justify-content-center align-items-center p-1"
+                  onclick="nextSong()"
+                  id="btn-next"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                    class="bi bi-chevron-right"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="d-flex flex-column mt-auto text-white">
+              <p class="mb-0">
+                <i class="bi-patch-check-fill text-primary me-1"></i>Artista
+                verificato
+              </p>
+              <h1 class="display-2">${artist.name}</h1>
+              <p class="mt-3">${artist.nb_fan} ascoltatori mensili</p>
+            </div>
+    `;
   })
   .catch(() => {
     console.log(`tuttto sbagliato`);
@@ -32,8 +90,6 @@ if (songInPlay) {
   console.log(songInPlayArray);
   currentSongArray.push(songInPlayArray);
 }
-
-console.log(currentSongArray[0].preview);
 
 // Elementi del Footer
 let playerImgContainer = document.getElementById("player-img-container");
@@ -55,10 +111,10 @@ const footerSong = function () {
     playerImg.setAttribute("src", currentSongArray[0].album.cover_small);
     playerArtist.innerText = currentSongArray[0].artist.name;
     const playerArtistLink = playerArtist.parentElement;
-    playerArtistLink.href = `./artists.html?eventId=${currentSongArray[0].artist.id}`
+    playerArtistLink.href = `./artists.html?eventId=${currentSongArray[0].artist.id}`;
     playerTitle.innerText = currentSongArray[0].title;
     const playerTitleLink = playerTitle.parentElement;
-    playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`
+    playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`;
     playerButton.innerHTML = `
       <i class="bi bi-pause-circle-fill text-light h3"></i>
       `;
