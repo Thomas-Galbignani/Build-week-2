@@ -366,15 +366,68 @@
                 <i class="bi-patch-check-fill text-primary me-1"></i>Artista
                 verificato
               </p>
-              <h1>prova</h1>
+              <h1></h1>
               <p>ascoltatori mensili</p>
             </div>
           </div>
+          <!-- div del contenuto artisti con row -->
+          <div>
+            <div class="row">
+              <div class="d-flex align-items-center mt-3 ms-2">
+                <button class="btn bg-transparent" id="btn-player-list">
+                  <i class="bi bi-play-circle-fill text-success h1"></i>
+                </button>
+                <button class="btn btn-outline-light">
+                  <p class="m-0">FOLLOWING</p>
+                </button>
+                <div>
+                  <a
+                    class="d-block text-decoration-none ms-3"
+                    data-bs-toggle="collapse"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="submenu1"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      fill="currentColor"
+                      class="bi bi-three-dots text-white my-2"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="col-7 d-flex flex-column text-light">
+                <h3>Popolari</h3>
+                <div id="top-50">
+                  <div class="d-flex align-items-center py-2">
+                    <div class="d-flex align-items-center me-auto">
+                      <p class="text-secondary mb-0 me-3">1</p>
+                      <img
+                        src=""
+                        alt=""
+                        class="mx-3 img-fluid"
+                        style="width: 50px; height: 50px; object-fit: cover"
+                      />
+                      <p class="mb-0">titolo</p>
+                    </div>
 
-          <div
-            class="row row-cols-2 row-cols-md-4 g-3"
-            id="card-container"
-          ></div>
+                    <p class="text-secondary mb-0 me-3">ascoltatori</p>
+                    <p class="text-secondary mb-0">durata</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5 text-light">
+                <h3>Brani che ti piacciono</h3>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- Attività Amici -->
         <div class="col-2 right-sidebar d-none d-lg-block" id="Amici">
