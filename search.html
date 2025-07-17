@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spotify</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
+    <!-- css -->
+    <link rel="stylesheet" href="./assets/css/homepage.css" />
+    <link rel="stylesheet" href="./assets/css/artist.css" />
+</head>
+
+<body class="bg-black">
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Pulsante toggle sidebar mobile -->
+                <button class="btn p-1 border-0 bg-transparent text-light position-fixed top-0 start-0 m-2 d-md-none"
+                    type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenuMobile"
+                    aria-controls="sidebarMenuMobile" style="z-index: 1045; width: auto">
+                    <i class="bi bi-list fs-4"></i>
+                </button>
+
+                <!-- SIDEBAR MOBILE (Offcanvas) -->
+                <div class="offcanvas offcanvas-start d-md-none bg-black text-white" tabindex="-1"
+                    id="sidebarMenuMobile" aria-labelledby="sidebarMenuMobileLabel">
+                    <div class="offcanvas-header pb-0">
+                        <h5 class="offcanvas-title" id="sidebarMenuMobileLabel"></h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Chiudi"></button>
+                    </div>
+                    <div class="offcanvas-body p-0">
+                        <nav class="bg-black sidebar">
+                            <div class="position-sticky pt-0">
+                                <ul class="nav flex-column align-items">
+                                    <li class="nav-item px-3">
+                                        <div>
+                                            <a class="d-block text-decoration-none" data-bs-toggle="collapse"
+                                                href="#submenu1" role="button" aria-expanded="false"
+                                                aria-controls="submenu1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                    fill="currentColor" class="bi bi-three-dots text-white my-2"
+                                                    viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                                </svg>
+                                            </a>
+                                            <div class="collapse ps-1 bg-dark rounded-2 mb-3" id="submenu1">
+                                                <a href="#"
+                                                    class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light">File</a>
+                                                <a href="#"
+                                                    class="d-block py-1 text-decoration-none text-secondary link-light">Modifica</a>
+                                                <a href="#"
+                                                    class="d-block py-1 text-decoration-none text-secondary link-light">Visualizza</a>
+                                                <a href="#"
+                                                    class="d-block py-1 text-decoration-none text-secondary link-light">Riproduzione</a>
+                                                <a href="#"
+                                                    class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light">Assistenza</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary active d-flex align-items-center link-light"
+                                            href="./index.html">
+                                            <i class="bi bi-house-door m-0 me-3 h4"></i> Home
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="text-secondary text-decoration-none d-inline-flex align-items-center link-light py-2 px-3"
+                                            href="#searchCollapse" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="searchCollapse">
+                                            <i class="bi bi-search m-0 me-3 h4"></i> Cerca
+                                        </a>
+                                        <div class="collapse mb-3" id="searchCollapse">
+                                            <input type="text" class="form-control"
+                                                placeholder="Cosa vuoi ascoltare?" />
+                                        </div>
+                                    </li>
+                                    <li class="nav-item mb-4">
+                                        <a class="nav-link text-secondary d-flex align-items-center link-light"
+                                            href="#">
+                                            <i class="bi bi-music-note-list m-0 me-3 h4"></i> La tua libreria
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary link-light" href="#">
+                                            <img src="https://cdn3.vectorstock.com/i/1000x1000/80/67/plus-sign-icon-add-or-increase-vector-26538067.jpg"
+                                                alt="ADDS" width="10%" class="me-3" />
+                                            Crea playlist
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary d-flex align-items-center link-light"
+                                            href="#">
+                                            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844e0f3caa1f9239c90fcd44fc"
+                                                alt="Brani Preferiti" width="10%" class="me-3" />
+                                            Brani che ti piacciono
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-secondary link-light" href="#">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/10015/10015330.png"
+                                                alt="Bookmark" width="10%" class="me-3" />
+                                            I tuoi episodi
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr class="border-secondary my-3" />
+                            <div class="small-playlists mb-4 overflow-auto" style="padding-bottom: 15px">
+                                <ul class="list-unstyled over small">
+                                    <li class="mb-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">early
+                                            stages
+                                            anxiety
+                                            syndrome (sett '2022)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">Be The
+                                            Young</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">cit.
+                                            Kimiko (lug
+                                            ago
+                                            2022)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">saggio
+                                            + ben</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">main
+                                            character
+                                            energy
+                                            (mag giu 2022)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">that
+                                            f***ing mood
+                                            <i class="fas fa-lock text-danger ms-1"></i></a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">VEE,
+                                            CARLOTTA E
+                                            GIACOMO VANNO A BOSSO</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">An
+                                            Emily Winchester
+                                            kind of mood
+                                            <i class="fas fa-lock text-danger ms-1"></i></a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">landing
+                                            page (mar
+                                            apr
+                                            2020)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">2021
+                                            ka</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">cosa
+                                            cazzo vuoi
+                                            dire
+                                            questa affermazione (gen fe...</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">honey
+                                            and glass
+                                            (nov
+                                            dic 2021)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">(Rewenge)
+                                            Training
+                                            An...</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">Lida +
+                                            Emily</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">minecraft
+                                            &
+                                            nintendo
+                                            switch (sep oct 2021)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">shuno
+                                            d'italia? i
+                                            hardly know her (lug - ago 2021)</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">culo
+                                            2021</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">Frah
+                                            Quintale
+                                            Mix</a>
+                                    </li>
+                                    <li class="mb-1 py-1 px-3">
+                                        <a href="#"
+                                            class="playlist-item text-secondary text-decoration-none link-light">Francesco
+                                            Guccini
+                                            Mix</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR DESKTOP -->
+                <nav id="sidebarMenu" class="col-12 col-md-3 col-lg-2 d-none d-md-block bg-black sidebar">
+                    <div class="position-sticky pt-3">
+                        <ul class="nav flex-column align-items">
+                            <li class="nav-item px-3">
+                                <div>
+                                    <a class="d-block text-decoration-none" data-bs-toggle="collapse"
+                                        href="#submenu1desktop" role="button" aria-expanded="false"
+                                        aria-controls="submenu1desktop">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            fill="currentColor" class="bi bi-three-dots text-white my-2"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                                        </svg>
+                                    </a>
+                                    <div class="collapse ps-1 bg-dark rounded-2 mb-3" id="submenu1desktop">
+                                        <a href="#"
+                                            class="d-block pt-2 pb-1 text-decoration-none text-secondary link-light">File</a>
+                                        <a href="#"
+                                            class="d-block py-1 text-decoration-none text-secondary link-light">Modifica</a>
+                                        <a href="#"
+                                            class="d-block py-1 text-decoration-none text-secondary link-light">Visualizza</a>
+                                        <a href="#"
+                                            class="d-block py-1 text-decoration-none text-secondary link-light">Riproduzione</a>
+                                        <a href="#"
+                                            class="d-block pt-1 pb-2 text-decoration-none text-secondary link-light">Assistenza</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary active d-flex align-items-center link-light"
+                                    href="./index.html">
+                                    <i class="bi bi-house-door m-0 me-3 h4"></i> Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="text-secondary text-decoration-none d-inline-flex align-items-center link-light py-2 px-3"
+                                    href="#searchCollapseDesktop" data-bs-toggle="collapse" role="button"
+                                    aria-expanded="false" aria-controls="searchCollapseDesktop">
+                                    <i class="bi bi-search m-0 me-3 h4"></i> Cerca
+                                </a>
+                                <div class="collapse mb-3" id="searchCollapseDesktop">
+                                    <input type="text" class="form-control" placeholder="Cosa vuoi ascoltare?" />
+                                </div>
+                            </li>
+                            <li class="nav-item mb-4">
+                                <a class="nav-link text-secondary d-flex align-items-center link-light" href="#">
+                                    <i class="bi bi-music-note-list m-0 me-3 h4"></i> La tua
+                                    libreria
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary link-light" href="#">
+                                    <img src="https://cdn3.vectorstock.com/i/1000x1000/80/67/plus-sign-icon-add-or-increase-vector-26538067.jpg"
+                                        alt="ADDS" width="10%" class="me-3" />
+                                    Crea playlist
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary d-flex align-items-center link-light" href="#">
+                                    <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da844e0f3caa1f9239c90fcd44fc"
+                                        alt="Brani Preferiti" width="10%" class="me-3" />
+                                    Brani che ti piacciono
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary link-light" href="#">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/10015/10015330.png" alt="Bookmark"
+                                        width="10%" class="me-3" />
+                                    I tuoi episodi
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled over small">
+                            <li class="mb-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">early
+                                    stages anxiety
+                                    syndrome (sett '2022)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">Be The
+                                    Young</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">cit.
+                                    Kimiko (lug ago
+                                    2022)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">saggio
+                                    + ben</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">main
+                                    character energy
+                                    (mag giu 2022)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">that
+                                    f***ing mood <i class="fas fa-lock text-danger ms-1"></i></a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">VEE,
+                                    CARLOTTA E GIACOMO
+                                    VANNO A BOSSO</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">An
+                                    Emily Winchester
+                                    kind
+                                    of mood
+                                    <i class="fas fa-lock text-danger ms-1"></i></a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">landing
+                                    page (mar apr
+                                    2020)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">2021
+                                    ka</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">cosa
+                                    cazzo vuoi dire
+                                    questa affermazione (gen fe...</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">honey
+                                    and glass (nov
+                                    dic
+                                    2021)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#"
+                                    class="playlist-item text-secondary text-decoration-none link-light">(Rewenge)
+                                    Training
+                                    An...</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">Lida +
+                                    Emily</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#"
+                                    class="playlist-item text-secondary text-decoration-none link-light">minecraft &
+                                    nintendo
+                                    switch (sep oct 2021)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">shuno
+                                    d'italia? i
+                                    hardly
+                                    know her (lug - ago 2021)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">culo
+                                    2021</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">Frah
+                                    Quintale Mix</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#"
+                                    class="playlist-item text-secondary text-decoration-none link-light">Francesco
+                                    Guccini
+                                    Mix</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr class="border-secondary my-3" />
+                    <div class="small-playlists mb-4 overflow-auto" style="padding-bottom: 15px">
+                        <ul class="list-unstyled over small">
+                            <li class="mb-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">early
+                                    stages anxiety
+                                    syndrome (sett '2022)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">Be The
+                                    Young</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">cit.
+                                    Kimiko (lug ago
+                                    2022)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">saggio
+                                    + ben</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">main
+                                    character energy
+                                    (mag giu 2022)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">that
+                                    f***ing mood <i class="fas fa-lock text-danger ms-1"></i></a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">VEE,
+                                    CARLOTTA E GIACOMO
+                                    VANNO A BOSSO</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">An
+                                    Emily Winchester
+                                    kind
+                                    of mood
+                                    <i class="fas fa-lock text-danger ms-1"></i></a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">landing
+                                    page (mar apr
+                                    2020)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">2021
+                                    ka</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">cosa
+                                    cazzo vuoi dire
+                                    questa affermazione (gen fe...</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">honey
+                                    and glass (nov
+                                    dic
+                                    2021)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#"
+                                    class="playlist-item text-secondary text-decoration-none link-light">(Rewenge)
+                                    Training
+                                    An...</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">Lida +
+                                    Emily</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#"
+                                    class="playlist-item text-secondary text-decoration-none link-light">minecraft &
+                                    nintendo
+                                    switch (sep oct 2021)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">shuno
+                                    d'italia? i
+                                    hardly
+                                    know her (lug - ago 2021)</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">culo
+                                    2021</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#" class="playlist-item text-secondary text-decoration-none link-light">Frah
+                                    Quintale Mix</a>
+                            </li>
+                            <li class="mb-1 py-1 px-3">
+                                <a href="#"
+                                    class="playlist-item text-secondary text-decoration-none link-light">Francesco
+                                    Guccini
+                                    Mix</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Contenuto Centrale -->
+                <div class="col-12 col-md-6 col-lg-8 overflow-auto main-content d-flex mt-5">
+
+                    <div class="col-6 text-light me-2">
+                        <h4 class="text-white my-3">Risultato più rilevante</h4>
+                        <div class="bg-dark rounded-4 p-2" style="height: 265px;" id="first-result">
+                            <!--Elemento generato dal JS-->
+                        </div>
+                    </div>
+                    <div class="col-6 ml-2">
+                        <h4 class="text-white my-3">Brani</h4>
+                        <div class="bg-dark rounded-4 p-2 h-50 overflow-scroll overflow-hidden mb-5" id="result-list">
+                            <!--Lista generata dal JS-->
+                        </div>
+                    </div>
+                </div>
+                <!-- Attività Amici -->
+                <div class="col-12 col-lg-2 right-sidebar d-none d-lg-block" id="Amici">
+                    <div>
+                        <h6 class="text-white my-2 float-start">Attività amici</h6>
+                        <a class="float-end my-1" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                height="20" fill="currentColor" class="bi bi-person-add text-secondary link-light"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" />
+                                <path
+                                    d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
+                            </svg></a>
+                    </div>
+                    <!-- card amici -->
+                    <div class="bg-black text-white rounded p-2 mt-3 d-flex" id="card-amici">
+                        <!-- Immagine profilo -->
+                        <img src="./assets/imgs/search/image-41.jpg" alt="Profile" class="rounded-circle" width="40"
+                            height="40" style="object-fit: cover" />
+
+                        <!-- Contenuto testo -->
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <strong class="text-white">Valeria Traverso</strong>
+                                <small class="text-muted">3 giorni</small>
+                            </div>
+                            <div class="text-white-50 small">New Kings • Sleeping Wolf</div>
+                            <div class="text-white-50 small">🎵 Twint Badass mood</div>
+                        </div>
+                    </div>
+
+                    <!-- fine sidebar amici -->
+                </div>
+
+                <!-- fine row principale -->
+            </div>
+
+            <!-- fine conteiner principale -->
+        </div>
+    </main>
+
+    <!-- Footer Player -->
+    <footer class="py-3 px-1 fixed-bottom bg-dark" id="footer">
+        <div class="container-fluid">
+            <div class="row gx-3 gy-2 d-flex align-items-center">
+                <div class="col-12 col-md-3 d-flex align-items-center justify-content-center justify-content-md-start order-1 order-md-0 opacity-0"
+                    id="player-img-container">
+                    <img src="" alt="immagine" class="me-2 img-fluid" style="max-width: 50px;" id="player-img" />
+                    <div class="text-truncate" style="max-width: calc(100% - 80px);">
+                        <a href="" class="text-decoration-none text-light d-block text-center text-md-start">
+                            <p class="m-0 fs-6 text-truncate" id="player-title"></p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary d-block text-center text-md-start">
+                            <p class="m-0 fs-7 text-truncate" id="player-artist"></p>
+                        </a>
+                    </div>
+                    <a href="" class="text-light ms-2 d-none d-sm-block"><i class="bi bi-heart"></i></a>
+                </div>
+                <div class="col-12 col-md-6 d-flex flex-column align-items-center order-0 order-md-1">
+                    <div class="d-flex justify-content-center mb-2">
+                        <button class="control-btn border-0 bg-transparent p-1">
+                            <i class="bi bi-shuffle h5 text-secondary link-light"></i>
+                        </button>
+                        <button class="control-btn border-0 bg-transparent p-1">
+                            <i class="bi bi-skip-backward-fill text-secondary h5 link-light"></i>
+                        </button>
+                        <button class="control-btn play-pause-btn border-0 bg-transparent p-1" id="play">
+                            <i class="bi bi-play-circle-fill text-light h2 link-light"></i>
+                        </button>
+                        <button class="control-btn border-0 bg-transparent p-1">
+                            <i class="bi bi-skip-forward-fill text-secondary h5 link-light"></i>
+                        </button>
+                        <button class="control-btn border-0 bg-transparent p-1">
+                            <i class="bi bi-repeat text-secondary h5 link-light"></i>
+                        </button>
+                    </div>
+                    <div class="progress-bar-container w-100 d-flex align-items-center px-2 px-md-0">
+                        <span class="current-time text-light small me-2">0:00</span>
+                        <div class="progress-bar-wrapper flex-grow-1">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        <span class="duration text-light small ms-2">0:30</span>
+                    </div>
+                </div>
+                <div
+                    class="col-12 col-md-3 d-flex justify-content-center justify-content-md-end mt-2 mt-md-0 order-2 order-md-2">
+                    <i class="bi bi-mic text-secondary me-2 link-light d-none d-lg-block" id="mouse"></i>
+                    <i class="bi bi-collection text-secondary me-2 link-light d-none d-lg-block" id="mouse"></i>
+                    <i class="bi bi-speaker text-secondary me-2 link-light d-none d-lg-block" id="mouse"></i>
+                    <i class="bi bi-volume-up text-secondary me-1 link-light" id="volume-mute"></i>
+                    <input type="range" id="volume" class="me-2" min="0" max="1" step="0.01" value="1"
+                        style="max-width: 100px;" />
+                    <i class="bi bi-arrows-angle-expand text-secondary link-light d-none d-lg-block" id="mouse"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+    <script src="./scripts/search.js"></script>
+</body>
+
+</html>
