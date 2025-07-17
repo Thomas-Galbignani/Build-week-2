@@ -25,6 +25,27 @@ let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
 
+// costanti per il search
+const searchInput = document.getElementById(`searchInput`);
+const searchForm = document.getElementById("searchForm");
+const searchInputDesktop = document.getElementById(`searchInputDesktop`);
+const searchFormDesktop = document.getElementById("searchFormDesktop");
+
+// Funzione per il form di ricerca
+const searchSong = function (e) {
+  e.preventDefault();
+  if (searchInput.value) {
+    attribute = searchInput.value;
+    window.location.href = `./search.html?eventId=${attribute}`;
+  } else if (searchInputDesktop.value) {
+    attribute = searchInputDesktop.value;
+    window.location.href = `./search.html?eventId=${attribute}`;
+  }
+};
+
+searchForm.addEventListener("submit", searchSong);
+searchFormDesktop.addEventListener("submit", searchSong);
+
 // Funzione per recuperare i dati dell'artista
 fetch(endpoint + `/` + eventId)
   .then((response) => {
@@ -120,14 +141,15 @@ fetch(endpoint + `/` + eventId)
           <div class="d-flex align-items-center py-2 mx-4">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0">${index + 1}</p>
-                      <img src="${track.album.cover}" alt="img-${track.title
-            }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
+                      <img src="${track.album.cover}" alt="img-${
+            track.title
+          }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
                       <p class="mb-0">${track.title}</p>
                     </div>
                     <p class="text-secondary mb-0 me-3">${track.rank}</p>
                     <p class="text-secondary mb-0">${formatDuration(
-              track.duration
-            )}</p>
+                      track.duration
+                    )}</p>
             </div>
             `;
           trackDiv.addEventListener("click", () => {
