@@ -7,6 +7,8 @@ const pageTitle = document.getElementById("page-title");
 // Dettagli album
 const albumInfoDiv = document.getElementById("album-info");
 const trackList = document.getElementById('tracklist-container');
+const btnPlayerList = document.getElementById("btn-player-list");
+btnPlayerList.style.cursor = "pointer";
 
 // Array delle canzoni
 let currentSong = new Audio();
@@ -40,15 +42,16 @@ fetch(endpoint + `/` + eventId)
             <div>
                 <div class="text-white">ALBUM</div>
                 <h2 class="text-white">${album.title}</h2>
-                <div class="text-white">${album.artist.name} • ${album.release_date || "?"}</div>
+                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${album.artist.id}">${album.artist.name} • ${album.release_date || "?"}</a></div>
             </div>
             `
             ;
         // Popoliamo la lista delle canzoni dell'album
+        firstTrack = album.tracks.data[0];
         album.tracks.data.forEach((track, index) => {
             const trackItem = document.createElement("div");
             trackItem.innerHTML = `
-                <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;" onclick="">
+                <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
                     <div style="width: 50%;">${index + 1}. ${track.title}<br><p>${track.artist.name}</p></div>
                     <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
                     <div style="width: 20%; text-align: right;">${formatDuration(track.duration)}</div>
@@ -64,6 +67,12 @@ fetch(endpoint + `/` + eventId)
     .catch(() => {
         console.log(`tuttto sbagliato`);
     });
+
+// Pulsante per far partire la prima canzone
+btnPlayerList.addEventListener("click", () => {
+    playSong(firstTrack);
+    console.log(firstTrack);
+});
 
 // Funzione per formattare il tempo della canzone
 function formatDuration(seconds) {
@@ -142,6 +151,7 @@ const playSong = function (songToPlay) {
         .then(() => {
             console.log(`sono io `, currentSongArray[0]);
             console.log(`stai ascoltando la canzone: ${currentSongArray[0].title}`);
+            localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
         })
         .catch((error) => {
             console.error(`Non funziona: Errore durante la riproduzione.`, error);
@@ -198,3 +208,5 @@ if (volumeSlider) {
         }
     });
 }
+
+footerSong();

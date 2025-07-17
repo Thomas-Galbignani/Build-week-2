@@ -183,6 +183,7 @@ if (songInPlay) {
   currentSongArray.push(songInPlayArray);
 }
 
+// Pulsante per far partire la prima canzone
 btnPlayerList.addEventListener("click", () => {
   playSong(firstTrack);
   console.log(firstTrack);
@@ -249,6 +250,7 @@ const playSong = function (songToPlay) {
     .then(() => {
       console.log(`sono io `, currentSongArray[0]);
       console.log(`stai ascoltando la canzone: ${currentSongArray[0].title}`);
+      localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
     })
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
