@@ -23,7 +23,7 @@
     <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
   </head>
 
-  <body class="bg-black">
+  <body class="bg-black h-100">
     <main class="min-vh-100">
       <div class="container-fluid w-100">
         <div class="row">
@@ -849,39 +849,41 @@
                     </a>
                   </div>
                 </div>
-                <div class="col-12 col-lg-7 d-flex flex-column text-light">
-                  <h3 class="mx-2 my-4">Popolari</h3>
-                  <!-- div della tracklist -->
-                  <div
-                    id="top-50"
-                    class="py-4 overflow-auto scrollplay"
-                    style="height: 200px"
-                  ></div>
-                  <div>
-                    <button
-                      class="btn bg-transparent text-light mb-5 mt-2"
-                      id="viewMore"
-                    >
-                      VISUALIZZA ALTRO
-                    </button>
-                  </div>
-                </div>
-                <div class="col-12 col-lg-5 text-light">
-                  <h3 class="my-4">Brani che ti piacciono</h3>
-                  <!-- imagine artisti con like -->
-                  <div class="d-flex align-items-center">
-                    <img
-                      src=""
-                      alt=""
-                      class="me-4"
-                      width="20%"
-                      height="20%"
-                      style="border-radius: 50%"
-                      id="imgArtist"
-                    />
+                <div class="row h-100 overflow-auto">
+                  <div class="col-12 col-lg-7 d-flex flex-column text-light">
+                    <h3 class="mx-2 my-4">Popolari</h3>
+                    <!-- div della tracklist -->
+                    <div
+                      id="top-50"
+                      class="py-4 overflow-auto scrollplay"
+                      style="height: 200px"
+                    ></div>
                     <div>
-                      <p class="m-0">Hai messo mi piace a 11 brani</p>
-                      <p class="text-secondary m-0" id="artistLike"></p>
+                      <button
+                        class="btn bg-transparent text-light mb-5 mt-2"
+                        id="viewMore"
+                      >
+                        VISUALIZZA ALTRO
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-5 d-none d-lg-block text-light">
+                    <h3 class="my-4">Brani che ti piacciono</h3>
+                    <!-- imagine artisti con like -->
+                    <div class="d-flex align-items-center">
+                      <img
+                        src=""
+                        alt=""
+                        class="me-4"
+                        width="20%"
+                        height="20%"
+                        style="border-radius: 50%"
+                        id="imgArtist"
+                      />
+                      <div>
+                        <p class="m-0">Hai messo mi piace a 11 brani</p>
+                        <p class="text-secondary m-0" id="artistLike"></p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -947,7 +949,7 @@
 
     <!-- Footer Player -->
 
-    <footer class="py-3 px-1 fixed-bottom bg-dark" id="footer">
+    <footer class="py-3 px-1 bg-dark" id="footer">
       <div class="container-fluid">
         <div class="row gx-3 gy-2 d-flex align-items-center">
           <div

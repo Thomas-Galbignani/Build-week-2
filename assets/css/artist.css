@@ -8,6 +8,11 @@
   position: fixed;
   bottom: 0;
 }
+@media (max-width: 768px) {
+  #ƒooter {
+    max-height: 20%;
+  }
+}
 .colorbg {
   background-color: #181818;
 }
@@ -242,4 +247,9 @@ html {
   #image-wrapper {
     height: 25%;
   }
+}
+.scrollrow {
+  z-index: 100;
+  height: 50%;
+  overflow-y: auto;
 }
