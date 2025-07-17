@@ -228,3 +228,18 @@ html {
 #volume-mute {
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  #image-wrapper {
+    height: 35%;
+  }
+}
+@media (min-width: 769px) and (max-width: 991px) {
+  #image-wrapper {
+    height: 40%;
+  }
+}
+@media (min-width: 992px) {
+  #image-wrapper {
+    height: 25%;
+  }
+}

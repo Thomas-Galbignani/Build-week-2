@@ -44,7 +44,6 @@ fetch(endpoint + `/` + eventId)
       (imgWrapper.style.backgroundSize = "cover");
     imgWrapper.style.backgroundRepeat = "no-repeat";
     imgWrapper.style.backgroundPosition = "center";
-    imgWrapper.style.height = "15%";
     const artistTracklistEndpoint = artist.tracklist; // Recuperiamo l'endpoint della top 50
     imgWrapper.innerHTML = `
           <div>
@@ -120,14 +119,15 @@ fetch(endpoint + `/` + eventId)
           <div class="d-flex align-items-center py-2 mx-4">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0">${index + 1}</p>
-                      <img src="${track.album.cover}" alt="img-${track.title
-            }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
+                      <img src="${track.album.cover}" alt="img-${
+            track.title
+          }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
                       <p class="mb-0">${track.title}</p>
                     </div>
                     <p class="text-secondary mb-0 me-3">${track.rank}</p>
                     <p class="text-secondary mb-0">${formatDuration(
-              track.duration
-            )}</p>
+                      track.duration
+                    )}</p>
             </div>
             `;
           trackDiv.addEventListener("click", () => {
