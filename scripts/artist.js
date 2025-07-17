@@ -4,7 +4,7 @@ const parameters = new URLSearchParams(location.search);
 const pageTitle = document.getElementById("page-title");
 const eventId = parameters.get("eventId");
 
-// array delle canzoni
+// Array delle canzoni
 let currentSong = new Audio();
 let currentSongArray = [];
 let firstTrack = [];
@@ -25,7 +25,7 @@ let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
 
-//Funzione per recuperare i dati dell'artista
+// Funzione per recuperare i dati dell'artista
 fetch(endpoint + `/` + eventId)
   .then((response) => {
     if (response.ok) {
@@ -120,15 +120,14 @@ fetch(endpoint + `/` + eventId)
           <div class="d-flex align-items-center py-2 mx-4">
                     <div class="d-flex align-items-center me-auto">
                       <p class="text-secondary mb-0">${index + 1}</p>
-                      <img src="${track.album.cover}" alt="img-${
-            track.title
-          }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
+                      <img src="${track.album.cover}" alt="img-${track.title
+            }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
                       <p class="mb-0">${track.title}</p>
                     </div>
                     <p class="text-secondary mb-0 me-3">${track.rank}</p>
                     <p class="text-secondary mb-0">${formatDuration(
-                      track.duration
-                    )}</p>
+              track.duration
+            )}</p>
             </div>
             `;
           trackDiv.addEventListener("click", () => {
