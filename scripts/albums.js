@@ -212,6 +212,8 @@ fetch(endpoint + `/` + eventId)
                 }">${album.artist.name} • ${album.release_date || "?"}</a></div>
             </div>
             `;
+
+            setMainContentBackground(album.cover_medium);
     // Popoliamo la lista delle canzoni dell'album
     firstTrack = album.tracks.data[0];
     album.tracks.data.forEach((track, index) => {
@@ -238,3 +240,19 @@ fetch(endpoint + `/` + eventId)
   });
 
 footerSong();
+
+function setMainContentBackground(imgSrc) {
+  const img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.src = imgSrc;
+  img.onload = () => {
+    const colorThief = new ColorThief();
+    const dominantColor = colorThief.getColor(img);
+    const rgb = `rgb(${dominantColor.join(",")})`;
+    const gradient = `linear-gradient(to bottom, ${rgb}, rgba(0,0,0,0.7))`;
+
+    const main = document.getElementById("main-content");
+    main.style.backgroundImage = gradient;
+    main.style.color = "white";
+  };
+}
