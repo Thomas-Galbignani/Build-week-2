@@ -75,12 +75,6 @@ html.shrink {
     padding-bottom: 160px !important;
   }
 
-  footer#footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .about-artist {
     display: none !important;
   }
