@@ -64,6 +64,7 @@ const footerSong = function () {
 
 console.log('canzone corrente' , currentSongArray)
 currentSong = new Audio(currentSongArray[0].preview);
+
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
     

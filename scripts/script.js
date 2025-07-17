@@ -142,7 +142,6 @@ searchFormDesktop.addEventListener("submit", searchSong);
 // Funzione per creare il carosello
 const createCarousel = function () {
   carouselContainer.innerHTML = ""; // Pulisce il div prima di aggiungere i nuovi elementi
-  localStorage.clear();
   songs.forEach((song, index) => {
     const carouselItem = document.createElement("div"); // Crea un nuovo div
     carouselItem.id = `carousel-item-${index}`; // Assegna un ID unico a ogni elemento del carosello
@@ -256,6 +255,17 @@ const footerSong = function () {
     `;
   }
 };
+
+
+const songInPlay = localStorage.getItem(`currentSong`);
+if (songInPlay) {
+  const songInPlayArray = JSON.parse(songInPlay);
+  console.log(songInPlayArray);
+  currentSongArray.push(songInPlayArray);
+}
+
+console.log('canzone corrente', songInPlay)
+
 
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
