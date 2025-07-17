@@ -1,147 +1,165 @@
- .small-playlists::-webkit-scrollbar {
-     width: 15px;
- }
+.small-playlists::-webkit-scrollbar {
+  width: 15px;
+}
 
- .small-playlists::-webkit-scrollbar-thumb {
-     background-color: #888;
- }
+.small-playlists::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
 
- .small-playlists::-webkit-scrollbar-thumb:hover {
-     background-color: #555;
- }
+.small-playlists::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
 
- /* for main content scrollbar */
- #main-content::-webkit-scrollbar {
-     width: 15px;
- }
+/* for main content scrollbar */
+#main-content::-webkit-scrollbar {
+  width: 15px;
+}
 
- #main-content::-webkit-scrollbar-thumb {
-     background-color: #888;
- }
+#main-content::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
 
- #main-content::-webkit-scrollbar-thumb:hover {
-     background-color: #555;
- }
+#main-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
 
- .btn-dark.rounded-circle {
-     transition: background-color 0.3s ease;
- }
+.btn-dark.rounded-circle {
+  transition: background-color 0.3s ease;
+}
 
- .btn-dark.rounded-circle:hover {
-     background-color: rgba(0, 0, 0, 0.34) !important;
-     border: none;
- }
+.btn-dark.rounded-circle:hover {
+  background-color: rgba(0, 0, 0, 0.34) !important;
+  border: none;
+}
 
- .track-row.highlight {
-     background-color: rgba(255, 255, 255, 0.2);
-     color: #ffd700;
- }
+.track-row.highlight {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffd700;
+}
 
- .control-btn:hover {
-     cursor: pointer;
-     transform: scale(1.1);
-     transition: all 0.3s ease;
- }
+.control-btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
 
- .bi-shuffle.active {
-     color: white !important;
- }
+.bi-shuffle.active {
+  color: white !important;
+}
 
- html.shrink {
-     height: calc(100vh - 80px);
- }
+html.shrink {
+  height: calc(100vh - 80px);
+}
 
- @media (max-width: 767.98px) {
+#footer {
+  display: none;
+}
 
-     #main-content {
-         flex: 1 1 100% !important;
-         height: auto !important;
-         overflow-y: visible !important;
-         padding: 1rem !important;
-     }
+@media (max-width: 767.98px) {
+  html,
+  body {
+    height: 100%;
+    overflow-y: auto;
+  }
 
-     footer#footer {
-         height: 145px !important;
-         display: flex;
-         align-items: center;
-         justify-content: space-between;
-         bottom: 30px;
+  .d-flex.align-items-center.mb-3.p-4 {
+    display: none !important;
+  }
 
-     }
+  .tracklist-header > div {
+    display: none !important;
+  }
 
-     .about-artist {
-         display: none !important;
-     }
+  #footer {
+    display: block;
+  }
 
-     #album-cover {
-         width: 100% !important;
-         max-width: 130px;
-         margin-bottom: 1rem;
-         top: 35px;
-     }
+  #main-content {
+    flex: 1 1 100% !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    max-height: 100vh;
+    margin-top: 45px;
+    padding-bottom: 160px !important;
+  }
 
+  footer#footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-     .bi-play-circle-fill.icon-btn {
-         font-size: 40px !important;
-     }
+  .about-artist {
+    display: none !important;
+  }
 
-     .tracklist-header,
-     .tracklist>div {
-         flex-direction: column !important;
-     }
+  #album-info {
+    flex-direction: column;
+    text-align: left;
+    margin-right: 1em;
+    margin-top: 1em;
+  }
 
-     .tracklist-header>div,
-     .tracklist>div>div {
-         width: 100% !important;
-         text-align: left !important;
-         margin-bottom: 0.3rem;
-     }
+  #album-info div:not(:first-child) {
+    width: 300px;
+    padding-right: 20px;
+  }
 
-     .small-playlists {
-         max-height: 150px !important;
-         overflow-x: hidden !important;
-     }
+  div.text-white {
+    margin-right: 30px;
+  }
 
-     .btn.btn-dark.rounded-circle {
-         width: 35px !important;
-         height: 35px !important;
-     }
+  #album-cover {
+    margin-bottom: 2rem;
+    width: 300px !important;
+    max-width: 90% !important;
+    padding-left: 0 !important;
+    display: block !important;
+  }
 
-     #attivi-amici {
-         display: none !important;
-     }
+  .bi-play-circle-fill.icon-btn {
+    font-size: 40px !important;
+  }
 
-     #album-cover {
-         position: fixed;
-         padding-left: 60px;
-         right: 0;
-     }
- }
+  .small-playlists {
+    max-height: 150px !important;
+    overflow-x: hidden !important;
+  }
 
- /* Barra di progresso */
- .progress-bar-container {
-     display: flex;
-     align-items: center;
-     gap: 10px;
-     flex: 2;
-     /* Occupano più spazio */
-     min-width: 250px;
- }
+  .btn.btn-dark.rounded-circle {
+    width: 35px !important;
+    height: 35px !important;
+  }
 
- .progress-bar-wrapper {
-     flex-grow: 1;
-     /* Si espande per riempire lo spazio */
-     height: 4px;
-     background-color: #535353;
-     border-radius: 2px;
-     cursor: pointer;
-     position: relative;
- }
+  #attivi-amici {
+    display: none !important;
+  }
+}
 
- .progress-bar {
-     height: 100%;
-     /* la width parte da 0 e si man mano che aumenta si riempie la barra */
-     width: 0%;
-     background-color: white;
-     border-radius: 2px;
- }
+/* Barra di progresso */
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 2;
+  /* Occupano più spazio */
+  min-width: 250px;
+}
+
+.progress-bar-wrapper {
+  flex-grow: 1;
+  /* Si espande per riempire lo spazio */
+  height: 4px;
+  background-color: #535353;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  /* la width parte da 0 e si man mano che aumenta si riempie la barra */
+  width: 0%;
+  background-color: white;
+  border-radius: 2px;
+}
