@@ -270,9 +270,13 @@ const popUpFooter = function () {
     //  footerWrapper.classList.add(`d-none`);
   } else {
     const songInPlayArray = JSON.parse(songInPlay);
-    console.log(`entrati con successo `, songInPlayArray);
     currentSongArray.push(songInPlayArray);
     footerWrapper.classList.remove(`d-none`);
+    currentSong = new Audio(currentSongArray[0].preview);
+    currentSong.addEventListener("timeupdate", updateProgressBar);
+    playerButton.innerHTML = `
+    <i class="bi bi-play-circle-fill text-light h3"></i>
+    `;
     footerSong(currentSongArray);
   }
 };

@@ -58,6 +58,8 @@ const popUpFooter = function () {
     console.log(`entrati con successo `, songInPlayArray);
     currentSongArray.push(songInPlayArray);
     footerWrapper.classList.remove(`d-none`);
+    currentSong = new Audio(currentSongArray[0].preview);
+    currentSong.addEventListener("timeupdate", updateProgressBar);
     footerSong(currentSongArray);
   }
 };
