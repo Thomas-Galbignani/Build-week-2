@@ -51,10 +51,6 @@ html.shrink {
   height: calc(100vh - 80px);
 }
 
-#footer {
-  display: none;
-}
-
 @media (max-width: 767.98px) {
   html,
   body {
@@ -68,10 +64,6 @@ html.shrink {
 
   .tracklist-header > div {
     display: none !important;
-  }
-
-  #footer {
-    display: block;
   }
 
   #main-content {
