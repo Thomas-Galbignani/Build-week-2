@@ -243,17 +243,31 @@ fetch(endpoint + `/` + eventId)
 footerSong();
 
 function setMainContentBackground(imgSrc) {
-  const img = new Image();
+    const img = new Image();
   img.crossOrigin = "Anonymous";
   img.src = imgSrc;
+  
   img.onload = () => {
     const colorThief = new ColorThief();
     const dominantColor = colorThief.getColor(img);
     const rgb = `rgb(${dominantColor.join(",")})`;
-    const gradient = `linear-gradient(to bottom, ${rgb}, rgba(0,0,0,0.7))`;
-
     const main = document.getElementById("main-content");
-    main.style.backgroundImage = gradient;
+    
+    if (window.innerWidth < 768) {
+      // Mobile
+      main.style.backgroundImage = `
+        linear-gradient(to bottom, ${rgb}, rgba(0,0,0,0.7)),
+        url(${imgSrc})
+      `;
+      main.style.backgroundSize = "cover";
+      main.style.backgroundPosition = "center";
+    } else {
+      // Desktop
+      main.style.backgroundImage = `linear-gradient(to bottom, ${rgb}, rgba(0,0,0,0.7))`;
+      main.style.backgroundSize = "";
+      main.style.backgroundPosition = "";
+    }
+    
     main.style.color = "white";
   };
 }
