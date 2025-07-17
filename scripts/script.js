@@ -6,9 +6,9 @@ let currentSong = new Audio(); // Canzone corrente
 let currentSongArray = []; // Array della canzone corrente
 // serch form
 const searchInput = document.getElementById(`searchInput`);
-const searchForm = document.getElementById('searchForm');
+const searchForm = document.getElementById("searchForm");
 const searchInputDesktop = document.getElementById(`searchInputDesktop`);
-const searchFormDesktop = document.getElementById('searchFormDesktop');
+const searchFormDesktop = document.getElementById("searchFormDesktop");
 let attribute = ``;
 
 // Array da popolare con canzoni del carosello
@@ -129,15 +129,15 @@ const searchSong = function (e) {
   e.preventDefault();
   if (searchInput.value) {
     attribute = searchInput.value;
-    window.location.href = `./search.html?eventId=${attribute}`
+    window.location.href = `./search.html?eventId=${attribute}`;
   } else if (searchInputDesktop.value) {
     attribute = searchInputDesktop.value;
-    window.location.href = `./search.html?eventId=${attribute}`
+    window.location.href = `./search.html?eventId=${attribute}`;
   }
 };
 
-searchForm.addEventListener('submit', searchSong);
-searchFormDesktop.addEventListener('submit', searchSong);
+searchForm.addEventListener("submit", searchSong);
+searchFormDesktop.addEventListener("submit", searchSong);
 
 // Funzione per creare il carosello
 const createCarousel = function () {
@@ -327,9 +327,11 @@ playerVolume.addEventListener("click", () => {
     currentSong.volume = 1;
     playerVolume.classList.remove("bi", "bi-volume-mute");
     playerVolume.classList.add("bi", "bi-volume-up");
+    console.log(`sto mutando`);
   } else {
     playerVolume.classList.remove("bi", "bi-volume-up");
     playerVolume.classList.add("bi", "bi-volume-mute");
+    console.log(`sto smutando`);
     currentSong.volume = 0;
   }
 });
@@ -343,19 +345,6 @@ if (volumeSlider) {
     }
   });
 }
-
-playerVolume.addEventListener("click", () => {
-  if (currentSong.volume === 0) {
-    // Se il volume è 0
-    currentSong.volume = 1;
-    playerVolume.classList.remove("bi", "bi-volume-mute");
-    playerVolume.classList.add("bi", "bi-volume-up");
-  } else {
-    playerVolume.classList.remove("bi", "bi-volume-up");
-    playerVolume.classList.add("bi", "bi-volume-mute");
-    currentSong.volume = 0;
-  }
-});
 
 songsOnCarousel();
 footerSong();
