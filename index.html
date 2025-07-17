@@ -14,7 +14,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <link rel="stylesheet" href="./assets/css/artist.css" />
   <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
@@ -75,7 +74,10 @@
                       <i class="bi bi-search m-0 me-3 h4"></i> Cerca
                     </a>
                     <div class="collapse mb-3" id="searchCollapse">
-                      <input type="text" class="form-control" placeholder="Cosa vuoi ascoltare?" />
+                      <form id="searchForm"> <input type="text" id="searchInput" class="form-control"
+                          placeholder="Cosa vuoi ascoltare?" />
+                        <button type="submit" style="display: none;"></button>
+                      </form>
                     </div>
                   </li>
                   <li class="nav-item mb-4">
@@ -230,7 +232,10 @@
                   <i class="bi bi-search m-0 me-3 h4"></i> Cerca
                 </a>
                 <div class="collapse mb-3" id="searchCollapseDesktop">
-                  <input type="text" class="form-control" placeholder="Cosa vuoi ascoltare?" />
+                  <form id="searchFormDesktop"> <input type="text" id="searchInputDesktop" class="form-control"
+                      placeholder="Cosa vuoi ascoltare?" />
+                    <button type="submit" style="display: none;"></button>
+                  </form>
                 </div>
               </li>
               <li class="nav-item mb-4">

@@ -6,6 +6,9 @@ let currentSong = new Audio(); // Canzone corrente
 let currentSongArray = []; // Array della canzone corrente
 // serch form
 const searchInput = document.getElementById(`searchInput`);
+const searchForm = document.getElementById('searchForm');
+const searchInputDesktop = document.getElementById(`searchInputDesktop`);
+const searchFormDesktop = document.getElementById('searchFormDesktop');
 let attribute = ``;
 
 // Array da popolare con canzoni del carosello
@@ -124,11 +127,17 @@ const songsOnCarousel = function () {
 // Funzione per il form di ricerca
 const searchSong = function (e) {
   e.preventDefault();
-  const formInput = searchInput.value;
-  if (searchInput) {
-    attribute = formInput;
+  if (searchInput.value) {
+    attribute = searchInput.value;
+    window.location.href = `./search.html?eventId=${attribute}`
+  } else if (searchInputDesktop.value) {
+    attribute = searchInputDesktop.value;
+    window.location.href = `./search.html?eventId=${attribute}`
   }
 };
+
+searchForm.addEventListener('submit', searchSong);
+searchFormDesktop.addEventListener('submit', searchSong);
 
 // Funzione per creare il carosello
 const createCarousel = function () {
@@ -143,10 +152,10 @@ const createCarousel = function () {
       "align-items-center",
       "w-100",
       "flex-column",
-      "flex-md-row", 
-      "text-center", 
-      "text-md-start", 
-      "py-3", 
+      "flex-md-row",
+      "text-center",
+      "text-md-start",
+      "py-3",
       "py-md-5"
     ); // Aggiunge le classi necessarie per allineare
 
