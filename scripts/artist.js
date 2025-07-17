@@ -25,6 +25,27 @@ let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
 
+// costanti per il search
+const searchInput = document.getElementById(`searchInput`);
+const searchForm = document.getElementById("searchForm");
+const searchInputDesktop = document.getElementById(`searchInputDesktop`);
+const searchFormDesktop = document.getElementById("searchFormDesktop");
+
+// Funzione per il form di ricerca
+const searchSong = function (e) {
+  e.preventDefault();
+  if (searchInput.value) {
+    attribute = searchInput.value;
+    window.location.href = `./search.html?eventId=${attribute}`;
+  } else if (searchInputDesktop.value) {
+    attribute = searchInputDesktop.value;
+    window.location.href = `./search.html?eventId=${attribute}`;
+  }
+};
+
+searchForm.addEventListener("submit", searchSong);
+searchFormDesktop.addEventListener("submit", searchSong);
+
 // Funzione per recuperare i dati dell'artista
 fetch(endpoint + `/` + eventId)
   .then((response) => {
