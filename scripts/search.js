@@ -59,12 +59,14 @@ const footerSong = function () {
         playerButton.innerHTML = `
       <i class="bi bi-pause-circle-fill text-light h3"></i>
       `;
-        playSong();
     }
 };
 
+console.log('canzone corrente' , currentSongArray)
+currentSong = new Audio(currentSongArray[0].preview);
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
+    
     if (!currentSong.paused) {
         // Se la canzone non è in pausa
         currentSong.pause(); // Mette in pausa la canzone
@@ -79,6 +81,8 @@ playerButton.addEventListener("click", () => {
       `;
     }
 });
+
+
 
 // Funzione per far partire la musica
 const playSong = function (songToPlay) {
