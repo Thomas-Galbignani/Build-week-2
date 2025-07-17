@@ -48,6 +48,7 @@ let playerArtist = document.getElementById("player-artist");
 let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
+const footerWrapper = document.getElementById(`footer`);
 
 const songsOnCard = function () {
   songNames.forEach((song) => {
@@ -256,16 +257,23 @@ const footerSong = function () {
   }
 };
 
-
 const songInPlay = localStorage.getItem(`currentSong`);
-if (songInPlay) {
-  const songInPlayArray = JSON.parse(songInPlay);
-  console.log(songInPlayArray);
-  currentSongArray.push(songInPlayArray);
-}
 
-console.log('canzone corrente', songInPlay)
+const popUpFooter = function () {
+  if (songInPlay === null) {
+    footerWrapper.classList.add(`d-none`);
+  } else {
+    const songInPlayArray = JSON.parse(songInPlay);
 
+    console.log(`entrati con successo `, songInPlayArray);
+    currentSongArray.push(songInPlayArray);
+    footerWrapper.classList.remove(`d-none`);
+
+    footerSong();
+  }
+};
+
+console.log("canzone corrente", songInPlay);
 
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
@@ -296,7 +304,7 @@ const playSong = function (songToPlay) {
     .play() // Avvia la canzone
     .then(() => {
       console.log(`sono io `, songToPlay);
-      footerSong(); // Lanciamo la funzione footerSong
+      popUpFooter(); // Lanciamo la funzione footerSong
 
       console.log(`stai ascoltando la canzone: ${songToPlay.title}`);
       localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
@@ -357,9 +365,9 @@ if (volumeSlider) {
 }
 
 songsOnCarousel();
-footerSong();
-songsOnCard();
 
+songsOnCard();
+popUpFooter();
 // funzione per auto-scorrimento del carosello ogni 5 secondi
 document.addEventListener("DOMContentLoaded", (event) => {
   setInterval(nextSong, 5000);
