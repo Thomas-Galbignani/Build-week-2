@@ -67,7 +67,7 @@ const songsOnCard = function () {
                 <div class="card bg-black p-3 rounded-4 text-white h-100">
                   <img
                     class="rounded-2 img-fluid" 
-                    src="${song.data[0].album.cover}"
+                    src="${song.data[0].album.cover_medium}"
                     alt="..."
                   />
                   <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
