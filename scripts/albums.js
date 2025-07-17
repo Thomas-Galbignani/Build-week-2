@@ -90,8 +90,6 @@ const footerSong = function () {
   }
 };
 
-currentSong = new Audio(currentSongArray[0].preview);
-
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
   if (!currentSong.paused) {
