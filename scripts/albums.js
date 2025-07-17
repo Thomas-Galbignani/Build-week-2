@@ -87,9 +87,10 @@ const footerSong = function () {
     playerButton.innerHTML = `
       <i class="bi bi-pause-circle-fill text-light h3"></i>
       `;
-    playSong();
   }
 };
+
+currentSong = new Audio(currentSongArray[0].preview);
 
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
