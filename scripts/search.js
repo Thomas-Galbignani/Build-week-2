@@ -5,6 +5,18 @@ const pageTitle = document.getElementById("page-title");
 const eventId = parameters.get("eventId");
 const resultList = document.getElementById('result-list');
 const firstResult = document.getElementById('first-result');
+let btnPlayerFirstSong = '';
+let currentSong = new Audio(); // Canzone corrente
+let currentSongArray = []; // Array della canzone corrente
+
+// Elementi del Footer
+let playerImgContainer = document.getElementById("player-img-container");
+let playerImg = document.getElementById("player-img");
+let playerTitle = document.getElementById("player-title");
+let playerArtist = document.getElementById("player-artist");
+let playerButton = document.getElementById("play");
+const playerVolume = document.getElementById("volume-mute");
+const progressBar = document.getElementById(`progressBar`);
 
 // Funzione per recuperare i risultati di ricerca
 fetch(endpoint + eventId)
@@ -19,29 +31,56 @@ fetch(endpoint + eventId)
         console.log(result);
         // Primo risultato
         firstResult.innerHTML = `
-                            <img class="rounded-3 h-50"
+                           <div class="flex-grow-1">
+                            <img class="img-fluid rounded-3 mb-3"
                                 src="${result.data[0].album.cover}"
-                                alt="img-${result.data[0].title}">
-                            <p class="mt-2">${result.data[0].title}</p>
-                            <div class="d-flex">
-                                <p>Brano</p>
-                                <p>${result.data[0].artist.name}</p>
+                                alt="img-${result.data[0].title}"
+                                style="max-width: 150px; height: auto;">
+
+                        <a class="text-decoration-none text-light" href="./artists.html?eventId=${result.data[0].artist.id}"><p class="mt-2 mb-1 fw-bold fs-5">${result.data[0].artist.name}</p></a>
+
+                            <div class="d-flex align-items-center justify-content-between flex-wrap row">
+                                <div class="col-10">
+                                 <a class="text-decoration-none text-secondary" href=""><p class="mb-0 text-secondary small">${result.data[0].title}</p></a>
+                                   
+                                   <a class="text-decoration-none text-secondary" href="./album.html?eventId=${result.data[0].album.id}"> <p class="mb-0 small">${result.data[0].album.title}</p></a>
+                                </div>
+                                <div class="m-0 col-2">
+                                    <button class="btn bg-transparent m-0 p-0" id="btn-player-first-song">
+                                    <i class="bi bi-play-circle-fill text-success h1 m-0"></i>
+                                    </button>
+                                </div>
+                                </div>
                             </div>
+                        
                           `;
+
+        btnPlayerFirstSong = document.getElementById('btn-player-first-song');
+        // Pulsante per far partire la prima canzone
+        btnPlayerFirstSong.addEventListener("click", () => {
+            playSong(result.data[0]);
+        });
+
         result.data.forEach((res, index) => {
             const resultDiv = document.createElement("div");
-            resultDiv.classList.add("d-flex", "text-light", "mt-2");
-            resultDiv.style.height = '65px';
+            // Aggiungi align-items-center per centrare verticalmente
+            resultDiv.classList.add("d-flex", "text-light", "mt-2", "align-items-center");
+            resultDiv.style.height = '65px'; // Questa altezza fissa aiuta a vedere l'allineamento verticale
             resultDiv.id = `${index}`
+            resultDiv.style.cursor = "pointer";
             resultDiv.innerHTML = `
-                            <img class="rounded-3"
+        <img class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"
             src="${res.album.cover}"
-            alt="img-${res.title}">
-        <div class="mx-3 flex-grow-1"> <p>${res.title}</p>
-            <p>${res.artist.name}</p>
+            alt="img-${res.title}" id="${res.id}">
+        <div class="mx-3 flex-grow-1">
+            <p class="mb-0 fw-bold">${res.title}</p>
+            <p class="mb-0 text-secondary">${res.artist.name}</p>
         </div>
-        <p class="ms-auto">${formatDuration(res.duration)}</p>
-            `;
+        <p class="ms-auto mb-0">${formatDuration(res.duration)}</p>
+    `;
+              resultDiv.addEventListener("click", () => {
+            playSong(res); // Passa l'intero oggetto 'track'
+          });
             resultList.appendChild(resultDiv)
         })
 
@@ -61,11 +100,19 @@ function formatDuration(seconds) {
 }
 
 
+const songInPlay = localStorage.getItem(`currentSong`);
+if (songInPlay) {
+    const songInPlayArray = JSON.parse(songInPlay);
+    console.log(songInPlayArray);
+    currentSongArray.push(songInPlayArray);
+}
+
+
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function () {
     if (currentSongArray.length === 0) {
         playerButton.disabled = true;
-        console.log("sono nell if", currentSongArray);
+        console.log("currentSongArray non ci sono canzoni", currentSongArray);
     } else {
         console.log(currentSongArray);
         playerButton.disabled = false;
