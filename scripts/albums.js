@@ -45,55 +45,7 @@ const searchSong = function (e) {
 searchForm.addEventListener("submit", searchSong);
 searchFormDesktop.addEventListener("submit", searchSong);
 
-//Funzione per recuperare l'album con l'ID
-fetch(endpoint + `/` + eventId)
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(` tutto rotto`);
-    }
-  })
-  .then((album) => {
-    console.log("album", album);
-    // Popoliamo la sezione in alto
-    pageTitle.innerText = album.title;
-    albumInfoDiv.innerHTML = `
-            <img id="album-cover" src="${
-              album.cover_medium
-            }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
-            <div>
-                <div class="text-white">ALBUM</div>
-                <h2 class="text-white">${album.title}</h2>
-                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${
-                  album.artist.id
-                }">${album.artist.name} • ${album.release_date || "?"}</a></div>
-            </div>
-            `;
-    // Popoliamo la lista delle canzoni dell'album
-    firstTrack = album.tracks.data[0];
-    album.tracks.data.forEach((track, index) => {
-      const trackItem = document.createElement("div");
-      trackItem.innerHTML = `
-                <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
-                    <div style="width: 50%;">${index + 1}. ${
-        track.title
-      }<br><p>${track.artist.name}</p></div>
-                    <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
-                    <div style="width: 20%; text-align: right;">${formatDuration(
-                      track.duration
-                    )}</div>
-                </div>
-            `;
-      trackItem.addEventListener("click", () => {
-        playSong(track); // Passa l'intero oggetto 'track'
-      });
-      trackList.appendChild(trackItem);
-    });
-  })
-  .catch(() => {
-    console.log(`tuttto sbagliato`);
-  });
+
 
 // Pulsante per far partire la prima canzone
 btnPlayerList.addEventListener("click", () => {
@@ -234,5 +186,55 @@ if (volumeSlider) {
     }
   });
 }
+
+//Funzione per recuperare l'album con l'ID
+fetch(endpoint + `/` + eventId)
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error(` tutto rotto`);
+    }
+  })
+  .then((album) => {
+    console.log("album", album);
+    // Popoliamo la sezione in alto
+    pageTitle.innerText = album.title;
+    albumInfoDiv.innerHTML = `
+            <img id="album-cover" src="${
+              album.cover_medium
+            }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
+            <div>
+                <div class="text-white">ALBUM</div>
+                <h2 class="text-white">${album.title}</h2>
+                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${
+                  album.artist.id
+                }">${album.artist.name} • ${album.release_date || "?"}</a></div>
+            </div>
+            `;
+    // Popoliamo la lista delle canzoni dell'album
+    firstTrack = album.tracks.data[0];
+    album.tracks.data.forEach((track, index) => {
+      const trackItem = document.createElement("div");
+      trackItem.innerHTML = `
+                <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
+                    <div style="width: 50%;">${index + 1}. ${
+        track.title
+      }<br><p>${track.artist.name}</p></div>
+                    <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
+                    <div style="width: 20%; text-align: right;">${formatDuration(
+                      track.duration
+                    )}</div>
+                </div>
+            `;
+      trackItem.addEventListener("click", () => {
+        playSong(track); // Passa l'intero oggetto 'track'
+      });
+      trackList.appendChild(trackItem);
+    });
+  })
+  .catch(() => {
+    console.log(`tuttto sbagliato`);
+  });
 
 footerSong();

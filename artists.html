@@ -768,44 +768,7 @@
 
             <div id="image-wrapper" class="d-flex flex-column img-fluid ps-3">
               <div>
-                <div class="mb-4 d-flex">
-                  <button
-                    class="btn btn-outline-light me-2 rounded-circle d-flex justify-content-center align-items-center p-1"
-                    id="btn-back"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      class="bi bi-chevron-left"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    class="btn btn-outline-light rounded-circle d-flex justify-content-center align-items-center p-1"
-                    id="btn-next"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      class="bi bi-chevron-right"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
-                      />
-                    </svg>
-                  </button>
-                </div>
+                <div class="mb-4 d-flex"></div>
               </div>
               <div class="d-flex flex-column mt-auto text-white">
                 <p>
@@ -953,7 +916,7 @@
       <div class="container-fluid">
         <div class="row gx-3 gy-2 d-flex align-items-center">
           <div
-            class="col-12 col-md-3 d-flex align-items-center justify-content-center justify-content-md-start order-1 order-md-0 opacity-0"
+            class="col-3 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-1 order-md-0"
             id="player-img-container"
           >
             <img
@@ -963,32 +926,41 @@
               style="max-width: 50px"
               id="player-img"
             />
-            <div class="text-truncate" style="max-width: calc(100% - 80px)">
+            <!-- Titolo e artista -->
+            <div class="text-truncate" style="max-width: 100%">
+              <!-- Titolo: visibile su tutti i dispositivi -->
               <a
                 href=""
                 class="text-decoration-none text-light d-block text-center text-md-start"
               >
                 <p class="m-0 fs-6 text-truncate" id="player-title"></p>
               </a>
+
+              <!-- Artista: visibile solo da md in su -->
               <a
                 href=""
-                class="text-decoration-none text-secondary d-block text-center text-md-start"
+                class="text-decoration-none text-secondary text-md-start"
               >
                 <p class="m-0 fs-7 text-truncate" id="player-artist"></p>
               </a>
             </div>
-            <a href="" class="text-light ms-2 d-none d-sm-block"
-              ><i class="bi bi-heart"></i
-            ></a>
+            <!-- Icona cuore: solo da sm in su -->
+            <a href="" class="text-light ms-2 d-none d-sm-block">
+              <i class="bi bi-heart"></i>
+            </a>
           </div>
           <div
-            class="col-12 col-md-6 d-flex flex-column align-items-center order-0 order-md-1"
+            class="col-6 col-md-6 d-flex flex-column align-items-center order-0 order-md-1"
           >
             <div class="d-flex justify-content-center mb-2">
-              <button class="control-btn border-0 bg-transparent p-1">
+              <button
+                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
+              >
                 <i class="bi bi-shuffle h5 text-secondary link-light"></i>
               </button>
-              <button class="control-btn border-0 bg-transparent p-1">
+              <button
+                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
+              >
                 <i
                   class="bi bi-skip-backward-fill text-secondary h5 link-light"
                 ></i>
@@ -999,12 +971,16 @@
               >
                 <i class="bi bi-play-circle-fill text-light h2 link-light"></i>
               </button>
-              <button class="control-btn border-0 bg-transparent p-1">
+              <button
+                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
+              >
                 <i
                   class="bi bi-skip-forward-fill text-secondary h5 link-light"
                 ></i>
               </button>
-              <button class="control-btn border-0 bg-transparent p-1">
+              <button
+                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
+              >
                 <i class="bi bi-repeat text-secondary h5 link-light"></i>
               </button>
             </div>
@@ -1034,13 +1010,13 @@
               id="mouse"
             ></i>
             <i
-              class="bi bi-volume-up text-secondary me-1 link-light"
+              class="bi bi-volume-up text-secondary me-1 link-light d-none d-lg-block"
               id="volume-mute"
             ></i>
             <input
               type="range"
               id="volume"
-              class="me-2"
+              class="me-2 d-none d-lg-block"
               min="0"
               max="1"
               step="0.01"
