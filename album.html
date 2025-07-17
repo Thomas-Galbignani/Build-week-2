@@ -487,45 +487,38 @@
   </main>
 
   <!-- Footer Player -->
-  <footer class="py-3 px-1 bg-dark" id="footer">
+  <footer class="py-3 px-1 fixed-bottom bg-dark" id="footer">
     <div class="container-fluid">
       <div class="row gx-3 gy-2 d-flex align-items-center">
         <div
-          class="col-3 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-1 order-md-0"
+          class="col-12 col-md-3 d-flex align-items-center justify-content-center justify-content-md-start order-1 order-md-0 opacity-0"
           id="player-img-container">
-          <img src="" alt="immagine" class="me-2 img-fluid" style="max-width: 50px" id="player-img" />
-          <!-- Titolo e artista -->
-          <div class="text-truncate" style="max-width: 100%">
-            <!-- Titolo: visibile su tutti i dispositivi -->
+          <img src="" alt="immagine" class="me-2 img-fluid" style="max-width: 50px;" id="player-img" />
+          <div class="text-truncate" style="max-width: calc(100% - 80px);">
             <a href="" class="text-decoration-none text-light d-block text-center text-md-start">
               <p class="m-0 fs-6 text-truncate" id="player-title"></p>
             </a>
-
-            <!-- Artista: visibile solo da md in su -->
-            <a href="" class="text-decoration-none text-secondary text-md-start">
+            <a href="" class="text-decoration-none text-secondary d-block text-center text-md-start">
               <p class="m-0 fs-7 text-truncate" id="player-artist"></p>
             </a>
           </div>
-          <!-- Icona cuore: solo da sm in su -->
-          <a href="" class="text-light ms-2 d-none d-sm-block">
-            <i class="bi bi-heart"></i>
-          </a>
+          <a href="" class="text-light ms-2 d-none d-sm-block"><i class="bi bi-heart"></i></a>
         </div>
-        <div class="col-6 col-md-6 d-flex flex-column align-items-center order-0 order-md-1">
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center order-0 order-md-1">
           <div class="d-flex justify-content-center mb-2">
-            <button class="control-btn border-0 bg-transparent p-1 d-none d-md-inline">
+            <button class="control-btn border-0 bg-transparent p-1">
               <i class="bi bi-shuffle h5 text-secondary link-light"></i>
             </button>
-            <button class="control-btn border-0 bg-transparent p-1 d-none d-md-inline">
+            <button class="control-btn border-0 bg-transparent p-1">
               <i class="bi bi-skip-backward-fill text-secondary h5 link-light"></i>
             </button>
             <button class="control-btn play-pause-btn border-0 bg-transparent p-1" id="play">
               <i class="bi bi-play-circle-fill text-light h2 link-light"></i>
             </button>
-            <button class="control-btn border-0 bg-transparent p-1 d-none d-md-inline">
+            <button class="control-btn border-0 bg-transparent p-1">
               <i class="bi bi-skip-forward-fill text-secondary h5 link-light"></i>
             </button>
-            <button class="control-btn border-0 bg-transparent p-1 d-none d-md-inline">
+            <button class="control-btn border-0 bg-transparent p-1">
               <i class="bi bi-repeat text-secondary h5 link-light"></i>
             </button>
           </div>
@@ -542,9 +535,9 @@
           <i class="bi bi-mic text-secondary me-2 link-light d-none d-lg-block" id="mouse"></i>
           <i class="bi bi-collection text-secondary me-2 link-light d-none d-lg-block" id="mouse"></i>
           <i class="bi bi-speaker text-secondary me-2 link-light d-none d-lg-block" id="mouse"></i>
-          <i class="bi bi-volume-up text-secondary me-1 link-light d-none d-lg-block" id="volume-mute"></i>
-          <input type="range" id="volume" class="me-2 d-none d-lg-block" min="0" max="1" step="0.01" value="1"
-            style="max-width: 100px" />
+          <i class="bi bi-volume-up text-secondary me-1 link-light" id="volume-mute"></i>
+          <input type="range" id="volume" class="me-2" min="0" max="1" step="0.01" value="1"
+            style="max-width: 100px;" />
           <i class="bi bi-arrows-angle-expand text-secondary link-light d-none d-lg-block" id="mouse"></i>
         </div>
       </div>

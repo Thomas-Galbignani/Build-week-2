@@ -23,6 +23,7 @@ let playerArtist = document.getElementById("player-artist");
 let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
+const footerWrapper = document.getElementById(`footer`);
 
 // costanti per il search
 const searchInput = document.getElementById(`searchInput`);
@@ -62,18 +63,29 @@ function formatDuration(seconds) {
 }
 
 const songInPlay = localStorage.getItem(`currentSong`);
-if (songInPlay) {
-  const songInPlayArray = JSON.parse(songInPlay);
-  console.log(songInPlayArray);
-  currentSongArray.push(songInPlayArray);
-}
+
+const popUpFooter = function () {
+  if (songInPlay === null) {
+    footerSong(null);
+    //  footerWrapper.classList.add(`d-none`);
+  } else {
+    const songInPlayArray = JSON.parse(songInPlay);
+    console.log(`entrati con successo `, songInPlayArray);
+    currentSongArray.push(songInPlayArray);
+    footerWrapper.classList.remove(`d-none`);
+    currentSong = new Audio(currentSongArray[0].preview);
+    currentSong.addEventListener("timeupdate", updateProgressBar);
+    footerSong(currentSongArray);
+  }
+};
 
 // Funzione per il la barra di riproduzione del footer
-const footerSong = function () {
-  if (currentSongArray.length === 0) {
-    playerButton.disabled = true;
-    console.log("sono nell if", currentSongArray);
+const footerSong = function (song) {
+
+  if (song === null) {
+    footerWrapper.classList.add(`d-none`);
   } else {
+    footerWrapper.classList.remove(`d-none`);
     console.log(currentSongArray);
     playerButton.disabled = false;
     playerImgContainer.classList.remove("opacity-0");
@@ -85,12 +97,10 @@ const footerSong = function () {
     const playerTitleLink = playerTitle.parentElement;
     playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`;
     playerButton.innerHTML = `
-      <i class="bi bi-pause-circle-fill text-light h3"></i>
-      `;
+    <i class="bi bi-pause-circle-fill text-light h3"></i>
+    `;
   }
 };
-
-currentSong = new Audio(currentSongArray[0].preview);
 
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
@@ -116,7 +126,6 @@ const playSong = function (songToPlay) {
     currentSongArray = [songToPlay];
     console.log("canzone passata dal click", currentSongArray);
     currentSong = new Audio(currentSongArray[0].preview);
-    footerSong();
     console.log("canzone corrente", currentSong);
   } else {
     currentSong = new Audio(currentSongArray[0].preview);
@@ -128,9 +137,10 @@ const playSong = function (songToPlay) {
   currentSong
     .play() // Avvia la canzone
     .then(() => {
-      console.log(`sono io `, currentSongArray[0]);
-      console.log(`stai ascoltando la canzone: ${currentSongArray[0].title}`);
       localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
+    })
+    .then(() => {
+      footerSong(songToPlay); // Lanciamo la funzione footerSong
     })
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
@@ -202,32 +212,29 @@ fetch(endpoint + `/` + eventId)
     // Popoliamo la sezione in alto
     pageTitle.innerText = album.title;
     albumInfoDiv.innerHTML = `
-            <img id="album-cover" src="${
-              album.cover_medium
-            }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
+            <img id="album-cover" src="${album.cover_medium
+      }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
             <div>
                 <div class="text-white">ALBUM</div>
                 <h2 class="text-white">${album.title}</h2>
-                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${
-                  album.artist.id
-                }">${album.artist.name} • ${album.release_date || "?"}</a></div>
+                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${album.artist.id
+      }">${album.artist.name} • ${album.release_date || "?"}</a></div>
             </div>
             `;
 
-            setMainContentBackground(album.cover_medium);
+    setMainContentBackground(album.cover_medium);
     // Popoliamo la lista delle canzoni dell'album
     firstTrack = album.tracks.data[0];
     album.tracks.data.forEach((track, index) => {
       const trackItem = document.createElement("div");
       trackItem.innerHTML = `
                 <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
-                    <div style="width: 50%;">${index + 1}. ${
-        track.title
-      }<br><p>${track.artist.name}</p></div>
+                    <div style="width: 50%;">${index + 1}. ${track.title
+        }<br><p>${track.artist.name}</p></div>
                     <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
                     <div style="width: 20%; text-align: right;">${formatDuration(
-                      track.duration
-                    )}</div>
+          track.duration
+        )}</div>
                 </div>
             `;
       trackItem.addEventListener("click", () => {
@@ -239,8 +246,6 @@ fetch(endpoint + `/` + eventId)
   .catch(() => {
     console.log(`tuttto sbagliato`);
   });
-
-footerSong();
 
 function setMainContentBackground(imgSrc) {
     const img = new Image();
@@ -271,3 +276,5 @@ function setMainContentBackground(imgSrc) {
     main.style.color = "white";
   };
 }
+
+popUpFooter();
