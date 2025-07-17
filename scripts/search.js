@@ -25,109 +25,6 @@ const searchForm = document.getElementById("searchForm");
 const searchInputDesktop = document.getElementById(`searchInputDesktop`);
 const searchFormDesktop = document.getElementById("searchFormDesktop");
 
-// Funzione per recuperare i risultati di ricerca
-fetch(endpoint + eventId)
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Errore nel recupero della prima canzone!");
-        }
-    })
-    .then((result) => {
-        console.log(result);
-        result.data.sort((a, b) => b.rank - a.rank);
-        // Primo risultato
-        firstResult.innerHTML = `
-                           <div class="flex-grow-1">
-                            <img class="img-fluid rounded-3 mb-3"
-                                src="${result.data[0].album.cover}"
-                                alt="img-${result.data[0].title}"
-                                style="max-width: 150px; height: auto;">
-
-                        <a class="text-decoration-none text-light" href="./artists.html?eventId=${result.data[0].artist.id}"><p class="mt-2 mb-1 fw-bold fs-5">${result.data[0].artist.name}</p></a>
-
-                            <div class="d-flex align-items-center justify-content-between flex-wrap row">
-                                <div class="col-10">
-                                 <a class="text-decoration-none text-secondary" href=""><p class="mb-0 text-secondary small">${result.data[0].title}</p></a>
-                                   
-                                   <a class="text-decoration-none text-secondary" href="./album.html?eventId=${result.data[0].album.id}"> <p class="mb-0 small">${result.data[0].album.title}</p></a>
-                                </div>
-                                <div class="m-0 col-2">
-                                    <button class="btn bg-transparent m-0 p-0" id="btn-player-first-song">
-                                    <i class="bi bi-play-circle-fill text-success h1 m-0"></i>
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                        
-                          `;
-
-        btnPlayerFirstSong = document.getElementById("btn-player-first-song");
-        // Pulsante per far partire la prima canzone
-        btnPlayerFirstSong.addEventListener("click", () => {
-            playSong(result.data[0]);
-        });
-
-        result.data.forEach((res, index) => {
-            const resultDiv = document.createElement("div");
-            // Aggiungi align-items-center per centrare verticalmente
-            resultDiv.classList.add(
-                "d-flex",
-                "text-light",
-                "mt-2",
-                "align-items-center"
-            );
-            resultDiv.style.height = "65px"; // Questa altezza fissa aiuta a vedere l'allineamento verticale
-            resultDiv.id = `${index}`;
-            resultDiv.style.cursor = "pointer";
-            resultDiv.innerHTML = `
-        <img class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"
-            src="${res.album.cover}"
-            alt="img-${res.title}" id="${res.id}">
-        <div class="mx-3 flex-grow-1">
-            <p class="mb-0 fw-bold">${res.title}</p>
-            <p class="mb-0 text-secondary">${res.artist.name}</p>
-        </div>
-        <p class="ms-auto mb-0">${formatDuration(res.duration)}</p>
-    `;
-            resultDiv.addEventListener("click", () => {
-                playSong(res); // Passa l'intero oggetto 'track'
-            });
-            resultList.appendChild(resultDiv);
-        });
-
-        // Sezione Artisti
-        // Crea un Set per memorizzare gli ID unici degli artisti già visualizzati
-        const uniqueArtistIds = new Set();
-        result.data.forEach((res) => {
-            if (res.artist.id && !uniqueArtistIds.has(res.artist.id)) {
-                // Se l'ID non è presente nel Set, lo aggiunge
-                uniqueArtistIds.add(res.artist.id);
-                const resultArtistDiv = document.createElement("div");
-                resultArtistDiv.classList.add("mx-3");
-                resultArtistDiv.style.cursor = "pointer";
-                resultArtistDiv.innerHTML = `
-                                <img class="rounded-circle"
-                                    src="${res.artist.picture}"
-                                    alt="artist">
-                                <p class="text-white fw-bold mb-0 mt-2">${res.artist.name}</p>
-                                <p class="text-secondary small">Artista</p>
-    `;
-                // Click del div per mandare nella pagina dell'artista
-                resultArtistDiv.addEventListener("click", () => {
-                    window.location.href = `./artists.html?eventId=${res.artist.id}`
-                });
-                artistContainer.appendChild(resultArtistDiv);
-            }
-
-        })
-
-    })
-    .catch((err) => {
-        console.log(err, "tutto rotto");
-    });
-
 // Funzione per formattare il tempo della canzone
 function formatDuration(seconds) {
     if (isNaN(seconds)) return "0:00";
@@ -276,5 +173,113 @@ const searchSong = function (e) {
 
 searchForm.addEventListener("submit", searchSong);
 searchFormDesktop.addEventListener("submit", searchSong);
+
+
+
+// Funzione per recuperare i risultati di ricerca
+fetch(endpoint + eventId)
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error("Errore nel recupero della prima canzone!");
+        }
+    })
+    .then((result) => {
+        console.log(result);
+        result.data.sort((a, b) => b.rank - a.rank);
+        // Primo risultato
+        firstResult.innerHTML = `
+                           <div class="flex-grow-1">
+                            <img class="img-fluid rounded-3 mb-3"
+                                src="${result.data[0].album.cover}"
+                                alt="img-${result.data[0].title}"
+                                style="max-width: 150px; height: auto;">
+
+                        <a class="text-decoration-none text-light" href="./artists.html?eventId=${result.data[0].artist.id}"><p class="mt-2 mb-1 fw-bold fs-5">${result.data[0].artist.name}</p></a>
+
+                            <div class="d-flex align-items-center justify-content-between flex-wrap row">
+                                <div class="col-10">
+                                 <a class="text-decoration-none text-secondary" href=""><p class="mb-0 text-secondary small">${result.data[0].title}</p></a>
+                                   
+                                   <a class="text-decoration-none text-secondary" href="./album.html?eventId=${result.data[0].album.id}"> <p class="mb-0 small">${result.data[0].album.title}</p></a>
+                                </div>
+                                <div class="m-0 col-2">
+                                    <button class="btn bg-transparent m-0 p-0" id="btn-player-first-song">
+                                    <i class="bi bi-play-circle-fill text-success h1 m-0"></i>
+                                    </button>
+                                </div>
+                                </div>
+                            </div>
+                        
+                          `;
+
+        btnPlayerFirstSong = document.getElementById("btn-player-first-song");
+        // Pulsante per far partire la prima canzone
+        btnPlayerFirstSong.addEventListener("click", () => {
+            playSong(result.data[0]);
+        });
+
+        result.data.forEach((res, index) => {
+            const resultDiv = document.createElement("div");
+            // Aggiungi align-items-center per centrare verticalmente
+            resultDiv.classList.add(
+                "d-flex",
+                "text-light",
+                "mt-2",
+                "align-items-center"
+            );
+            resultDiv.style.height = "65px"; // Questa altezza fissa aiuta a vedere l'allineamento verticale
+            resultDiv.id = `${index}`;
+            resultDiv.style.cursor = "pointer";
+            resultDiv.innerHTML = `
+        <img class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"
+            src="${res.album.cover}"
+            alt="img-${res.title}" id="${res.id}">
+        <div class="mx-3 flex-grow-1">
+            <p class="mb-0 fw-bold">${res.title}</p>
+            <p class="mb-0 text-secondary">${res.artist.name}</p>
+        </div>
+        <p class="ms-auto mb-0">${formatDuration(res.duration)}</p>
+    `;
+            resultDiv.addEventListener("click", () => {
+                playSong(res); // Passa l'intero oggetto 'track'
+            });
+            resultList.appendChild(resultDiv);
+        });
+
+        // Sezione Artisti
+        // Crea un Set per memorizzare gli ID unici degli artisti già visualizzati
+        const uniqueArtistIds = new Set();
+
+        result.data.forEach((res) => {
+            if (res.artist.id && !uniqueArtistIds.has(res.artist.id)) {
+                // Se l'ID non è presente nel Set, lo aggiunge
+                uniqueArtistIds.add(res.artist.id);
+                const resultArtistDiv = document.createElement("div");
+                resultArtistDiv.classList.add("mx-3");
+                resultArtistDiv.style.cursor = "pointer";
+                resultArtistDiv.innerHTML = `
+                                <img class="rounded-circle"
+                                    src="${res.artist.picture}"
+                                    alt="artist">
+                                <p class="text-white fw-bold mb-0 mt-2">${res.artist.name}</p>
+                                <p class="text-secondary small">Artista</p>
+    `;
+                // Click del div per mandare nella pagina dell'artista
+                resultArtistDiv.addEventListener("click", () => {
+                    window.location.href = `./artists.html?eventId=${res.artist.id}`
+                });
+                artistContainer.appendChild(resultArtistDiv);
+            }
+
+        })
+
+    })
+    .catch((err) => {
+        console.log(err, "tutto rotto");
+    });
+
+
 
 footerSong();

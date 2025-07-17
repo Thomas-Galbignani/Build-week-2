@@ -46,121 +46,6 @@ const searchSong = function (e) {
 searchForm.addEventListener("submit", searchSong);
 searchFormDesktop.addEventListener("submit", searchSong);
 
-// Funzione per recuperare i dati dell'artista
-fetch(endpoint + `/` + eventId)
-  .then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(` tutto rotto`);
-    }
-  })
-  .then((artist) => {
-    console.log("artista", artist);
-    artistImg.src = artist.picture;
-    artistLike.innerText = `
-    DI ${artist.name}`;
-    pageTitle.innerText = artist.name;
-    (imgWrapper.style.backgroundImage = `url(${artist.picture_xl})`),
-      (imgWrapper.style.backgroundSize = "cover");
-    imgWrapper.style.backgroundRepeat = "no-repeat";
-    imgWrapper.style.backgroundPosition = "center";
-    const artistTracklistEndpoint = artist.tracklist; // Recuperiamo l'endpoint della top 50
-    imgWrapper.innerHTML = `
-          <div>
-              <div class="mb-4 d-flex mt-2">
-              </div>
-            </div>
-            <div class="d-flex flex-column mt-auto text-white">
-              <p class="mb-0">
-                <i class="bi-patch-check-fill text-primary me-1"></i>Artista
-                verificato
-              </p>
-              <h1 class="display-2">${artist.name}</h1>
-              <p class="mt-3">${artist.nb_fan} ascoltatori mensili</p>
-            </div>
-    `;
-
-    // Nuova chiamata all'api per recuperare la top 50
-    fetch(artistTracklistEndpoint)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error(` tutto rotto`);
-        }
-      })
-      .then((tracklist) => {
-        console.log(tracklist);
-        // Ordiniamo le canzoni in base al rank
-        tracklist.data.sort((a, b) => b.rank - a.rank);
-        firstTrack = tracklist.data[0];
-        tracklist.data.forEach((track, index) => {
-          const trackDiv = document.createElement("div");
-          trackDiv.id = `${index}`;
-          trackDiv.style.cursor = "pointer";
-          trackDiv.classList.add("d-none");
-          trackDiv.innerHTML = `
-          <div class="d-flex align-items-center py-2 mx-4">
-                    <div class="d-flex align-items-center me-auto">
-                      <p class="text-secondary mb-0">${index + 1}</p>
-                      <img src="${track.album.cover}" alt="img-${
-            track.title
-          }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
-                      <p class="mb-0">${track.title}</p>
-                    </div>
-                    <p class="text-secondary mb-0 me-3">${track.rank}</p>
-                    <p class="text-secondary mb-0">${formatDuration(
-                      track.duration
-                    )}</p>
-            </div>
-            `;
-          trackDiv.addEventListener("click", () => {
-            playSong(track); // Passa l'intero oggetto 'track'
-          });
-
-          // funzioni per mostrare meno e più con il pulsante visualizza altro
-
-          const vediAltro = function () {
-            if ((btnViewMore.innerText = "VISUALIZZA ALTRO")) {
-              btnViewMore.addEventListener("click", () => {
-                if (trackDiv.id < 10) {
-                  trackDiv.classList.remove("d-none");
-                  btnViewMore.innerText = "VISUALIZZA MENO";
-                  vediMeno();
-                }
-              });
-            }
-          };
-          vediAltro();
-
-          const vediMeno = function () {
-            if (btnViewMore.innerText === "VISUALIZZA MENO") {
-              btnViewMore.addEventListener("click", () => {
-                console.log("ciao voglio chiudere la visuale");
-                if (trackDiv.id >= 5) {
-                  trackDiv.classList.add("d-none");
-                  btnViewMore.innerText = "VISUALIZZA ALTRO";
-                  vediAltro();
-                }
-              });
-            }
-          };
-
-          if (trackDiv.id < 5) {
-            trackDiv.classList.remove("d-none");
-          }
-          topTracks.appendChild(trackDiv);
-        });
-      })
-      .catch(() => {
-        console.log(`Tracklist tuttto sbagliato`);
-      });
-  })
-  .catch(() => {
-    console.log(`tuttto sbagliato`);
-  });
-
 const songInPlay = localStorage.getItem(`currentSong`);
 if (songInPlay) {
   const songInPlayArray = JSON.parse(songInPlay);
@@ -300,5 +185,122 @@ function formatDuration(seconds) {
   const sec = Math.floor(seconds % 60);
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
+
+
+// Funzione per recuperare i dati dell'artista
+fetch(endpoint + `/` + eventId)
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error(` tutto rotto`);
+    }
+  })
+  .then((artist) => {
+    console.log("artista", artist);
+    artistImg.src = artist.picture;
+    artistLike.innerText = `
+    DI ${artist.name}`;
+    pageTitle.innerText = artist.name;
+    (imgWrapper.style.backgroundImage = `url(${artist.picture_xl})`),
+      (imgWrapper.style.backgroundSize = "cover");
+    imgWrapper.style.backgroundRepeat = "no-repeat";
+    imgWrapper.style.backgroundPosition = "center";
+    const artistTracklistEndpoint = artist.tracklist; // Recuperiamo l'endpoint della top 50
+    imgWrapper.innerHTML = `
+          <div>
+              <div class="mb-4 d-flex mt-2">
+              </div>
+            </div>
+            <div class="d-flex flex-column mt-auto text-white">
+              <p class="mb-0">
+                <i class="bi-patch-check-fill text-primary me-1"></i>Artista
+                verificato
+              </p>
+              <h1 class="display-2">${artist.name}</h1>
+              <p class="mt-3">${artist.nb_fan} ascoltatori mensili</p>
+            </div>
+    `;
+
+    // Nuova chiamata all'api per recuperare la top 50
+    fetch(artistTracklistEndpoint)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error(` tutto rotto`);
+        }
+      })
+      .then((tracklist) => {
+        console.log(tracklist);
+        // Ordiniamo le canzoni in base al rank
+        tracklist.data.sort((a, b) => b.rank - a.rank);
+        firstTrack = tracklist.data[0];
+        tracklist.data.forEach((track, index) => {
+          const trackDiv = document.createElement("div");
+          trackDiv.id = `${index}`;
+          trackDiv.style.cursor = "pointer";
+          trackDiv.classList.add("d-none");
+          trackDiv.innerHTML = `
+          <div class="d-flex align-items-center py-2 mx-4">
+                    <div class="d-flex align-items-center me-auto">
+                      <p class="text-secondary mb-0">${index + 1}</p>
+                      <img src="${track.album.cover}" alt="img-${
+            track.title
+          }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
+                      <p class="mb-0">${track.title}</p>
+                    </div>
+                    <p class="text-secondary mb-0 me-3">${track.rank}</p>
+                    <p class="text-secondary mb-0">${formatDuration(
+                      track.duration
+                    )}</p>
+            </div>
+            `;
+          trackDiv.addEventListener("click", () => {
+            playSong(track); // Passa l'intero oggetto 'track'
+          });
+
+          // funzioni per mostrare meno e più con il pulsante visualizza altro
+
+          const vediAltro = function () {
+            if ((btnViewMore.innerText = "VISUALIZZA ALTRO")) {
+              btnViewMore.addEventListener("click", () => {
+                if (trackDiv.id < 10) {
+                  trackDiv.classList.remove("d-none");
+                  btnViewMore.innerText = "VISUALIZZA MENO";
+                  vediMeno();
+                }
+              });
+            }
+          };
+          vediAltro();
+
+          const vediMeno = function () {
+            if (btnViewMore.innerText === "VISUALIZZA MENO") {
+              btnViewMore.addEventListener("click", () => {
+                console.log("ciao voglio chiudere la visuale");
+                if (trackDiv.id >= 5) {
+                  trackDiv.classList.add("d-none");
+                  btnViewMore.innerText = "VISUALIZZA ALTRO";
+                  vediAltro();
+                }
+              });
+            }
+          };
+
+          if (trackDiv.id < 5) {
+            trackDiv.classList.remove("d-none");
+          }
+          topTracks.appendChild(trackDiv);
+        });
+      })
+      .catch(() => {
+        console.log(`Tracklist tuttto sbagliato`);
+      });
+  })
+  .catch(() => {
+    console.log(`tuttto sbagliato`);
+  });
+  
 
 footerSong();
