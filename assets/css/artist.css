@@ -233,7 +233,13 @@ html {
 #volume-mute {
   cursor: pointer;
 }
-@media (max-width: 768px) {
+@media (max-width: 360px) {
+  #image-wrapper {
+    height: 40%;
+  }
+}
+
+@media (min-width: 768px) {
   #image-wrapper {
     height: 35%;
   }
@@ -247,9 +253,4 @@ html {
   #image-wrapper {
     height: 25%;
   }
-}
-.scrollrow {
-  z-index: 100;
-  height: 50%;
-  overflow-y: auto;
 }
