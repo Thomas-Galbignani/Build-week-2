@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./assets/css/circular-font.css" />
     <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
     <link rel="stylesheet" href="./assets/css/album.css" />
+    <link rel="stylesheet" href="./assets/css/artist.css" />
     <link rel="stylesheet" href="./assets/css/homepage.css" />
   </head>
 
@@ -32,7 +33,7 @@
         <div class="row">
           <!-- Pulsante toggle sidebar mobile -->
           <button
-            class="btn p-1 border-0 bg-transparent text-light position-fixed top-0 start-0 m-2 d-md-none"
+            class="btn p-1 border-0 bg-transparent text-light position-fixed top-0 start-0 m-2 d-lg-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#sidebarMenuMobile"
@@ -44,7 +45,7 @@
 
           <!-- SIDEBAR MOBILE (Offcanvas) -->
           <div
-            class="offcanvas offcanvas-start d-md-none bg-black text-white"
+            class="offcanvas offcanvas-start d-lg-none bg-black text-white"
             tabindex="-1"
             id="sidebarMenuMobile"
             aria-labelledby="sidebarMenuMobileLabel"
@@ -627,7 +628,7 @@
           <!-- Contenuto centrale -->
           <div
             id="main-content"
-            class="col-12 col-md-6 col-lg-8 overflow-auto main-content"
+            class="col-12 col-lg-8 overflow-auto main-content"
             style="overflow-y: auto; height: 100vh"
           >
             <div class="d-flex align-items-center mb-3 p-4">
@@ -786,11 +787,11 @@
 
     <!-- Footer Player -->
 
-    <footer class="py-3 px-1 bg-dark fixed-bottom" id="footer">
+    <footer class="py-3 px-1 bg-dark" id="footer">
       <div class="container-fluid">
         <div class="row gx-3 gy-2 d-flex align-items-center">
           <div
-            class="col-3 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-1 order-md-0"
+            class="col-8 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-md-0"
             id="player-img-container"
           >
             <img
@@ -815,7 +816,10 @@
                 href=""
                 class="text-decoration-none text-secondary text-md-start"
               >
-                <p class="m-0 fs-7 text-truncate" id="player-artist"></p>
+                <p
+                  class="m-0 fs-7 text-truncate circularMedium"
+                  id="player-artist"
+                ></p>
               </a>
             </div>
             <!-- Icona cuore: solo da sm in su -->
@@ -824,7 +828,7 @@
             </a>
           </div>
           <div
-            class="col-6 col-md-6 d-flex flex-column align-items-center order-0 order-md-1"
+            class="col-4 col-md-6 d-flex flex-column align-items-center align-content-center align order-md-1 mt-3 mt-md-2"
           >
             <div class="d-flex justify-content-center mb-2">
               <button
@@ -832,9 +836,7 @@
               >
                 <i class="bi bi-shuffle h5 text-secondary link-light"></i>
               </button>
-              <button
-                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
-              >
+              <button class="control-btn border-0 bg-transparent p-1 d-inline">
                 <i
                   class="bi bi-skip-backward-fill text-secondary h5 link-light"
                 ></i>
@@ -845,9 +847,7 @@
               >
                 <i class="bi bi-play-circle-fill text-light h2 link-light"></i>
               </button>
-              <button
-                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
-              >
+              <button class="control-btn border-0 bg-transparent p-1 d-inline">
                 <i
                   class="bi bi-skip-forward-fill text-secondary h5 link-light"
                 ></i>
