@@ -250,18 +250,13 @@ html {
     height: 25%;
   }
 }
-@media (max-width: 576px) {
-  #player-img-container img,
-  #player-artist,
-  #player-img-container .bi-heart {
+@media (max-width: 767px) {
+  .progress-bar-container {
     display: none !important;
   }
 
-  #player-img-container {
-    order: 1 !important;
-    flex: 1 1 auto;
-    justify-content: center !important;
-    margin-top: 0.5rem;
+  #player-img-container img {
+    border-radius: 50%;
   }
 
   #footer .col-md-3:last-child {
