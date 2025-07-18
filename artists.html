@@ -783,7 +783,10 @@
             <div>
               <div class="row">
                 <div class="d-flex align-items-center mt-3 ms-2">
-                  <button class="btn bg-transparent" id="btn-player-list">
+                  <button
+                    class="btn bg-transparent play-button-effect me-3"
+                    id="btn-player-list"
+                  >
                     <i class="bi bi-play-circle-fill text-success h1"></i>
                   </button>
                   <button class="btn btn-outline-light">
@@ -916,7 +919,7 @@
       <div class="container-fluid">
         <div class="row gx-3 gy-2 d-flex align-items-center">
           <div
-            class="col-3 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-1 order-md-0"
+            class="col-8 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-md-0"
             id="player-img-container"
           >
             <img
@@ -950,7 +953,7 @@
             </a>
           </div>
           <div
-            class="col-6 col-md-6 d-flex flex-column align-items-center order-0 order-md-1"
+            class="col-4 col-md-6 d-flex flex-column align-items-center align-content-center align order-md-1 mt-3 mt-md-2"
           >
             <div class="d-flex justify-content-center mb-2">
               <button
@@ -958,9 +961,7 @@
               >
                 <i class="bi bi-shuffle h5 text-secondary link-light"></i>
               </button>
-              <button
-                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
-              >
+              <button class="control-btn border-0 bg-transparent p-1 d-inline">
                 <i
                   class="bi bi-skip-backward-fill text-secondary h5 link-light"
                 ></i>
@@ -971,9 +972,7 @@
               >
                 <i class="bi bi-play-circle-fill text-light h2 link-light"></i>
               </button>
-              <button
-                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
-              >
+              <button class="control-btn border-0 bg-transparent p-1 d-inline">
                 <i
                   class="bi bi-skip-forward-fill text-secondary h5 link-light"
                 ></i>

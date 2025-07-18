@@ -210,8 +210,9 @@ fetch(endpoint + `/` + eventId)
   .then((artist) => {
     console.log("artista", artist);
     artistImg.src = artist.picture;
+    artistImg.classList.add('artist-img'); // Classe Hover sull'immagine
     artistLike.innerText = `
-    DI ${artist.name}`;
+    Di ${artist.name}`;
     pageTitle.innerText = artist.name;
     (imgWrapper.style.backgroundImage = `url(${artist.picture_xl})`),
       (imgWrapper.style.backgroundSize = "cover");
@@ -251,7 +252,7 @@ fetch(endpoint + `/` + eventId)
           const trackDiv = document.createElement("div");
           trackDiv.id = `${index}`;
           trackDiv.style.cursor = "pointer";
-          trackDiv.classList.add("d-none");
+          trackDiv.classList.add("d-none", "track-item-hover");
           trackDiv.innerHTML = `
           <div class="d-flex align-items-center py-2 mx-4">
                     <div class="d-flex align-items-center me-auto">

@@ -47,7 +47,7 @@
   color: white !important;
 }
 
-html.shrink {
+/* html.shrink {
   height: calc(100vh - 80px);
 }
 
@@ -152,7 +152,7 @@ html.shrink {
     align-items: center;
     margin-bottom: 1rem; 
   }
-}
+} */
 
 /* Barra di progresso */
 .progress-bar-container {
