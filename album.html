@@ -433,7 +433,13 @@
               style="color: #1db954; font-size: 60px"></i>
             <i class="bi bi-heart icon-btn fs-4 me-4"></i>
             <i class="bi bi-download icon-btn fs-4 me-4"></i>
-            <i class="bi bi-three-dots icon-btn new-class fs-4"></i>
+           <div class="dropdown" style="position: relative;">
+  <i class="bi bi-three-dots icon-btn new-class fs-4" id="more-options" style="cursor:pointer;"></i>
+  <ul class="dropdown-menu" id="dropdown-menu" style="display:none; position:absolute; background:#222; padding:10px; list-style:none; border-radius:5px; color:white; top: 100%; right: 0; z-index: 1000;">
+    <li><a href="#" id="share-song" style="color: white; text-decoration:none; display:block; padding: 5px 10px;">Share</a></li>
+    <li><a href="#" id="add-to-playlist" style="color: white; text-decoration:none; display:block; padding: 5px 10px;">Add to playlist</a></li>
+  </ul>
+</div>
           </div>
 
           <div class="tracklist-header d-flex py-3 px-4 border-bottom border-secondary text-white">

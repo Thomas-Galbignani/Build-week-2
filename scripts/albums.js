@@ -226,22 +226,21 @@ fetch(endpoint + `/` + eventId)
     // Popoliamo la lista delle canzoni dell'album
     firstTrack = album.tracks.data[0];
     album.tracks.data.forEach((track, index) => {
-      const trackItem = document.createElement("div");
-      trackItem.innerHTML = `
-                <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
-                    <div style="width: 50%;">${index + 1}. ${track.title
-        }<br><p>${track.artist.name}</p></div>
-                    <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
-                    <div style="width: 20%; text-align: right;">${formatDuration(
-          track.duration
-        )}</div>
-                </div>
-            `;
-      trackItem.addEventListener("click", () => {
-        playSong(track); // Passa l'intero oggetto 'track'
-      });
-      trackList.appendChild(trackItem);
-    });
+  const trackItem = document.createElement("div");
+  trackItem.innerHTML = `
+    <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
+      <div style="width: 50%;">${index + 1}. ${track.title}<br><p>${track.artist.name}</p></div>
+      <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
+      <div style="width: 20%; text-align: right;">${formatDuration(track.duration)}</div>
+    </div>
+  `;
+
+  trackItem.addEventListener("click", () => {
+    highlightSelectedTrack(trackItem);
+    playSong(track);
+  });
+  trackList.appendChild(trackItem);
+});
   })
   .catch(() => {
     console.log(`tuttto sbagliato`);
@@ -276,5 +275,56 @@ function setMainContentBackground(imgSrc) {
     main.style.color = "white";
   };
 }
+
+// track highlight
+function highlightSelectedTrack(selectedElement) {
+  const allTracks = trackList.children;
+  Array.from(allTracks).forEach(track => track.classList.remove("highlight"));
+  selectedElement.classList.add("highlight");
+}
+
+const heartIcon = document.querySelector('.bi-heart');
+
+heartIcon.addEventListener('click', () => {
+  heartIcon.classList.toggle('text-danger');
+});
+
+const downloadIcon = document.querySelector('.bi-download');
+
+downloadIcon.addEventListener('click', () => {
+  if (currentSongArray.length > 0) {
+    const previewUrl = currentSongArray[0].preview;
+    const a = document.createElement('a');
+    a.href = previewUrl;
+    a.download = 'song_preview.mp3';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    alert('Yükləmək üçün mahnı seçilməyib!');
+  }
+});
+
+const moreOptions = document.getElementById('more-options');
+const dropdownMenu = document.getElementById('dropdown-menu');
+
+moreOptions.addEventListener('click', () => {
+  if (dropdownMenu.style.display === 'none') {
+    dropdownMenu.style.display = 'block';
+  } else {
+    dropdownMenu.style.display = 'none';
+  }
+});
+
+
+document.getElementById('share-song').addEventListener('click', (e) => {
+  e.preventDefault();
+  alert('Playlist is not ready yet');
+});
+
+document.getElementById('add-to-playlist').addEventListener('click', (e) => {
+  e.preventDefault();
+  alert('Playlist is getting prepared');
+});
 
 popUpFooter();
