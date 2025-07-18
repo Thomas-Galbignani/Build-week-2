@@ -24,7 +24,6 @@
     <link rel="icon" type="image/png" href="./assets/imgs/favicon.png" />
     <link rel="stylesheet" href="./assets/css/album.css" />
     <link rel="stylesheet" href="./assets/css/homepage.css" />
-    <link rel="stylesheet" href="./assets/css/artist.css" />
   </head>
 
   <body class="bg-black">
@@ -33,7 +32,7 @@
         <div class="row">
           <!-- Pulsante toggle sidebar mobile -->
           <button
-            class="btn p-1 border-0 bg-transparent text-light position-fixed top-0 start-0 m-2 d-lg-none"
+            class="btn p-1 border-0 bg-transparent text-light position-fixed top-0 start-0 m-2 d-md-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#sidebarMenuMobile"
@@ -45,7 +44,7 @@
 
           <!-- SIDEBAR MOBILE (Offcanvas) -->
           <div
-            class="offcanvas offcanvas-start d-lg-none bg-black text-white"
+            class="offcanvas offcanvas-start d-md-none bg-black text-white"
             tabindex="-1"
             id="sidebarMenuMobile"
             aria-labelledby="sidebarMenuMobileLabel"
@@ -628,7 +627,7 @@
           <!-- Contenuto centrale -->
           <div
             id="main-content"
-            class="col-12 col-lg-8 overflow-auto main-content"
+            class="col-12 col-md-6 col-lg-8 overflow-auto main-content"
             style="overflow-y: auto; height: 100vh"
           >
             <div class="d-flex align-items-center mb-3 p-4">
@@ -660,7 +659,56 @@
               ></i>
               <i class="bi bi-heart icon-btn fs-4 me-4"></i>
               <i class="bi bi-download icon-btn fs-4 me-4"></i>
-              <i class="bi bi-three-dots icon-btn new-class fs-4"></i>
+              <div class="dropdown" style="position: relative">
+                <i
+                  class="bi bi-three-dots icon-btn new-class fs-4"
+                  id="more-options"
+                  style="cursor: pointer"
+                ></i>
+                <ul
+                  class="dropdown-menu"
+                  id="dropdown-menu"
+                  style="
+                    display: none;
+                    position: absolute;
+                    background: #222;
+                    padding: 10px;
+                    list-style: none;
+                    border-radius: 5px;
+                    color: white;
+                    top: 100%;
+                    right: 0;
+                    z-index: 1000;
+                  "
+                >
+                  <li>
+                    <a
+                      href="#"
+                      id="share-song"
+                      style="
+                        color: white;
+                        text-decoration: none;
+                        display: block;
+                        padding: 5px 10px;
+                      "
+                      >Share</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      id="add-to-playlist"
+                      style="
+                        color: white;
+                        text-decoration: none;
+                        display: block;
+                        padding: 5px 10px;
+                      "
+                      >Add to playlist</a
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div
@@ -737,11 +785,12 @@
     </main>
 
     <!-- Footer Player -->
-    <footer class="py-3 px-1 bg-dark" id="footer">
+
+    <footer class="py-3 px-1 bg-dark fixed-bottom" id="footer">
       <div class="container-fluid">
         <div class="row gx-3 gy-2 d-flex align-items-center">
           <div
-            class="col-8 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-md-0"
+            class="col-3 col-md-3 d-flex align-items-center justify-content-start justify-content-md-start order-1 order-md-0"
             id="player-img-container"
           >
             <img
@@ -775,7 +824,7 @@
             </a>
           </div>
           <div
-            class="col-4 col-md-6 d-flex flex-column align-items-center align-content-center align order-md-1 mt-3 mt-md-2"
+            class="col-6 col-md-6 d-flex flex-column align-items-center order-0 order-md-1"
           >
             <div class="d-flex justify-content-center mb-2">
               <button
@@ -783,7 +832,9 @@
               >
                 <i class="bi bi-shuffle h5 text-secondary link-light"></i>
               </button>
-              <button class="control-btn border-0 bg-transparent p-1 d-inline">
+              <button
+                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
+              >
                 <i
                   class="bi bi-skip-backward-fill text-secondary h5 link-light"
                 ></i>
@@ -794,7 +845,9 @@
               >
                 <i class="bi bi-play-circle-fill text-light h2 link-light"></i>
               </button>
-              <button class="control-btn border-0 bg-transparent p-1 d-inline">
+              <button
+                class="control-btn border-0 bg-transparent p-1 d-none d-md-inline"
+              >
                 <i
                   class="bi bi-skip-forward-fill text-secondary h5 link-light"
                 ></i>
