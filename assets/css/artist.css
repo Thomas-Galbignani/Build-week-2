@@ -267,4 +267,51 @@ html {
   #footer {
     height: 13%;
   }
-} */
+}
+
+/* Animazione immagine Artista */
+.artist-img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.artist-img:hover {
+  transform: scale(1.1);
+}
+
+/* Animazione pulsante Play */
+.play-button-effect {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.play-button-effect .bi-play-circle-fill {
+  color: var(--bs-success);
+  font-size: 3rem;
+  line-height: 1;
+  transition: color 0.2s ease-in-out;
+}
+
+.play-button-effect:hover {
+  transform: scale(1.1);
+}
+
+.play-button-effect:hover .bi-play-circle-fill {
+  color: #4caf50 !important;
+}
+
+/* Animazione Lista Canzoni */
+.track-item-hover {
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  padding: 0.5rem;
+}
+
+.track-item-hover:hover {
+  background-color: #343a40;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
