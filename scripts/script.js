@@ -65,7 +65,7 @@ const songsOnCard = function () {
         cardItem.classList.add("mx-2", "mb-5");
         cardItem.innerHTML = `
             <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
-                <div class="card bg-black p-3 rounded-4 text-white h-100 " style="width:300px">
+                <div class="card bg-dark p-3 rounded-4 text-white h-100 " style="width:300px">
                   <img
                     class="rounded-2 img-fluid" 
                     src="${song.data[0].album.cover_big}"
@@ -156,7 +156,8 @@ const createCarousel = function () {
       "text-center",
       "text-md-start",
       "py-3",
-      "py-md-5"
+      "py-md-5",
+      "flex-grow-1"
     ); // Aggiunge le classi necessarie per allineare
 
     // Nascondi tutti gli elementi tranne il primo all'inizio
@@ -168,7 +169,9 @@ const createCarousel = function () {
     carouselItem.innerHTML = `
       <img src="${song.album.cover_medium}" class="album-cover me-md-4 mb-3 mb-md-0 img-fluid" alt="Album cover" />
             <div>
+            <div class="d-flex justify-content-between">
                 <a href='./album.html?eventId=${song.album.id}' class='text-decoration-none'> <p class="text-white">${song.album.title}</p></a>
+                <button class="btn">Nascondi annuncio</button></div>
                   <h1 class="text-white">${song.title}</h1>
                   <a href='./artists.html?eventId=${song.artist.id}' class='text-decoration-none'> <p class="text-white">${song.artist.name}</p></a>
                   <p class="text-white">Ascolta il nuovo singolo di ${song.artist.name}!</p>

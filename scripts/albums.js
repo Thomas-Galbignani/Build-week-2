@@ -236,6 +236,7 @@ fetch(endpoint + `/` + eventId)
     firstTrack = album.tracks.data[0];
     album.tracks.data.forEach((track, index) => {
       const trackItem = document.createElement("div");
+      trackItem.setAttribute("data-id", track.id);
       trackItem.innerHTML = `
     <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
       <div style="width: 50%;">${index + 1}. ${track.title}<br><p>${
