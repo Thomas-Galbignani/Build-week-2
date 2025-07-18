@@ -72,7 +72,6 @@ btnPlayerList.addEventListener("click", () => {
 
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function (song) {
-
   if (song === null) {
     footerWrapper.classList.add(`d-none`);
   } else {
@@ -197,7 +196,6 @@ function formatDuration(seconds) {
   return `${min}:${sec < 10 ? "0" : ""}${sec}`;
 }
 
-
 // Funzione per recuperare i dati dell'artista
 fetch(endpoint + `/` + eventId)
   .then((response) => {
@@ -210,7 +208,7 @@ fetch(endpoint + `/` + eventId)
   .then((artist) => {
     console.log("artista", artist);
     artistImg.src = artist.picture;
-    artistImg.classList.add('artist-img'); // Classe Hover sull'immagine
+    artistImg.classList.add("artist-img"); // Classe Hover sull'immagine
     artistLike.innerText = `
     Di ${artist.name}`;
     pageTitle.innerText = artist.name;
@@ -225,12 +223,12 @@ fetch(endpoint + `/` + eventId)
               </div>
             </div>
             <div class="d-flex flex-column mt-auto text-white">
-              <p class="mb-0">
+              <p class="mb-0" class="title">
                 <i class="bi-patch-check-fill text-primary me-1"></i>Artista
                 verificato
               </p>
-              <h1 class="display-2">${artist.name}</h1>
-              <p class="mt-3">${artist.nb_fan} ascoltatori mensili</p>
+              <h1 class="display-2 title">${artist.name}</h1>
+              <p class="mt-3 circularMedium">${artist.nb_fan.toLocaleString()} ascoltatori mensili</p>
             </div>
     `;
 
@@ -260,10 +258,10 @@ fetch(endpoint + `/` + eventId)
                       <img src="${track.album.cover}" alt="img-${
             track.title
           }" class="mx-3 img-fluid" style="width: 50px; height: 50px; object-fit: cover"/>
-                      <p class="mb-0">${track.title}</p>
+                      <p class="mb-0 circularMedium">${track.title}</p>
                     </div>
-                    <p class="text-secondary mb-0 me-3">${track.rank}</p>
-                    <p class="text-secondary mb-0">${formatDuration(
+                    <p class="text-secondary mb-0 me-3 circularMedium">${track.rank.toLocaleString()}</p>
+                    <p class="text-secondary mb-0 circularMedium">${formatDuration(
                       track.duration
                     )}</p>
             </div>
@@ -313,6 +311,5 @@ fetch(endpoint + `/` + eventId)
   .catch(() => {
     console.log(`tuttto sbagliato`);
   });
-  
 
 popUpFooter();

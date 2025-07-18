@@ -62,13 +62,13 @@ const songsOnCard = function () {
         console.log(song);
         songCard.push(song);
         const cardItem = document.createElement("div");
-        cardItem.classList.add("col");
+        cardItem.classList.add("mx-2", "mb-5");
         cardItem.innerHTML = `
             <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
-                <div class="card bg-black p-3 rounded-4 text-white h-100">
+                <div class="card bg-dark p-3 rounded-4 text-white h-100 " style="width:300px">
                   <img
                     class="rounded-2 img-fluid" 
-                    src="${song.data[0].album.cover_medium}"
+                    src="${song.data[0].album.cover_big}"
                     alt="..."
                   />
                   <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
@@ -156,7 +156,8 @@ const createCarousel = function () {
       "text-center",
       "text-md-start",
       "py-3",
-      "py-md-5"
+      "py-md-5",
+      "flex-grow-1"
     ); // Aggiunge le classi necessarie per allineare
 
     // Nascondi tutti gli elementi tranne il primo all'inizio
@@ -168,7 +169,9 @@ const createCarousel = function () {
     carouselItem.innerHTML = `
       <img src="${song.album.cover_medium}" class="album-cover me-md-4 mb-3 mb-md-0 img-fluid" alt="Album cover" />
             <div>
+            <div class="d-flex justify-content-between">
                 <a href='./album.html?eventId=${song.album.id}' class='text-decoration-none'> <p class="text-white">${song.album.title}</p></a>
+                <button class="btn">Nascondi annuncio</button></div>
                   <h1 class="text-white">${song.title}</h1>
                   <a href='./artists.html?eventId=${song.artist.id}' class='text-decoration-none'> <p class="text-white">${song.artist.name}</p></a>
                   <p class="text-white">Ascolta il nuovo singolo di ${song.artist.name}!</p>
@@ -237,7 +240,6 @@ const backSong = function () {
 
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function (song) {
-
   if (song === null) {
     footerWrapper.classList.add(`d-none`);
   } else {
@@ -258,7 +260,6 @@ const footerSong = function (song) {
   }
 };
 
-
 const songInPlay = localStorage.getItem(`currentSong`);
 
 const popUpFooter = function () {
@@ -275,7 +276,6 @@ const popUpFooter = function () {
     footerSong(currentSongArray);
   }
 };
-
 
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
