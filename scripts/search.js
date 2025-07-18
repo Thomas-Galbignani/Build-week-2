@@ -204,7 +204,7 @@ fetch(endpoint + eventId)
         // Primo risultato
         firstResult.innerHTML = `
                            <div class="flex-grow-1">
-                            <img class="img-fluid rounded-3 mb-3"
+                            <img class="image-container img-fluid rounded-3 mb-3 artist-img"
                                 src="${result.data[0].album.cover}"
                                 alt="img-${result.data[0].title}"
                                 style="max-width: 150px; height: auto;">
@@ -218,7 +218,7 @@ fetch(endpoint + eventId)
                                    <a class="text-decoration-none text-secondary" href="./album.html?eventId=${result.data[0].album.id}"> <p class="mb-0 small">${result.data[0].album.title}</p></a>
                                 </div>
                                 <div class="m-0 col-2">
-                                    <button class="btn bg-transparent m-0 p-0" id="btn-player-first-song">
+                                    <button class="btn bg-transparent m-0 p-0 play-button-effect" id="btn-player-first-song">
                                     <i class="bi bi-play-circle-fill text-success h1 m-0"></i>
                                     </button>
                                 </div>
@@ -240,13 +240,14 @@ fetch(endpoint + eventId)
                 "d-flex",
                 "text-light",
                 "mt-2",
-                "align-items-center"
+                "align-items-center",
+                "track-item-hover"
             );
             resultDiv.style.height = "65px"; // Questa altezza fissa aiuta a vedere l'allineamento verticale
             resultDiv.id = `${index}`;
             resultDiv.style.cursor = "pointer";
             resultDiv.innerHTML = `
-        <img class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"
+        <img class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;" title="Riproduci ${res.title}? Di ${res.artist.name}"
             src="${res.album.cover}"
             alt="img-${res.title}" id="${res.id}">
         <div class="mx-3 flex-grow-1">
@@ -273,7 +274,7 @@ fetch(endpoint + eventId)
                 resultArtistDiv.classList.add("mx-3");
                 resultArtistDiv.style.cursor = "pointer";
                 resultArtistDiv.innerHTML = `
-                                <img class="rounded-circle"
+                                <img class="rounded-circle artist-img"
                                     src="${res.artist.picture}"
                                     alt="artist">
                                 <p class="text-white fw-bold mb-0 mt-2">${res.artist.name}</p>
