@@ -24,6 +24,7 @@ let playerArtist = document.getElementById("player-artist");
 let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
+const footerWrapper = document.getElementById(`footer`);
 
 // costanti per il search
 const searchInput = document.getElementById(`searchInput`);
@@ -47,11 +48,21 @@ searchForm.addEventListener("submit", searchSong);
 searchFormDesktop.addEventListener("submit", searchSong);
 
 const songInPlay = localStorage.getItem(`currentSong`);
-if (songInPlay) {
-  const songInPlayArray = JSON.parse(songInPlay);
-  console.log(songInPlayArray);
-  currentSongArray.push(songInPlayArray);
-}
+
+const popUpFooter = function () {
+  if (songInPlay === null) {
+    footerSong(null);
+    //  footerWrapper.classList.add(`d-none`);
+  } else {
+    const songInPlayArray = JSON.parse(songInPlay);
+    console.log(`entrati con successo `, songInPlayArray);
+    currentSongArray.push(songInPlayArray);
+    footerWrapper.classList.remove(`d-none`);
+    currentSong = new Audio(currentSongArray[0].preview);
+    currentSong.addEventListener("timeupdate", updateProgressBar);
+    footerSong(currentSongArray);
+  }
+};
 
 // Pulsante per far partire la prima canzone
 btnPlayerList.addEventListener("click", () => {
@@ -60,11 +71,12 @@ btnPlayerList.addEventListener("click", () => {
 });
 
 // Funzione per il la barra di riproduzione del footer
-const footerSong = function () {
-  if (currentSongArray.length === 0) {
-    playerButton.disabled = true;
-    console.log("sono nell if", currentSongArray);
+const footerSong = function (song) {
+
+  if (song === null) {
+    footerWrapper.classList.add(`d-none`);
   } else {
+    footerWrapper.classList.remove(`d-none`);
     console.log(currentSongArray);
     playerButton.disabled = false;
     playerImgContainer.classList.remove("opacity-0");
@@ -76,12 +88,11 @@ const footerSong = function () {
     const playerTitleLink = playerTitle.parentElement;
     playerTitleLink.href = `./album.html?eventId=${currentSongArray[0].album.id}`;
     playerButton.innerHTML = `
-      <i class="bi bi-pause-circle-fill text-light h3"></i>
-      `;
+    <i class="bi bi-pause-circle-fill text-light h3"></i>
+    `;
   }
 };
 
-currentSong = new Audio(currentSongArray[0].preview);
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
   if (!currentSong.paused) {
@@ -106,7 +117,6 @@ const playSong = function (songToPlay) {
     currentSongArray = [songToPlay];
     console.log("canzone passata dal click", currentSongArray);
     currentSong = new Audio(currentSongArray[0].preview);
-    footerSong();
     console.log("canzone corrente", currentSong);
   } else {
     currentSong = new Audio(currentSongArray[0].preview);
@@ -118,9 +128,10 @@ const playSong = function (songToPlay) {
   currentSong
     .play() // Avvia la canzone
     .then(() => {
-      console.log(`sono io `, currentSongArray[0]);
-      console.log(`stai ascoltando la canzone: ${currentSongArray[0].title}`);
       localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
+    })
+    .then(() => {
+      footerSong(songToPlay); // Lanciamo la funzione footerSong
     })
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
@@ -303,4 +314,4 @@ fetch(endpoint + `/` + eventId)
   });
   
 
-footerSong();
+popUpFooter();
