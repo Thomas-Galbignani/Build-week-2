@@ -62,13 +62,13 @@ const songsOnCard = function () {
         console.log(song);
         songCard.push(song);
         const cardItem = document.createElement("div");
-        cardItem.classList.add("col");
+        cardItem.classList.add("mx-2", "mb-5");
         cardItem.innerHTML = `
             <a href="./album.html?eventId=${song.data[0].album.id}" class="text-decoration-none">
-                <div class="card bg-black p-3 rounded-4 text-white h-100">
+                <div class="card bg-black p-3 rounded-4 text-white h-100 " style="width:300px">
                   <img
                     class="rounded-2 img-fluid" 
-                    src="${song.data[0].album.cover_medium}"
+                    src="${song.data[0].album.cover_big}"
                     alt="..."
                   />
                   <h6 class="card-title mb-1 my-2 pt-2">${song.data[0].album.title}</h6>
@@ -237,7 +237,6 @@ const backSong = function () {
 
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function (song) {
-
   if (song === null) {
     footerWrapper.classList.add(`d-none`);
   } else {
@@ -258,7 +257,6 @@ const footerSong = function (song) {
   }
 };
 
-
 const songInPlay = localStorage.getItem(`currentSong`);
 
 const popUpFooter = function () {
@@ -275,7 +273,6 @@ const popUpFooter = function () {
     footerSong(currentSongArray);
   }
 };
-
 
 // Funzione per il pulsante play del footer
 playerButton.addEventListener("click", () => {
