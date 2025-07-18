@@ -263,8 +263,8 @@ html {
     display: none !important;
   }
 }
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
   #footer {
     height: 13%;
   }
-}
+} */
