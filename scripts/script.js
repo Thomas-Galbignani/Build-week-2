@@ -48,6 +48,7 @@ let playerArtist = document.getElementById("player-artist");
 let playerButton = document.getElementById("play");
 const playerVolume = document.getElementById("volume-mute");
 const progressBar = document.getElementById(`progressBar`);
+const footerWrapper = document.getElementById(`footer`);
 
 const songsOnCard = function () {
   songNames.forEach((song) => {
@@ -235,11 +236,12 @@ const backSong = function () {
 };
 
 // Funzione per il la barra di riproduzione del footer
-const footerSong = function () {
-  if (currentSongArray.length === 0) {
-    playerButton.disabled = true;
-    console.log("sono nell if", currentSongArray);
+const footerSong = function (song) {
+
+  if (song === null) {
+    footerWrapper.classList.add(`d-none`);
   } else {
+    footerWrapper.classList.remove(`d-none`);
     console.log(currentSongArray);
     playerButton.disabled = false;
     playerImgContainer.classList.remove("opacity-0");
@@ -258,13 +260,21 @@ const footerSong = function () {
 
 
 const songInPlay = localStorage.getItem(`currentSong`);
-if (songInPlay) {
-  const songInPlayArray = JSON.parse(songInPlay);
-  console.log(songInPlayArray);
-  currentSongArray.push(songInPlayArray);
-}
 
-console.log('canzone corrente', songInPlay)
+const popUpFooter = function () {
+  if (songInPlay === null) {
+    footerSong(null);
+    //  footerWrapper.classList.add(`d-none`);
+  } else {
+    const songInPlayArray = JSON.parse(songInPlay);
+    console.log(`entrati con successo `, songInPlayArray);
+    currentSongArray.push(songInPlayArray);
+    footerWrapper.classList.remove(`d-none`);
+    currentSong = new Audio(currentSongArray[0].preview);
+    currentSong.addEventListener("timeupdate", updateProgressBar);
+    footerSong(currentSongArray);
+  }
+};
 
 
 // Funzione per il pulsante play del footer
@@ -295,11 +305,10 @@ const playSong = function (songToPlay) {
   currentSong
     .play() // Avvia la canzone
     .then(() => {
-      console.log(`sono io `, songToPlay);
-      footerSong(); // Lanciamo la funzione footerSong
-
-      console.log(`stai ascoltando la canzone: ${songToPlay.title}`);
       localStorage.setItem(`currentSong`, JSON.stringify(songToPlay));
+    })
+    .then(() => {
+      footerSong(songToPlay); // Lanciamo la funzione footerSong
     })
     .catch((error) => {
       console.error(`Non funziona: Errore durante la riproduzione.`, error);
@@ -357,7 +366,7 @@ if (volumeSlider) {
 }
 
 songsOnCarousel();
-footerSong();
+popUpFooter();
 songsOnCard();
 
 // funzione per auto-scorrimento del carosello ogni 5 secondi
