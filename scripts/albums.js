@@ -49,7 +49,12 @@ searchFormDesktop.addEventListener("submit", searchSong);
 // Pulsante per far partire la prima canzone
 btnPlayerList.addEventListener("click", () => {
   playSong(firstTrack);
-  console.log(firstTrack);
+  const firstTrackElement = trackList.querySelector(
+    `[data-id="${firstTrack.id}"]`
+  );
+  if (firstTrackElement) {
+    highlightSelectedTrack(firstTrackElement);
+  }
 });
 
 // Funzione per formattare il tempo della canzone
