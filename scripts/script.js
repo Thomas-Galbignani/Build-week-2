@@ -150,14 +150,14 @@ const createCarousel = function () {
       "carousel-song-card",
       "d-flex",
       "align-items-center",
+      "align-items-md-start",
       "w-100",
       "flex-column",
       "flex-md-row",
       "text-center",
       "text-md-start",
       "py-3",
-      "py-md-5",
-      "flex-grow-1"
+      "py-md-5"
     ); // Aggiunge le classi necessarie per allineare
 
     // Nascondi tutti gli elementi tranne il primo all'inizio
@@ -169,9 +169,9 @@ const createCarousel = function () {
     carouselItem.innerHTML = `
       <img src="${song.album.cover_medium}" class="album-cover me-md-4 mb-3 mb-md-0 img-fluid" alt="Album cover" />
             <div>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-center justify-content-md-between align-items-md-start">
                 <a href='./album.html?eventId=${song.album.id}' class='text-decoration-none'> <p class="text-white">${song.album.title}</p></a>
-                <button class="btn">Nascondi annuncio</button></div>
+                </div>
                   <h1 class="text-white">${song.title}</h1>
                   <a href='./artists.html?eventId=${song.artist.id}' class='text-decoration-none'> <p class="text-white">${song.artist.name}</p></a>
                   <p class="text-white">Ascolta il nuovo singolo di ${song.artist.name}!</p>
@@ -191,7 +191,11 @@ const createCarousel = function () {
                         </a>
                       </div>
                     </div>
+                    
           </div>
+             <button class="btn bg-white bg-opacity-25 py-0 px-4 rounded-5 d-none d-lg-block">
+                Nascondi annuncio
+              </button>
   `;
 
     carouselContainer.appendChild(carouselItem); // Aggiunge l'elemento al div principale
