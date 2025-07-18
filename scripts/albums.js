@@ -222,9 +222,7 @@ fetch(endpoint + `/` + eventId)
                 <div class="text-white circularLight">${
                   album.type.charAt(0).toUpperCase() + album.type.slice(1)
                 }</div>
-                <h1 class="text-white display-1 circularBook">${
-                  album.title
-                }</h1>
+                <h1 class="text-white display-1 title">${album.title}</h1>
                 <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${
                   album.artist.id
                 }">${album.artist.name} • ${formatdate || "?"} • ${
