@@ -9,7 +9,7 @@ const albumInfoDiv = document.getElementById("album-info");
 const trackList = document.getElementById("tracklist-container");
 const btnPlayerList = document.getElementById("btn-player-list");
 btnPlayerList.style.cursor = "pointer";
-
+const copyDiv = document.getElementById("copyright");
 // Array delle canzoni
 let currentSong = new Audio();
 let currentSongArray = [];
@@ -46,8 +46,6 @@ const searchSong = function (e) {
 searchForm.addEventListener("submit", searchSong);
 searchFormDesktop.addEventListener("submit", searchSong);
 
-
-
 // Pulsante per far partire la prima canzone
 btnPlayerList.addEventListener("click", () => {
   playSong(firstTrack);
@@ -81,7 +79,6 @@ const popUpFooter = function () {
 
 // Funzione per il la barra di riproduzione del footer
 const footerSong = function (song) {
-
   if (song === null) {
     footerWrapper.classList.add(`d-none`);
   } else {
@@ -209,16 +206,21 @@ fetch(endpoint + `/` + eventId)
   })
   .then((album) => {
     console.log("album", album);
+    const formatdate = album.release_date.slice(0, 4);
     // Popoliamo la sezione in alto
     pageTitle.innerText = album.title;
     albumInfoDiv.innerHTML = `
-            <img id="album-cover" src="${album.cover_medium
-      }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
+            <img id="album-cover" src="${
+              album.cover_medium
+            }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
             <div>
                 <div class="text-white">ALBUM</div>
                 <h2 class="text-white">${album.title}</h2>
-                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${album.artist.id
-      }">${album.artist.name} • ${album.release_date || "?"}</a></div>
+                <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${
+                  album.artist.id
+                }">${album.artist.name} • ${formatdate || "?"} • ${
+      album.nb_tracks
+    } brani, ${formatDuration(album.duration)} min</a></div>
             </div>
             `;
 
@@ -226,37 +228,50 @@ fetch(endpoint + `/` + eventId)
     // Popoliamo la lista delle canzoni dell'album
     firstTrack = album.tracks.data[0];
     album.tracks.data.forEach((track, index) => {
-  const trackItem = document.createElement("div");
-  trackItem.innerHTML = `
+      const trackItem = document.createElement("div");
+      trackItem.innerHTML = `
     <div class="d-flex py-2 px-4 text-white track-row" style="cursor: pointer;">
-      <div style="width: 50%;">${index + 1}. ${track.title}<br><p>${track.artist.name}</p></div>
+      <div style="width: 50%;">${index + 1}. ${track.title}<br><p>${
+        track.artist.name
+      }</p></div>
       <div style="width: 30%; text-align: center;">${track.rank.toLocaleString()}</div>
-      <div style="width: 20%; text-align: right;">${formatDuration(track.duration)}</div>
+      <div style="width: 20%; text-align: right;">${formatDuration(
+        track.duration
+      )}</div>
     </div>
   `;
 
-  trackItem.addEventListener("click", () => {
-    highlightSelectedTrack(trackItem);
-    playSong(track);
-  });
-  trackList.appendChild(trackItem);
-});
+      trackItem.addEventListener("click", () => {
+        highlightSelectedTrack(trackItem);
+        playSong(track);
+      });
+      trackList.appendChild(trackItem);
+    });
+
+    copyDiv.innerHTML = `
+    <p class="text-secondary mb-0"> ${album.release_date}</p> 
+    <p class="text-secondary mb-0"> © ${formatdate} ${
+      album.artist.name
+    }, under exclusive license to ${album.label || ""} </p>  
+    <p class="text-secondary mb-0"> ℗ ${formatdate} ${
+      album.artist.name
+    }, under exclusive license to ${album.label || ""}</p>`;
   })
   .catch(() => {
     console.log(`tuttto sbagliato`);
   });
 
 function setMainContentBackground(imgSrc) {
-    const img = new Image();
+  const img = new Image();
   img.crossOrigin = "Anonymous";
   img.src = imgSrc;
-  
+
   img.onload = () => {
     const colorThief = new ColorThief();
     const dominantColor = colorThief.getColor(img);
     const rgb = `rgb(${dominantColor.join(",")})`;
     const main = document.getElementById("main-content");
-    
+
     if (window.innerWidth < 768) {
       // Mobile
       main.style.backgroundImage = `
@@ -271,7 +286,7 @@ function setMainContentBackground(imgSrc) {
       main.style.backgroundSize = "";
       main.style.backgroundPosition = "";
     }
-    
+
     main.style.color = "white";
   };
 }
@@ -279,65 +294,64 @@ function setMainContentBackground(imgSrc) {
 // track highlight
 function highlightSelectedTrack(selectedElement) {
   const allTracks = trackList.children;
-  Array.from(allTracks).forEach(track => track.classList.remove("highlight"));
+  Array.from(allTracks).forEach((track) => track.classList.remove("highlight"));
   selectedElement.classList.add("highlight");
 }
 
 // heart button
-const heartIcon = document.querySelector('.bi-heart');
+const heartIcon = document.querySelector(".bi-heart");
 
-heartIcon.addEventListener('click', () => {
-  heartIcon.classList.toggle('text-danger');
+heartIcon.addEventListener("click", () => {
+  heartIcon.classList.toggle("text-danger");
 });
 
 // download button
 
-const downloadIcon = document.querySelector('.bi-download');
+const downloadIcon = document.querySelector(".bi-download");
 
-downloadIcon.addEventListener('click', () => {
+downloadIcon.addEventListener("click", () => {
   if (currentSongArray.length > 0) {
     const previewUrl = currentSongArray[0].preview;
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = previewUrl;
-    a.download = 'song_preview.mp3';
+    a.download = "song_preview.mp3";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
   } else {
-    alert('Please choose a music');
+    alert("Please choose a music");
   }
 });
 
 // dropdown menu
 
-const moreOptions = document.getElementById('more-options');
-const dropdownMenu = document.getElementById('dropdown-menu');
+const moreOptions = document.getElementById("more-options");
+const dropdownMenu = document.getElementById("dropdown-menu");
 
-moreOptions.addEventListener('click', (e) => {
+moreOptions.addEventListener("click", (e) => {
   e.stopPropagation();
-  if (dropdownMenu.style.display === 'block') {
-    dropdownMenu.style.display = 'none';
+  if (dropdownMenu.style.display === "block") {
+    dropdownMenu.style.display = "none";
   } else {
-    dropdownMenu.style.display = 'block';
+    dropdownMenu.style.display = "block";
   }
 });
-document.addEventListener('click', () => {
-  dropdownMenu.style.display = 'none';
+document.addEventListener("click", () => {
+  dropdownMenu.style.display = "none";
 });
 
-dropdownMenu.addEventListener('click', (e) => {
+dropdownMenu.addEventListener("click", (e) => {
   e.stopPropagation();
 });
 
-
-document.getElementById('share-song').addEventListener('click', (e) => {
+document.getElementById("share-song").addEventListener("click", (e) => {
   e.preventDefault();
-  alert('Playlist is not ready yet');
+  alert("Playlist is not ready yet");
 });
 
-document.getElementById('add-to-playlist').addEventListener('click', (e) => {
+document.getElementById("add-to-playlist").addEventListener("click", (e) => {
   e.preventDefault();
-  alert('Playlist is getting prepared');
+  alert("Playlist is getting prepared");
 });
 
 popUpFooter();
