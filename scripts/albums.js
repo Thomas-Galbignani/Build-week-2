@@ -283,11 +283,14 @@ function highlightSelectedTrack(selectedElement) {
   selectedElement.classList.add("highlight");
 }
 
+// heart button
 const heartIcon = document.querySelector('.bi-heart');
 
 heartIcon.addEventListener('click', () => {
   heartIcon.classList.toggle('text-danger');
 });
+
+// download button
 
 const downloadIcon = document.querySelector('.bi-download');
 
@@ -301,19 +304,29 @@ downloadIcon.addEventListener('click', () => {
     a.click();
     document.body.removeChild(a);
   } else {
-    alert('Yükləmək üçün mahnı seçilməyib!');
+    alert('Please choose a music');
   }
 });
+
+// dropdown menu
 
 const moreOptions = document.getElementById('more-options');
 const dropdownMenu = document.getElementById('dropdown-menu');
 
-moreOptions.addEventListener('click', () => {
-  if (dropdownMenu.style.display === 'none') {
-    dropdownMenu.style.display = 'block';
-  } else {
+moreOptions.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (dropdownMenu.style.display === 'block') {
     dropdownMenu.style.display = 'none';
+  } else {
+    dropdownMenu.style.display = 'block';
   }
+});
+document.addEventListener('click', () => {
+  dropdownMenu.style.display = 'none';
+});
+
+dropdownMenu.addEventListener('click', (e) => {
+  e.stopPropagation();
 });
 
 
