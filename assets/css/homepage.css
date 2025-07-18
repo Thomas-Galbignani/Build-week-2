@@ -1,35 +1,42 @@
-body{
-background: #000000;
-background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(36, 35, 35, 1) 70%, rgba(56, 56, 56, 1) 100%);
+body {
+  background: #000000;
+  background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(36, 35, 35, 1) 70%, rgba(56, 56, 56, 1) 100%);
 }
+
 /* aumenta la zona di scorrimento della scrollbar */
-.main-content{
-    height: 100vh;
-    padding-bottom: 100px;
+.main-content {
+  height: 100vh;
+  padding-bottom: 100px;
 }
+
 /* colore sfondo carosello */
-#carousel{
-background: #000000;
-background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(38, 37, 37, 1) 70%, rgba(44, 44, 44, 1) 100%);
+#carousel {
+  background: #000000;
+  background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(38, 37, 37, 1) 70%, rgba(44, 44, 44, 1) 100%);
 }
-#card-container{
-    cursor: pointer;
+
+#card-container {
+  cursor: pointer;
 }
-#card-buonasera{
-     cursor: pointer;
+
+#card-buonasera {
+  cursor: pointer;
 
 }
+
 /* colore sfondo sidebar amici */
-#Amici{
-    background-color: black;
+#Amici {
+  background-color: black;
 
 }
-#card-amici{
-    width: 100%; 
-    gap: 10px; 
-    align-items: start;
-    cursor: pointer;    
+
+#card-amici {
+  width: 100%;
+  gap: 10px;
+  align-items: start;
+  cursor: pointer;
 }
+
 /* modifiche scrollbar sidebar*/
 .small-playlists::-webkit-scrollbar {
   height: 8px;
@@ -74,19 +81,31 @@ background: linear-gradient(42deg, rgba(0, 0, 0, 1) 0%, rgba(38, 37, 37, 1) 70%,
 
 
 /* scrollbar sconosciuta html */
-html{
-    overflow-y: hidden !important;
+html {
+  overflow-y: hidden !important;
 }
 
 
 
 /* cursore pulsanti */
-#mouse{
-    cursor: pointer;
+#mouse {
+  cursor: pointer;
 }
-#volume{
-    cursor: pointer;
+
+#volume {
+  cursor: pointer;
 }
-#volume-mute{
-    cursor: pointer;
+
+#volume-mute {
+  cursor: pointer;
+}
+
+/* Animazioni card playlist in home */
+#card-buonasera {
+  transition: transform 0.3s ease-in-out;
+}
+
+#card-buonasera:hover {
+  transform: scale(1.03);
+  cursor: pointer;
 }
