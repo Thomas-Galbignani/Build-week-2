@@ -219,8 +219,12 @@ fetch(endpoint + `/` + eventId)
               album.cover_medium
             }" class="me-3 rounded" style="width: 250px; padding-left: 20px" crossorigin="anonymous" />
             <div>
-                <div class="text-white">ALBUM</div>
-                <h2 class="text-white">${album.title}</h2>
+                <div class="text-white circularLight">${
+                  album.type.charAt(0).toUpperCase() + album.type.slice(1)
+                }</div>
+                <h1 class="text-white display-1 circularBook">${
+                  album.title
+                }</h1>
                 <div class="text-white"><a class="text-decoration-none text-light" href="./artists.html?eventId=${
                   album.artist.id
                 }">${album.artist.name} • ${formatdate || "?"} • ${
